@@ -3,7 +3,7 @@
 
 void SceneMainMenu::enter()
 {
-	auto sprite = std::make_shared<Sprite>("wall");
+	auto sprite = App::get().getSprite("wall");
 	auto testEntity = std::make_shared<Entity>(sprite);
 	auto testEntity2 = std::make_shared<Entity>(sprite);
 	testEntity2->move(150, 50);

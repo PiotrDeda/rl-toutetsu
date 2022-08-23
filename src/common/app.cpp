@@ -45,6 +45,9 @@ void App::init()
 	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
 		Logger::logErrorImg("SDL_image could not initialize!");
 
+	// Sprites
+	loadSprites();
+
 	// Scene Manager
 	sceneManager.init();
 
@@ -61,3 +64,33 @@ void App::shutdown()
 	Logger::logInfo("Shutting down...");
 	running = false;
 }
+
+const char* App::getAssetPath(const char* path)
+{
+	const char* prefix = assetPath;
+	const char* suffix = ".png";
+	char* result = new char[strlen(prefix) + strlen(path) + strlen(suffix) + 1];
+	strcpy(result, prefix);
+	strcat(result, path);
+	strcat(result, suffix);
+	return result;
+}
+
+std::shared_ptr<Sprite> App::getSprite(const std::string& id) const
+{
+	if (sprites.find(id) == sprites.end())
+	{
+		Logger::logError("Sprite not found: %s", id.c_str());
+		throw std::runtime_error("Sprite not found: " + id);
+	}
+	return std::make_shared<Sprite>(sprites.at(id));
+}
+
+void App::loadSprites()
+{
+	sprites.emplace("player", Sprite("player"));
+	sprites.emplace("wall", Sprite("wall"));
+	sprites.emplace("wall_torch", Sprite("wall_torch"));
+}
+
+
