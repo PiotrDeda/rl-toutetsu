@@ -5,14 +5,15 @@
 class Sprite
 {
 public:
-	explicit Sprite(const char* path);
+	explicit Sprite(const char* name);
 
-	void draw(int x, int y) const;
+	virtual void draw(int x, int y);
+	virtual void setState(int state);
 
 	SDL_Renderer* renderer;
 	TexturePtr texture;
 
-private:
+protected:
 	int width;
 	int height;
 };

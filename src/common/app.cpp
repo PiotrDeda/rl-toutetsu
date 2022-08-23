@@ -4,6 +4,8 @@
 #include <SDL_image.h>
 
 #include "../util/logger.h"
+#include "../engine/state_sprite.h"
+#include "../engine/animated_sprite.h"
 
 App::~App()
 {
@@ -33,7 +35,8 @@ void App::init()
 	}
 
 	// Renderer
-	renderer = makeRenderer(SDL_CreateRenderer(window.get(), -1, SDL_RENDERER_ACCELERATED));
+	renderer = makeRenderer(SDL_CreateRenderer(window.get(), -1,
+											   SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
 	if (!renderer)
 	{
 		Logger::logErrorSdl("Renderer could not be created!");
@@ -83,14 +86,14 @@ std::shared_ptr<Sprite> App::getSprite(const std::string& id) const
 		Logger::logError("Sprite not found: %s", id.c_str());
 		throw std::runtime_error("Sprite not found: " + id);
 	}
-	return std::make_shared<Sprite>(sprites.at(id));
+	return sprites.at(id);
 }
 
 void App::loadSprites()
 {
-	sprites.emplace("player", Sprite("player"));
-	sprites.emplace("wall", Sprite("wall"));
-	sprites.emplace("wall_torch", Sprite("wall_torch"));
+	sprites.emplace("player", std::make_shared<StateSprite>("player", 4));
+	sprites.emplace("wall", std::make_shared<Sprite>("wall"));
+	sprites.emplace("wall_torch", std::make_shared<AnimatedSprite>("wall_torch", 3, 10));
 }
 
 

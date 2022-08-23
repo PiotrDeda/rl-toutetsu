@@ -31,5 +31,5 @@ private:
 	void loadSprites();
 
 	bool running = true;
-	std::map<std::string, Sprite> sprites;
+	std::map<std::string, std::shared_ptr<Sprite>> sprites;
 };
