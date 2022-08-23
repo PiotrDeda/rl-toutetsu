@@ -13,6 +13,8 @@ public:
 	TexturePtr texture;
 
 private:
+	static const char* getPath(const char* path);
+
 	int width;
 	int height;
 };
