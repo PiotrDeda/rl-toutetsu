@@ -6,7 +6,7 @@
 class Entity
 {
 public:
-	Entity(const SurfacePtr& layer, const std::shared_ptr<Sprite>& sprite);
+	explicit Entity(const std::shared_ptr<Sprite> &sprite);
 
 	void draw() const;
 	void move(int targetX, int targetY);

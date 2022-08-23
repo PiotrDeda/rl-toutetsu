@@ -1,14 +1,21 @@
 #include "sprite.h"
+#include "../common/app.h"
+#include "../util/logger.h"
 
 #include <SDL_surface.h>
+#include <SDL_image.h>
 
-Sprite::Sprite(const SurfacePtr& surface)
+Sprite::Sprite(const char* path) // NOLINT(cppcoreguidelines-pro-type-member-init)
 {
-	this->surface = surface;
+	this->renderer = App::get().renderer.get();
+	this->texture = makeTexture(IMG_LoadTexture(renderer, path));
+	if (!texture)
+		Logger::logErrorImg("Failed to load texture: %s", path);
+	SDL_QueryTexture(texture.get(), nullptr, nullptr, &this->width, &this->height);
 }
 
-void Sprite::draw(const int x, const int y, const SurfacePtr& layer) const
+void Sprite::draw(const int x, const int y) const
 {
-	SDL_Rect offset = {x, y, 0, 0};
-	SDL_BlitSurface(surface.get(), nullptr, layer.get(), &offset);
+	SDL_Rect dstRect = {x, y, width, height};
+	SDL_RenderCopy(renderer, texture.get(), nullptr, &dstRect);
 }

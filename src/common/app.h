@@ -14,16 +14,14 @@ public:
 	~App();
 
 	void init();
-	[[nodiscard]] const WindowPtr& getWindow() const;
-	[[nodiscard]] const SurfacePtr& getWindowSurface() const;
 	[[nodiscard]] bool isRunning() const;
 	void shutdown();
 
+	WindowPtr window;
+	RendererPtr renderer;
 	SceneManager sceneManager;
 
 private:
 	App() = default;
-	WindowPtr window;
-	SurfacePtr windowSurface;
 	bool running = true;
 };

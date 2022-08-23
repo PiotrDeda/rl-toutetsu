@@ -5,9 +5,14 @@
 class Sprite
 {
 public:
-	explicit Sprite(const SurfacePtr& surface);
+	explicit Sprite(const char* path);
 
-	void draw(int x, int y, const SurfacePtr& layer) const;
+	void draw(int x, int y) const;
 
-	SurfacePtr surface;
+	SDL_Renderer* renderer;
+	TexturePtr texture;
+
+private:
+	int width;
+	int height;
 };

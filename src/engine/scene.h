@@ -7,16 +7,17 @@
 class Scene
 {
 public:
-	explicit Scene();
+	Scene();
 
 	virtual void enter();
 	virtual void doEvents(SDL_Event event);
 	virtual void doLogic();
 	void doRender();
 
+	[[nodiscard]] virtual const char* getName() const { return "Scene"; }
+
 	std::vector<std::shared_ptr<Entity>> entities;
 
 private:
-	SDL_Surface* windowSurface;
-	Uint32 backgroundColor;
+	SDL_Renderer* renderer;
 };

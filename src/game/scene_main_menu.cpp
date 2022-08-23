@@ -3,11 +3,10 @@
 
 void SceneMainMenu::enter()
 {
-	auto sprite = std::make_shared<Sprite>(makeSurface(
-			SDL_CreateRGBSurface(0, 32, 32, 32, 0, 0, 0, 0)));
-	auto testEntity = std::make_shared<Entity>(App::get().getWindowSurface(), sprite);
-	auto testEntity2 = std::make_shared<Entity>(App::get().getWindowSurface(), sprite);
-	testEntity2->move(100, 32);
+	auto sprite = std::make_shared<Sprite>("test.png");
+	auto testEntity = std::make_shared<Entity>(sprite);
+	auto testEntity2 = std::make_shared<Entity>(sprite);
+	testEntity2->move(150, 50);
 	entities.push_back(testEntity);
 	entities.push_back(testEntity2);
 }
@@ -34,10 +33,12 @@ void SceneMainMenu::doLogic()
 {
 	if (delay++ % 60 == 0)
 	{
+		int w, h;
+		SDL_GetWindowSize(App::get().window.get(), &w, &h);
 		for (auto& entity : entities)
 		{
 			entity->move(entity->x + speed, entity->y + speed);
-			if (entity->x > App::get().getWindowSurface()->w || entity->y > App::get().getWindowSurface()->h || entity->x < 0 ||
+			if (entity->x > w || entity->y > h || entity->x < 0 ||
 				entity->y < 0)
 				App::get().shutdown();
 		}

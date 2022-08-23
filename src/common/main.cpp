@@ -3,26 +3,25 @@
 
 int main(int, char* [])
 {
-	App::get().init();
+	auto& app = App::get();
+	app.init();
+	auto& sceneManager = app.sceneManager;
 
-	while (App::get().isRunning())
+	while (app.isRunning())
 	{
 		// Events
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
-		{
-			App::get().sceneManager.currentScene->doEvents(event);
-		}
+			sceneManager.currentScene->doEvents(event);
 
 		// Logic
-		App::get().sceneManager.currentScene->doLogic();
+		sceneManager.currentScene->doLogic();
 
 		// Render
-		App::get().sceneManager.currentScene->doRender();
-		SDL_UpdateWindowSurface(App::get().getWindow().get());
+		sceneManager.currentScene->doRender();
 
 		// Scenes
-		App::get().sceneManager.switchScenes();
+		sceneManager.switchScenes();
 	}
 
 	return 0;

@@ -3,8 +3,7 @@
 
 Scene::Scene()
 {
-	this->windowSurface = App::get().getWindowSurface().get();
-	this->backgroundColor = SDL_MapRGB(App::get().getWindowSurface()->format, 0xFF, 0xFF, 0xFF);
+	renderer = App::get().renderer.get();
 }
 
 void Scene::enter() {}
@@ -25,7 +24,8 @@ void Scene::doLogic() {}
 
 void Scene::doRender()
 {
-	SDL_FillRect(windowSurface, nullptr, backgroundColor);
+	SDL_RenderClear(renderer);
 	for (auto& entity : entities)
 		entity->draw();
+	SDL_RenderPresent(renderer);
 }
