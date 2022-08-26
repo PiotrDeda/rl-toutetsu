@@ -25,7 +25,12 @@ void Scene::doLogic() {}
 void Scene::doRender()
 {
 	SDL_RenderClear(renderer);
-	for (auto& entity : entities)
+	for (auto& entity : gameObjects)
 		entity->draw();
 	SDL_RenderPresent(renderer);
+}
+
+void Scene::addObject(const std::shared_ptr<GameObject>& object)
+{
+	gameObjects.push_back(object);
 }
