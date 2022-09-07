@@ -1,13 +1,13 @@
 #include "scene_manager.h"
-#include "../game/scene_main_menu.h"
-#include "../util/logger.h"
+#include "../game_map/scene_game_map.h"
+#include "../../common/logger.h"
 
 void SceneManager::init()
 {
 	scenes[SceneId::Blank] = std::make_shared<Scene>();
-	scenes[SceneId::MainMenu] = std::make_shared<SceneMainMenu>();
+	scenes[SceneId::GameMap] = std::make_shared<SceneGameMap>();
 	currentScene = scenes[SceneId::Blank];
-	setNextScene(SceneId::MainMenu);
+	setNextScene(SceneId::GameMap);
 }
 
 void SceneManager::setNextScene(SceneId nextSceneId)

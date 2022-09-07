@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../util/sdl_pointers.h"
+#include "../common/sdl_pointers.h"
 
 class Sprite
 {

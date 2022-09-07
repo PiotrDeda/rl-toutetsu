@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../engine/game_object.h"
+#include "../game_object.h"
 #include "tile.h"
 
 class Map

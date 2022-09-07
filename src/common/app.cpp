@@ -3,9 +3,9 @@
 #include <stdexcept>
 #include <SDL_image.h>
 
-#include "../util/logger.h"
-#include "../engine/state_sprite.h"
-#include "../engine/animated_sprite.h"
+#include "logger.h"
+#include "../sprites/state_sprite.h"
+#include "../sprites/animated_sprite.h"
 
 App::~App()
 {

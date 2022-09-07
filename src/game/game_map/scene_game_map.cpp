@@ -1,7 +1,7 @@
-#include "scene_main_menu.h"
-#include "../common/app.h"
+#include "scene_game_map.h"
+#include "../../common/app.h"
 
-void SceneMainMenu::enter()
+void SceneGameMap::enter()
 {
 	auto testEntity1 = std::make_shared<GameObject>(App::get().getSprite("wall"));
 	map.addObject(testEntity1, 1, 1);
@@ -13,7 +13,7 @@ void SceneMainMenu::enter()
 	map.addObject(testEntity3, 3, 1);
 }
 
-void SceneMainMenu::doEvents(SDL_Event event)
+void SceneGameMap::doEvents(SDL_Event event)
 {
 	switch (event.type)
 	{
@@ -39,7 +39,7 @@ void SceneMainMenu::doEvents(SDL_Event event)
 	}
 }
 
-void SceneMainMenu::doLogic()
+void SceneGameMap::doLogic()
 {
 	/*int w, h;
 	SDL_GetWindowSize(App::get().window.get(), &w, &h);
@@ -52,11 +52,9 @@ void SceneMainMenu::doLogic()
 	}*/
 }
 
-void SceneMainMenu::doRender()
+void SceneGameMap::doRender()
 {
 	SDL_RenderClear(renderer);
-	for (auto& entity : gameObjects)
-		entity->draw();
 	map.draw();
 	SDL_RenderPresent(renderer);
 }

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../engine/scene.h"
+#include "../scene_manager/scene.h"
 #include "map.h"
 
-class SceneMainMenu : public Scene
+class SceneGameMap : public Scene
 {
 public:
 	void enter() override;
@@ -11,7 +11,7 @@ public:
 	void doLogic() override;
 	void doRender() override;
 
-	[[nodiscard]] const char* getName() const override { return "SceneMainMenu"; }
+	[[nodiscard]] const char* getName() const override { return "SceneGameMap"; }
 
 	Map map;
 };

@@ -4,8 +4,9 @@
 
 enum SceneId
 {
-	Blank = 0,
-	MainMenu = 1
+	Blank,
+	MainMenu,
+	GameMap
 };
 
 class SceneManager

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "../engine/game_object.h"
+#include "../game_object.h"
 
 class Tile
 {

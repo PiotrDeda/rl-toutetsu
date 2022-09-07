@@ -1,9 +1,9 @@
 #pragma once
 
 #include <map>
-#include "../util/sdl_pointers.h"
-#include "../util/singleton.h"
-#include "../engine/scene_manager.h"
+#include "sdl_pointers.h"
+#include "singleton.h"
+#include "../game/scene_manager/scene_manager.h"
 
 class App
 {

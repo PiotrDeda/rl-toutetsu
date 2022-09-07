@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "sprite.h"
+#include "../sprites/sprite.h"
 
 class GameObject
 {
