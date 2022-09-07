@@ -27,7 +27,7 @@ void App::init()
 
 	// Window
 	window = makeWindow(SDL_CreateWindow("Sandbox", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-										 defaultWidth, defaultHeight, SDL_WINDOW_SHOWN));
+										 defaultWidth, defaultHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE));
 	if (!window)
 	{
 		Logger::logErrorSdl("Window could not be created!");
@@ -42,7 +42,8 @@ void App::init()
 		Logger::logErrorSdl("Renderer could not be created!");
 		throw std::runtime_error("Renderer could not be created!");
 	}
-	SDL_SetRenderDrawColor(renderer.get(), 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_SetRenderDrawColor(renderer.get(), 0x00, 0x00, 0x00, 0xFF);
+	SDL_RenderSetLogicalSize(renderer.get(), defaultWidth, defaultHeight);
 
 	// SDL_Image
 	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)

@@ -10,6 +10,8 @@ public:
 
 	void draw() const;
 	void move(int targetX, int targetY);
+	[[nodiscard]] int getRealX() const;
+	[[nodiscard]] int getRealY() const;
 
 	int x = 0;
 	int y = 0;

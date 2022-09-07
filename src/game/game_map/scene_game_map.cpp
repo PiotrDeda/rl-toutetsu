@@ -11,6 +11,15 @@ void SceneGameMap::enter()
 
 	auto testEntity3 = std::make_shared<GameObject>(App::get().getSprite("player"));
 	map.addObject(testEntity3, 3, 1);
+
+	auto testEntity4 = std::make_shared<GameObject>(App::get().getSprite("wall"));
+	map.addObject(testEntity4, 0, 0);
+
+	auto testEntity5 = std::make_shared<GameObject>(App::get().getSprite("wall"));
+	map.addObject(testEntity5, 11, 8);
+
+	auto testEntity6 = std::make_shared<GameObject>(App::get().getSprite("wall_torch"));
+	map.addObject(testEntity6, 12, 9);
 }
 
 void SceneGameMap::doEvents(SDL_Event event)
