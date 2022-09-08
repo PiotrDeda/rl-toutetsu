@@ -3,22 +3,22 @@
 
 void SceneGameMap::enter()
 {
-	auto testEntity1 = std::make_shared<GameObject>(App::get().getSprite("wall"));
+	auto testEntity1 = std::make_shared<GameObject>(App::get().getSprite("wall"), camera);
 	map.addObject(testEntity1, 1, 1);
 
-	auto testEntity2 = std::make_shared<GameObject>(App::get().getSprite("wall_torch"));
+	auto testEntity2 = std::make_shared<GameObject>(App::get().getSprite("wall_torch"), camera);
 	map.addObject(testEntity2, 2, 1);
 
-	auto testEntity3 = std::make_shared<GameObject>(App::get().getSprite("player"));
+	auto testEntity3 = std::make_shared<GameObject>(App::get().getSprite("player"), camera);
 	map.addObject(testEntity3, 3, 1);
 
-	auto testEntity4 = std::make_shared<GameObject>(App::get().getSprite("wall"));
+	auto testEntity4 = std::make_shared<GameObject>(App::get().getSprite("wall"), camera);
 	map.addObject(testEntity4, 0, 0);
 
-	auto testEntity5 = std::make_shared<GameObject>(App::get().getSprite("wall"));
+	auto testEntity5 = std::make_shared<GameObject>(App::get().getSprite("wall"), camera);
 	map.addObject(testEntity5, 11, 8);
 
-	auto testEntity6 = std::make_shared<GameObject>(App::get().getSprite("wall_torch"));
+	auto testEntity6 = std::make_shared<GameObject>(App::get().getSprite("wall_torch"), camera);
 	map.addObject(testEntity6, 12, 9);
 }
 
@@ -42,6 +42,14 @@ void SceneGameMap::doEvents(SDL_Event event)
 				map[3][1].objects[0]->sprite->setState(2);
 			else if (event.key.keysym.sym == SDLK_d)
 				map[3][1].objects[0]->sprite->setState(3);
+			else if (event.key.keysym.sym == SDLK_r)
+				camera->resetZoom();
+			break;
+		case SDL_MOUSEWHEEL:
+			if (event.wheel.y > 0)
+				camera->zoomIn();
+			else if (event.wheel.y < 0)
+				camera->zoomOut();
 			break;
 		default:
 			break;

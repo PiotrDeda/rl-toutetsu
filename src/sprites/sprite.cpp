@@ -17,9 +17,9 @@ Sprite::Sprite(const char* name) // NOLINT(cppcoreguidelines-pro-type-member-ini
 	SDL_QueryTexture(texture.get(), nullptr, nullptr, &this->width, &this->height);
 }
 
-void Sprite::draw(const int x, const int y)
+void Sprite::draw(const int x, const int y, const double scale)
 {
-	SDL_Rect dstRect = {x, y, width, height};
+	SDL_Rect dstRect = {static_cast<int>(x * scale), static_cast<int>(y * scale), static_cast<int>(width * scale), static_cast<int>(height * scale)};
 	SDL_RenderCopy(renderer, texture.get(), nullptr, &dstRect);
 }
 

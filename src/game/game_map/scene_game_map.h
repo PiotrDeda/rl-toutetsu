@@ -13,5 +13,6 @@ public:
 
 	[[nodiscard]] const char* getName() const override { return "SceneGameMap"; }
 
+	std::shared_ptr<Camera> camera = std::make_shared<Camera>();
 	Map map;
 };

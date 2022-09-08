@@ -1,27 +1,18 @@
 #include "game_object.h"
 
-GameObject::GameObject(const std::shared_ptr<Sprite>& sprite)
+GameObject::GameObject(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Camera>& camera)
 {
 	this->sprite = sprite;
+	this->camera = camera;
 }
 
 void GameObject::draw() const
 {
-	sprite->draw(getRealX(), getRealY());
+	sprite->draw(camera->getScreenX(x), camera->getScreenY(y), camera->getScale());
 }
 
 void GameObject::move(const int targetX, const int targetY)
 {
 	x = targetX;
 	y = targetY;
-}
-
-int GameObject::getRealX() const
-{
-	return x;
-}
-
-int GameObject::getRealY() const
-{
-	return y;
 }

@@ -7,7 +7,7 @@ class Sprite
 public:
 	explicit Sprite(const char* name);
 
-	virtual void draw(int x, int y);
+	virtual void draw(int x, int y, double scale);
 	virtual void setState(int state);
 
 	SDL_Renderer* renderer;
