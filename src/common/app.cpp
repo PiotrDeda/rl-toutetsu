@@ -6,6 +6,7 @@
 #include "logger.h"
 #include "../sprites/state_sprite.h"
 #include "../sprites/animated_sprite.h"
+#include "../sprites/animated_state_sprite.h"
 
 App::~App()
 {
@@ -92,7 +93,7 @@ std::shared_ptr<Sprite> App::getSprite(const std::string& id) const
 
 void App::loadSprites()
 {
-	sprites.emplace("player", std::make_shared<StateSprite>("player", 4));
+	sprites.emplace("player", std::make_shared<AnimatedStateSprite>("player", 2, 30, 4));
 	sprites.emplace("wall", std::make_shared<Sprite>("wall"));
 	sprites.emplace("wall_torch", std::make_shared<AnimatedSprite>("wall_torch", 3, 10));
 	sprites.emplace("ui_test", std::make_shared<Sprite>("ui_test"));
