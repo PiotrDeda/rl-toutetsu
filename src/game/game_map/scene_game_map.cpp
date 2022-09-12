@@ -20,6 +20,9 @@ void SceneGameMap::enter()
 
 	auto testEntity6 = std::make_shared<GameObject>(App::get().getSprite("wall_torch"), camera);
 	map.addObject(testEntity6, 12, 9);
+
+	auto uiTestEntity = std::make_shared<GameObject>(App::get().getSprite("ui_test"), uiCamera);
+	map.addObject(uiTestEntity, 5, 1);
 }
 
 void SceneGameMap::doEvents(SDL_Event event)

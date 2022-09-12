@@ -1,14 +1,13 @@
 #pragma once
 
-
 #include <array>
 
 class Camera
 {
 public:
-	[[nodiscard]] int getScreenX(int x) const;
-	[[nodiscard]] int getScreenY(int y) const;
-	[[nodiscard]] double getScale() const;
+	[[nodiscard]] virtual int getScreenX(int x) const;
+	[[nodiscard]] virtual int getScreenY(int y) const;
+	[[nodiscard]] virtual double getScale() const;
 	void zoomIn();
 	void zoomOut();
 	void resetZoom();
