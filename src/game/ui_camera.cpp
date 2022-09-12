@@ -1,13 +1,13 @@
 #include "ui_camera.h"
 
-int UICamera::getScreenX(int x) const
+int UICamera::getScreenX(int gameX) const
 {
-	return x;
+	return gameX;
 }
 
-int UICamera::getScreenY(int y) const
+int UICamera::getScreenY(int gameY) const
 {
-	return y;
+	return gameY;
 }
 
 double UICamera::getScale() const

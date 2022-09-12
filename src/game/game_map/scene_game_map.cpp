@@ -3,6 +3,8 @@
 
 void SceneGameMap::enter()
 {
+	camera->setBoundaries(-64, -64, 784, 784);
+
 	auto testEntity1 = std::make_shared<GameObject>(App::get().getSprite("wall"), camera);
 	map.addObject(testEntity1, 1, 1);
 
@@ -16,10 +18,16 @@ void SceneGameMap::enter()
 	map.addObject(testEntity4, 0, 0);
 
 	auto testEntity5 = std::make_shared<GameObject>(App::get().getSprite("wall"), camera);
-	map.addObject(testEntity5, 11, 8);
+	map.addObject(testEntity5, 10, 10);
 
 	auto testEntity6 = std::make_shared<GameObject>(App::get().getSprite("wall_torch"), camera);
-	map.addObject(testEntity6, 12, 9);
+	map.addObject(testEntity6, 11, 11);
+
+	auto testEntity7 = std::make_shared<GameObject>(App::get().getSprite("wall_torch"), camera);
+	map.addObject(testEntity7, 22, 22);
+
+	auto testEntity8 = std::make_shared<GameObject>(App::get().getSprite("wall"), camera);
+	map.addObject(testEntity8, 23, 23);
 
 	auto uiTestEntity = std::make_shared<GameObject>(App::get().getSprite("ui_test"), uiCamera);
 	map.addObject(uiTestEntity, 5, 1);
@@ -46,13 +54,21 @@ void SceneGameMap::doEvents(SDL_Event event)
 			else if (event.key.keysym.sym == SDLK_d)
 				map[3][1].objects[0]->sprite->setState(3);
 			else if (event.key.keysym.sym == SDLK_r)
-				camera->resetZoom();
+				camera->resetCamera();
+			else if (event.key.keysym.sym == SDLK_e)
+				camera->move(-15, -15);
+			else if (event.key.keysym.sym == SDLK_q)
+				camera->move(15, 15);
 			break;
 		case SDL_MOUSEWHEEL:
 			if (event.wheel.y > 0)
 				camera->zoomIn();
 			else if (event.wheel.y < 0)
 				camera->zoomOut();
+			break;
+		case SDL_MOUSEMOTION:
+			if (event.motion.state & SDL_BUTTON_RMASK)
+				camera->move(-event.motion.xrel, -event.motion.yrel);
 			break;
 		default:
 			break;

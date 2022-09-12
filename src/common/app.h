@@ -8,8 +8,8 @@
 class App
 {
 public:
-	static constexpr int defaultWidth = 800;
-	static constexpr int defaultHeight = 600;
+	static constexpr int defaultWidth = 1280;
+	static constexpr int defaultHeight = 720;
 	static constexpr const char* assetPath = "../src/assets/";
 
 	SINGLETON(App)

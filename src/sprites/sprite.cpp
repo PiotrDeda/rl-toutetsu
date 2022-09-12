@@ -19,7 +19,7 @@ Sprite::Sprite(const char* name) // NOLINT(cppcoreguidelines-pro-type-member-ini
 
 void Sprite::draw(const int x, const int y, const double scale)
 {
-	SDL_Rect dstRect = {static_cast<int>(x * scale), static_cast<int>(y * scale), static_cast<int>(width * scale), static_cast<int>(height * scale)};
+	SDL_Rect dstRect = {x, y, static_cast<int>(width * scale), static_cast<int>(height * scale)};
 	SDL_RenderCopy(renderer, texture.get(), nullptr, &dstRect);
 }
 
