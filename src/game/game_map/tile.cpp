@@ -12,7 +12,7 @@ void Tile::draw() const
 		object->draw();
 }
 
-void Tile::addObject(const std::shared_ptr<GameObject>& object)
+void Tile::addObject(const std::shared_ptr<MapObject>& object)
 {
 	objects.push_back(object);
 	object->move(x, y);

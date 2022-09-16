@@ -4,9 +4,9 @@
 #include <SDL_image.h>
 
 #include "logger.h"
-#include "../sprites/state_sprite.h"
-#include "../sprites/animated_sprite.h"
-#include "../sprites/animated_state_sprite.h"
+#include "../game/sprites/state_sprite.h"
+#include "../game/sprites/animated_sprite.h"
+#include "../game/sprites/animated_state_sprite.h"
 
 App::~App()
 {

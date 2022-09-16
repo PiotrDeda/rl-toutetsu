@@ -1,15 +1,16 @@
 #pragma once
 
 #include <memory>
-#include "../sprites/sprite.h"
-#include "camera.h"
+#include "sprites/sprite.h"
+#include "camera/camera.h"
+#include "sprites/i_renderable.h"
 
-class GameObject
+class GameObject : public IRenderable
 {
 public:
 	explicit GameObject(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Camera>& camera);
 
-	void draw() const;
+	void draw() const override;
 	void move(int targetX, int targetY);
 
 	int x = 0;

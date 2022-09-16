@@ -12,9 +12,11 @@ public:
 	virtual void enter();
 	virtual void doEvents(SDL_Event event);
 	virtual void doLogic();
-	virtual void doRender();
+	void doRender();
 
 	[[nodiscard]] virtual const char* getName() const { return "Scene"; }
+
+	std::vector<std::shared_ptr<IRenderable>> renderables;
 
 protected:
 	SDL_Renderer* renderer;

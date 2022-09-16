@@ -22,4 +22,10 @@ void Scene::doEvents(SDL_Event event)
 
 void Scene::doLogic() {}
 
-void Scene::doRender() {}
+void Scene::doRender()
+{
+	SDL_RenderClear(renderer);
+	for (auto& renderable : renderables)
+		renderable->draw();
+	SDL_RenderPresent(renderer);
+}

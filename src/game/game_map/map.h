@@ -2,8 +2,9 @@
 
 #include "../game_object.h"
 #include "tile.h"
+#include "../sprites/i_renderable.h"
 
-class Map
+class Map : public IRenderable
 {
 public:
 	static constexpr int mapSize = 40;
@@ -12,8 +13,8 @@ public:
 	Map();
 	std::array<Tile, mapSize>& operator[](int x);
 
-	void draw() const;
-	void addObject(const std::shared_ptr<GameObject>& object, int x, int y);
+	void draw() const override;
+	void addObject(const std::shared_ptr<MapObject>& object, int x, int y);
 
 private:
 	std::array<std::array<Tile, mapSize>, mapSize> tiles;

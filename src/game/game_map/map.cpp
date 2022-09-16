@@ -12,7 +12,7 @@ std::array<Tile, Map::mapSize>& Map::operator[](int x)
 	return tiles[x];
 }
 
-void Map::addObject(const std::shared_ptr<GameObject>& object, int x, int y)
+void Map::addObject(const std::shared_ptr<MapObject>& object, int x, int y)
 {
 	tiles[x][y].addObject(object);
 }

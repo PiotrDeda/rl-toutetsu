@@ -1,36 +1,21 @@
 #include "scene_game_map.h"
 #include "../../common/app.h"
 
-void SceneGameMap::enter()
+SceneGameMap::SceneGameMap() : Scene()
 {
+	renderables.push_back(map);
 	camera->setBoundaries(-64, -64, 784, 784);
 
-	auto testEntity1 = std::make_shared<GameObject>(App::get().getSprite("wall"), camera);
-	map.addObject(testEntity1, 1, 1);
+	auto testEntity1 = createMapObject("wall", 1, 1);
+	auto testEntity2 = createMapObject("wall_torch", 2, 1);
+	auto testEntity3 = createMapObject("player", 3, 1);
+	auto testEntity4 = createMapObject("wall", 0, 0);
+	auto testEntity5 = createMapObject("wall", 10, 10);
+	auto testEntity6 = createMapObject("wall_torch", 11, 11);
+	auto testEntity7 = createMapObject("wall_torch", 22, 22);
+	auto testEntity8 = createMapObject("wall", 23, 23);
 
-	auto testEntity2 = std::make_shared<GameObject>(App::get().getSprite("wall_torch"), camera);
-	map.addObject(testEntity2, 2, 1);
-
-	auto testEntity3 = std::make_shared<GameObject>(App::get().getSprite("player"), camera);
-	map.addObject(testEntity3, 3, 1);
-
-	auto testEntity4 = std::make_shared<GameObject>(App::get().getSprite("wall"), camera);
-	map.addObject(testEntity4, 0, 0);
-
-	auto testEntity5 = std::make_shared<GameObject>(App::get().getSprite("wall"), camera);
-	map.addObject(testEntity5, 10, 10);
-
-	auto testEntity6 = std::make_shared<GameObject>(App::get().getSprite("wall_torch"), camera);
-	map.addObject(testEntity6, 11, 11);
-
-	auto testEntity7 = std::make_shared<GameObject>(App::get().getSprite("wall_torch"), camera);
-	map.addObject(testEntity7, 22, 22);
-
-	auto testEntity8 = std::make_shared<GameObject>(App::get().getSprite("wall"), camera);
-	map.addObject(testEntity8, 23, 23);
-
-	auto uiTestEntity = std::make_shared<GameObject>(App::get().getSprite("ui_test"), uiCamera);
-	map.addObject(uiTestEntity, 5, 1);
+	auto uiTestEntity = createUIObject("ui_test", 32, 32);
 }
 
 void SceneGameMap::doEvents(SDL_Event event)
@@ -41,18 +26,14 @@ void SceneGameMap::doEvents(SDL_Event event)
 			App::get().shutdown();
 			break;
 		case SDL_KEYDOWN:
-			/*if (event.key.keysym.sym == SDLK_w)
-				speed += 1;
-			else if (event.key.keysym.sym == SDLK_s)
-				speed -= 1;*/
 			if (event.key.keysym.sym == SDLK_s)
-				map[3][1].objects[0]->sprite->setState(0);
+				(*map)[3][1].objects[0]->sprite->setState(0);
 			else if (event.key.keysym.sym == SDLK_w)
-				map[3][1].objects[0]->sprite->setState(1);
+				(*map)[3][1].objects[0]->sprite->setState(1);
 			else if (event.key.keysym.sym == SDLK_a)
-				map[3][1].objects[0]->sprite->setState(2);
+				(*map)[3][1].objects[0]->sprite->setState(2);
 			else if (event.key.keysym.sym == SDLK_d)
-				map[3][1].objects[0]->sprite->setState(3);
+				(*map)[3][1].objects[0]->sprite->setState(3);
 			else if (event.key.keysym.sym == SDLK_r)
 				camera->resetCamera();
 			else if (event.key.keysym.sym == SDLK_e)
@@ -88,9 +69,17 @@ void SceneGameMap::doLogic()
 	}*/
 }
 
-void SceneGameMap::doRender()
+std::shared_ptr<MapObject> SceneGameMap::createMapObject(const std::string& spriteId, int x, int y)
 {
-	SDL_RenderClear(renderer);
-	map.draw();
-	SDL_RenderPresent(renderer);
+	auto object = std::make_shared<MapObject>(App::get().getSprite(spriteId), camera);
+	map->addObject(object, x, y);
+	return object;
+}
+
+std::shared_ptr<GameObject> SceneGameMap::createUIObject(const std::string& spriteId, int x, int y)
+{
+	auto object = std::make_shared<GameObject>(App::get().getSprite(spriteId), uiCamera);
+	object->move(x, y);
+	renderables.push_back(object);
+	return object;
 }
