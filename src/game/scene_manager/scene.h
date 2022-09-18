@@ -17,7 +17,9 @@ public:
 	[[nodiscard]] virtual const char* getName() const { return "Scene"; }
 
 	std::vector<std::shared_ptr<IRenderable>> renderables;
+	std::vector<std::shared_ptr<GameObject>> clickables;
 
 protected:
+	std::vector<std::shared_ptr<GameObject>> clickablesQueued;
 	SDL_Renderer* renderer;
 };

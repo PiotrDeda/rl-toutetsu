@@ -12,6 +12,14 @@ void Scene::doEvents(SDL_Event event)
 {
 	switch (event.type)
 	{
+		case SDL_MOUSEBUTTONDOWN:
+			int x, y;
+			SDL_GetMouseState(&x, &y);
+			if (event.button.button == SDL_BUTTON_LEFT)
+				for (auto& clickable : clickables)
+					if (clickable->isMouseOver(x, y))
+						clickablesQueued.push_back(clickable);
+			break;
 		case SDL_QUIT:
 			App::get().shutdown();
 			break;
@@ -20,7 +28,12 @@ void Scene::doEvents(SDL_Event event)
 	}
 }
 
-void Scene::doLogic() {}
+void Scene::doLogic()
+{
+	for (auto& clickable : clickablesQueued)
+		clickable->onClick();
+	clickablesQueued.clear();
+}
 
 void Scene::doRender()
 {

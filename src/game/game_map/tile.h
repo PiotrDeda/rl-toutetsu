@@ -3,7 +3,7 @@
 #include <vector>
 #include "../game_object.h"
 #include "map_object.h"
-#include "../sprites/i_renderable.h"
+#include "../i_renderable.h"
 
 class Tile : public IRenderable
 {

@@ -10,7 +10,7 @@ StateSprite::StateSprite(const char* name, const int stateCount) : Sprite(name)
 
 void StateSprite::draw(int x, int y, const double scale)
 {
-	SDL_Rect dstRect = {x, y, static_cast<int>(width * scale), static_cast<int>(height * scale)};
+	SDL_Rect dstRect = {x, y, getScaledWidth(scale), getScaledHeight(scale)};
 	SDL_RenderCopy(renderer, texture.get(), &clips[currentState], &dstRect);
 }
 

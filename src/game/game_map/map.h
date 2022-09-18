@@ -2,7 +2,7 @@
 
 #include "../game_object.h"
 #include "tile.h"
-#include "../sprites/i_renderable.h"
+#include "../i_renderable.h"
 
 class Map : public IRenderable
 {

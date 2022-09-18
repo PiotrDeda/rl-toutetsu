@@ -3,7 +3,7 @@
 #include <memory>
 #include "sprites/sprite.h"
 #include "camera/camera.h"
-#include "sprites/i_renderable.h"
+#include "i_renderable.h"
 
 class GameObject : public IRenderable
 {
@@ -12,6 +12,8 @@ public:
 
 	void draw() const override;
 	void move(int targetX, int targetY);
+	[[nodiscard]] bool isMouseOver(int mouseX, int mouseY) const;
+	virtual void onClick();
 
 	int x = 0;
 	int y = 0;

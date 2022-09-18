@@ -20,6 +20,8 @@ SceneGameMap::SceneGameMap() : Scene()
 
 void SceneGameMap::doEvents(SDL_Event event)
 {
+	// TODO: Remake Scene class to get rid of forced parent call
+	Scene::doEvents(event);
 	switch (event.type)
 	{
 		case SDL_QUIT:
@@ -58,6 +60,8 @@ void SceneGameMap::doEvents(SDL_Event event)
 
 void SceneGameMap::doLogic()
 {
+	// TODO: Remake Scene class to get rid of forced parent call
+	Scene::doLogic();
 	/*int w, h;
 	SDL_GetWindowSize(App::get().window.get(), &w, &h);
 	for (auto& entity : gameObjects)

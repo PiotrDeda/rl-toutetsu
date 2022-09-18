@@ -97,6 +97,8 @@ void App::loadSprites()
 	sprites.emplace("wall", std::make_shared<Sprite>("wall"));
 	sprites.emplace("wall_torch", std::make_shared<AnimatedSprite>("wall_torch", 3, 10));
 	sprites.emplace("ui_test", std::make_shared<Sprite>("ui_test"));
+	sprites.emplace("play_button", std::make_shared<Sprite>("play_button"));
+	sprites.emplace("quit_button", std::make_shared<Sprite>("quit_button"));
 }
 
 

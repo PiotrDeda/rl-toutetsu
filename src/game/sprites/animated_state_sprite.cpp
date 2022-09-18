@@ -15,7 +15,7 @@ AnimatedStateSprite::AnimatedStateSprite(const char* name, const int frameCount,
 
 void AnimatedStateSprite::draw(int x, int y, const double scale)
 {
-	SDL_Rect dstRect = {x, y, static_cast<int>(width * scale), static_cast<int>(height * scale)};
+	SDL_Rect dstRect = {x, y, getScaledWidth(scale), getScaledHeight(scale)};
 	int clipIndex = currentState * frameCount + currentFrame;
 	SDL_RenderCopy(renderer, texture.get(), &clips[clipIndex], &dstRect);
 	if (--currentDelay == 0)

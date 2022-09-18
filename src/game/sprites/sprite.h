@@ -9,6 +9,8 @@ public:
 
 	virtual void draw(int x, int y, double scale);
 	virtual void setState(int state);
+	[[nodiscard]] int getScaledWidth(double scale) const;
+	[[nodiscard]] int getScaledHeight(double scale) const;
 
 	SDL_Renderer* renderer;
 	TexturePtr texture;
