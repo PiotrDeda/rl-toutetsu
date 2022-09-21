@@ -5,11 +5,10 @@
 
 void SceneManager::init()
 {
-	scenes[SceneId::Blank] = std::make_shared<Scene>();
 	scenes[SceneId::MainMenu] = std::make_shared<SceneMainMenu>();
 	scenes[SceneId::GameMap] = std::make_shared<SceneGameMap>();
-	currentScene = scenes[SceneId::Blank];
-	setNextScene(SceneId::MainMenu);
+	currentScene = scenes[SceneId::MainMenu];
+	nextScene = scenes[SceneId::MainMenu];
 }
 
 void SceneManager::setNextScene(SceneId nextSceneId)

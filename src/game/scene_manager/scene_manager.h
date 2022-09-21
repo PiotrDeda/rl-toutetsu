@@ -4,7 +4,6 @@
 
 enum SceneId
 {
-	Blank,
 	MainMenu,
 	GameMap
 };

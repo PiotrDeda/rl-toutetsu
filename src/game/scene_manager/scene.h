@@ -7,8 +7,6 @@
 class Scene
 {
 public:
-	Scene();
-
 	void doEvents(SDL_Event event);
 	void doLogic();
 	void doRender();
@@ -23,6 +21,8 @@ public:
 	std::vector<std::shared_ptr<GameObject>> clickables;
 
 protected:
+	Scene();
+
 	std::vector<std::shared_ptr<GameObject>> clickablesQueued;
 	SDL_Renderer* renderer;
 };
