@@ -9,8 +9,8 @@ class SceneGameMap : public Scene
 public:
 	SceneGameMap();
 
-	void doEvents(SDL_Event event) override;
-	void doLogic() override;
+	void customEvents(SDL_Event event) override;
+	void customLogic() override;
 
 	[[nodiscard]] const char* getName() const override { return "SceneGameMap"; }
 

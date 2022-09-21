@@ -23,6 +23,6 @@ void SceneManager::switchScenes()
 	if (currentScene != nextScene)
 	{
 		currentScene = nextScene;
-		currentScene->enter();
+		//currentScene->enter();
 	}
 }

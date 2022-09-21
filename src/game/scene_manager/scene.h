@@ -9,10 +9,13 @@ class Scene
 public:
 	Scene();
 
-	virtual void enter();
-	virtual void doEvents(SDL_Event event);
-	virtual void doLogic();
+	void doEvents(SDL_Event event);
+	void doLogic();
 	void doRender();
+
+	virtual void customEvents(SDL_Event event);
+	virtual void customLogic();
+	virtual void customRender();
 
 	[[nodiscard]] virtual const char* getName() const { return "Scene"; }
 

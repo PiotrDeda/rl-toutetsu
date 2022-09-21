@@ -6,8 +6,6 @@ Scene::Scene()
 	renderer = App::get().renderer.get();
 }
 
-void Scene::enter() {}
-
 void Scene::doEvents(SDL_Event event)
 {
 	switch (event.type)
@@ -26,6 +24,8 @@ void Scene::doEvents(SDL_Event event)
 		default:
 			break;
 	}
+
+	customEvents(event);
 }
 
 void Scene::doLogic()
@@ -33,6 +33,8 @@ void Scene::doLogic()
 	for (auto& clickable : clickablesQueued)
 		clickable->onClick();
 	clickablesQueued.clear();
+
+	customLogic();
 }
 
 void Scene::doRender()
@@ -41,4 +43,12 @@ void Scene::doRender()
 	for (auto& renderable : renderables)
 		renderable->draw();
 	SDL_RenderPresent(renderer);
+
+	customRender();
 }
+
+void Scene::customEvents(SDL_Event event) {}
+
+void Scene::customLogic() {}
+
+void Scene::customRender() {}

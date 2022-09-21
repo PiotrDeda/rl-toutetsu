@@ -18,15 +18,10 @@ SceneGameMap::SceneGameMap() : Scene()
 	auto uiTestEntity = createUIObject("ui_test", 32, 32);
 }
 
-void SceneGameMap::doEvents(SDL_Event event)
+void SceneGameMap::customEvents(SDL_Event event)
 {
-	// TODO: Remake Scene class to get rid of forced parent call
-	Scene::doEvents(event);
 	switch (event.type)
 	{
-		case SDL_QUIT:
-			App::get().shutdown();
-			break;
 		case SDL_KEYDOWN:
 			if (event.key.keysym.sym == SDLK_s)
 				(*map)[3][1].objects[0]->sprite->setState(0);
@@ -58,20 +53,7 @@ void SceneGameMap::doEvents(SDL_Event event)
 	}
 }
 
-void SceneGameMap::doLogic()
-{
-	// TODO: Remake Scene class to get rid of forced parent call
-	Scene::doLogic();
-	/*int w, h;
-	SDL_GetWindowSize(App::get().window.get(), &w, &h);
-	for (auto& entity : gameObjects)
-	{
-		entity->move(entity->x + speed, entity->y + speed);
-		if (entity->x > w || entity->y > h || entity->x < 0 ||
-			entity->y < 0)
-			App::get().shutdown();
-	}*/
-}
+void SceneGameMap::customLogic() {}
 
 std::shared_ptr<MapObject> SceneGameMap::createMapObject(const std::string& spriteId, int x, int y)
 {
