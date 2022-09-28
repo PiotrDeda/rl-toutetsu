@@ -93,12 +93,12 @@ std::shared_ptr<Sprite> App::getSprite(const std::string& id) const
 
 void App::loadSprites()
 {
+	sprites.emplace("play_button", std::make_shared<Sprite>("play_button"));
+	sprites.emplace("quit_button", std::make_shared<Sprite>("quit_button"));
 	sprites.emplace("player", std::make_shared<AnimatedStateSprite>("player", 2, 30, 4));
 	sprites.emplace("wall", std::make_shared<Sprite>("wall"));
 	sprites.emplace("wall_torch", std::make_shared<AnimatedSprite>("wall_torch", 3, 10));
-	sprites.emplace("ui_test", std::make_shared<Sprite>("ui_test"));
-	sprites.emplace("play_button", std::make_shared<Sprite>("play_button"));
-	sprites.emplace("quit_button", std::make_shared<Sprite>("quit_button"));
+	sprites.emplace("ui_equipment_bg", std::make_shared<Sprite>("ui_equipment_bg"));
 }
 
 

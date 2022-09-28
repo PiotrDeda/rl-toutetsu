@@ -15,7 +15,7 @@ SceneGameMap::SceneGameMap() : Scene()
 	auto testEntity7 = createMapObject("wall_torch", 22, 22);
 	auto testEntity8 = createMapObject("wall", 23, 23);
 
-	auto uiTestEntity = createUIObject("ui_test", 32, 32);
+	auto uiTestEntity = createUIObject("ui_equipment_bg", 912, 0);
 }
 
 void SceneGameMap::customEvents(SDL_Event event)

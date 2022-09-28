@@ -10,7 +10,7 @@ class App
 public:
 	static constexpr int defaultWidth = 1280;
 	static constexpr int defaultHeight = 720;
-	static constexpr const char* assetPath = "../src/assets/";
+	static constexpr const char* assetPath = "assets/";
 
 	SINGLETON(App)
 	~App();

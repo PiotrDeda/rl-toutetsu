@@ -24,3 +24,5 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARIES}
         ${SDL2_TTF_LIBRARIES})
+
+file(COPY src/assets DESTINATION ${CMAKE_BINARY_DIR})
