@@ -1,10 +1,12 @@
 #include <SDL.h>
 #include "../engine/app/app.h"
+#include "loaders/sprite_loader.h"
 
 int main(int, char* [])
 {
 	auto& app = App::get();
 	app.init();
+	app.loadSprites(SpriteLoader::getSprites());
 	auto& sceneManager = app.sceneManager;
 	sceneManager.loadScenes(SceneLoader::getScenes());
 

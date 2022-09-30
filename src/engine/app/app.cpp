@@ -4,9 +4,6 @@
 #include <SDL_image.h>
 
 #include "../misc/logger.h"
-#include "../sprite/state_sprite.h"
-#include "../sprite/animated_sprite.h"
-#include "../sprite/animated_state_sprite.h"
 
 App::~App()
 {
@@ -50,10 +47,12 @@ void App::init()
 	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
 		Logger::logErrorImg("SDL_image could not initialize!");
 
-	// Sprites
-	loadSprites();
-
 	Logger::logInfo("SDL initialized");
+}
+
+void App::loadSprites(std::map<std::string, std::shared_ptr<Sprite>> loadedSprites)
+{
+	sprites = std::move(loadedSprites);
 }
 
 bool App::isRunning() const
@@ -87,15 +86,3 @@ std::shared_ptr<Sprite> App::getSprite(const std::string& id) const
 	}
 	return sprites.at(id);
 }
-
-void App::loadSprites()
-{
-	sprites.emplace("play_button", std::make_shared<Sprite>("play_button"));
-	sprites.emplace("quit_button", std::make_shared<Sprite>("quit_button"));
-	sprites.emplace("player", std::make_shared<AnimatedStateSprite>("player", 2, 30, 4));
-	sprites.emplace("wall", std::make_shared<Sprite>("wall"));
-	sprites.emplace("wall_torch", std::make_shared<AnimatedSprite>("wall_torch", 3, 10));
-	sprites.emplace("ui_equipment_bg", std::make_shared<Sprite>("ui_equipment_bg"));
-}
-
-

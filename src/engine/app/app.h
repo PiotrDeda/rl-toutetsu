@@ -16,6 +16,7 @@ public:
 	~App();
 
 	void init();
+	void loadSprites(std::map<std::string, std::shared_ptr<Sprite>> loadedSprites);
 	[[nodiscard]] bool isRunning() const;
 	void shutdown();
 	static const char* getAssetPath(const char* name);
@@ -27,8 +28,6 @@ public:
 
 private:
 	App() = default;
-
-	void loadSprites();
 
 	bool running = true;
 	std::map<std::string, std::shared_ptr<Sprite>> sprites;
