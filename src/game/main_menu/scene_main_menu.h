@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../scene_manager/scene.h"
-#include "../camera/ui_camera.h"
+#include "../../engine/scene_manager/scene.h"
+#include "../../engine/camera/ui_camera.h"
 
 class SceneMainMenu : public Scene
 {

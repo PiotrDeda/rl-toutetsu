@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../game_object.h"
+#include "../../engine/game_object/game_object.h"
 
 class PlayButton : public GameObject
 {

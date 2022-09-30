@@ -1,9 +1,9 @@
 #pragma once
 
 #include <vector>
-#include "../game_object.h"
+#include "../../engine/game_object/game_object.h"
 #include "map_object.h"
-#include "../i_renderable.h"
+#include "../../engine/game_object/i_renderable.h"
 
 class Tile : public IRenderable
 {

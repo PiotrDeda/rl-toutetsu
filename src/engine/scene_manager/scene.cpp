@@ -1,5 +1,5 @@
 #include "scene.h"
-#include "../../common/app.h"
+#include "../app/app.h"
 
 Scene::Scene()
 {

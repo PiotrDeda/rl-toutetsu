@@ -1,6 +1,6 @@
 #include "sprite.h"
-#include "../../common/app.h"
-#include "../../common/logger.h"
+#include "../app/app.h"
+#include "../misc/logger.h"
 
 #include <SDL_surface.h>
 #include <SDL_image.h>

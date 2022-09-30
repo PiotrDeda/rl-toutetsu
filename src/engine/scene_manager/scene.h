@@ -2,7 +2,7 @@
 
 #include <SDL_events.h>
 #include <vector>
-#include "../game_object.h"
+#include "../game_object/game_object.h"
 
 class Scene
 {

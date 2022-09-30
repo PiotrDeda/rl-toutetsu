@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
-#include "sprites/sprite.h"
-#include "camera/camera.h"
+#include "../sprite/sprite.h"
+#include "../camera/camera.h"
 #include "i_renderable.h"
 
 class GameObject : public IRenderable

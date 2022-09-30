@@ -3,10 +3,10 @@
 #include <stdexcept>
 #include <SDL_image.h>
 
-#include "logger.h"
-#include "../game/sprites/state_sprite.h"
-#include "../game/sprites/animated_sprite.h"
-#include "../game/sprites/animated_state_sprite.h"
+#include "../misc/logger.h"
+#include "../sprite/state_sprite.h"
+#include "../sprite/animated_sprite.h"
+#include "../sprite/animated_state_sprite.h"
 
 App::~App()
 {

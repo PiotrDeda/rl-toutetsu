@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../game_object.h"
+#include "../../engine/game_object/game_object.h"
 #include "tile.h"
-#include "../i_renderable.h"
+#include "../../engine/game_object/i_renderable.h"
 
 class Map : public IRenderable
 {
