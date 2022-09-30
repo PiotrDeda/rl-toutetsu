@@ -53,9 +53,6 @@ void App::init()
 	// Sprites
 	loadSprites();
 
-	// Scene Manager
-	sceneManager.init();
-
 	Logger::logInfo("SDL initialized");
 }
 

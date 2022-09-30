@@ -1,11 +1,12 @@
 #include <SDL.h>
-#include "app.h"
+#include "../engine/app/app.h"
 
 int main(int, char* [])
 {
 	auto& app = App::get();
 	app.init();
 	auto& sceneManager = app.sceneManager;
+	sceneManager.loadScenes(SceneLoader::getScenes());
 
 	while (app.isRunning())
 	{

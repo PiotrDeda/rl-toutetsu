@@ -1,23 +1,18 @@
 #pragma once
 
 #include "scene.h"
-
-enum SceneId
-{
-	MainMenu,
-	GameMap
-};
+#include "../../game/loaders/scene_loader.h"
 
 class SceneManager
 {
 public:
-	void init();
+	void loadScenes(std::array<std::shared_ptr<Scene>, SceneLoader::sceneCount> loadedScenes);
 	void setNextScene(SceneId nextSceneId);
 	void switchScenes();
 
 	std::shared_ptr<Scene> currentScene;
 
 private:
-	std::array<std::shared_ptr<Scene>, 8> scenes;
+	std::array<std::shared_ptr<Scene>, SceneLoader::sceneCount> scenes;
 	std::shared_ptr<Scene> nextScene;
 };
