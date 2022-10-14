@@ -7,13 +7,14 @@
 enum SceneId
 {
 	MainMenu,
-	GameMap
+	GameMap,
+	Fight
 };
 
 class SceneLoader
 {
 public:
-	static constexpr int sceneCount = 8;
+	static constexpr int sceneCount = 4;
 
 	static std::array<std::shared_ptr<Scene>, sceneCount> getScenes();
 

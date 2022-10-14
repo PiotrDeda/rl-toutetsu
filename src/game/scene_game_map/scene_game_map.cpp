@@ -1,8 +1,11 @@
 #include "scene_game_map.h"
+
+#include <utility>
 #include "../../engine/app/app.h"
 
-SceneGameMap::SceneGameMap() : Scene()
+SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 {
+	this->gameState = std::move(gameState);
 	renderables.push_back(map);
 	camera->setBoundaries(-64, -64, 784, 784);
 
@@ -23,20 +26,35 @@ void SceneGameMap::customEvents(SDL_Event event)
 	switch (event.type)
 	{
 		case SDL_KEYDOWN:
-			if (event.key.keysym.sym == SDLK_s)
-				(*map)[3][1].objects[0]->sprite->setState(0);
-			else if (event.key.keysym.sym == SDLK_w)
-				(*map)[3][1].objects[0]->sprite->setState(1);
-			else if (event.key.keysym.sym == SDLK_a)
-				(*map)[3][1].objects[0]->sprite->setState(2);
-			else if (event.key.keysym.sym == SDLK_d)
-				(*map)[3][1].objects[0]->sprite->setState(3);
-			else if (event.key.keysym.sym == SDLK_r)
-				camera->resetCamera();
-			else if (event.key.keysym.sym == SDLK_e)
-				camera->move(-15, -15);
-			else if (event.key.keysym.sym == SDLK_q)
-				camera->move(15, 15);
+			switch (event.key.keysym.sym)
+			{
+				case SDLK_s:
+					(*map)[3][1].objects[0]->sprite->setState(0);
+					break;
+				case SDLK_w:
+					(*map)[3][1].objects[0]->sprite->setState(1);
+					break;
+				case SDLK_a:
+					(*map)[3][1].objects[0]->sprite->setState(2);
+					break;
+				case SDLK_d:
+					(*map)[3][1].objects[0]->sprite->setState(3);
+					break;
+				case SDLK_r:
+					camera->resetCamera();
+					break;
+				case SDLK_e:
+					camera->move(-15, -15);
+					break;
+				case SDLK_q:
+					camera->move(15, 15);
+					break;
+				case SDLK_f:
+					App::get().sceneManager.setNextScene(SceneId::Fight);
+					break;
+				default:
+					break;
+			}
 			break;
 		case SDL_MOUSEWHEEL:
 			if (event.wheel.y > 0)
