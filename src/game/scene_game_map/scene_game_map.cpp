@@ -1,7 +1,7 @@
 #include "scene_game_map.h"
 
 #include <utility>
-#include "../../engine/app/app.h"
+#include "../game_state/inventory_view.h"
 
 SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 {
@@ -19,6 +19,10 @@ SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 	auto testEntity8 = createMapObject("wall", 23, 23);
 
 	auto uiTestEntity = createUIObject("ui_equipment_bg", 912, 0);
+
+	auto inventoryView = std::make_shared<InventoryView>(this->gameState->inventory, uiCamera);
+	inventoryView->move(912, 0);
+	renderables.push_back(inventoryView);
 }
 
 void SceneGameMap::customEvents(SDL_Event event)

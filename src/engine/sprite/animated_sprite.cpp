@@ -13,7 +13,7 @@ AnimatedSprite::AnimatedSprite(const char* name, const int frameCount, const int
 void AnimatedSprite::draw(int x, int y, const double scale)
 {
 	SDL_Rect dstRect = {x, y, getScaledWidth(scale), getScaledHeight(scale)};
-	SDL_RenderCopy(renderer, texture.get(), &clips[currentFrame], &dstRect);
+	SDL_RenderCopy(renderer.get(), texture.get(), &clips[currentFrame], &dstRect);
 	if (--currentDelay == 0)
 	{
 		currentFrame = (currentFrame + 1) % frameCount;

@@ -1,4 +1,5 @@
 #include "sprite_loader.h"
+#include "../../engine/sprite/blank_sprite.h"
 #include "../../engine/sprite/animated_sprite.h"
 #include "../../engine/sprite/state_sprite.h"
 #include "../../engine/sprite/animated_state_sprite.h"
@@ -6,6 +7,8 @@
 std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 {
 	std::map<std::string, std::shared_ptr<Sprite>> sprites;
+
+	sprites.emplace("blank", std::make_shared<BlankSprite>());
 
 	// Main menu
 	sprites.emplace("play_button", std::make_shared<Sprite>("play_button"));

@@ -11,7 +11,7 @@ public:
 	explicit GameObject(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Camera>& camera);
 
 	void draw() const override;
-	void move(int targetX, int targetY);
+	virtual void move(int targetX, int targetY);
 	[[nodiscard]] bool isMouseOver(int mouseX, int mouseY) const;
 	virtual void onClick();
 

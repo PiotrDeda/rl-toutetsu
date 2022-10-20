@@ -7,8 +7,8 @@
 
 Sprite::Sprite(const char* name) // NOLINT(cppcoreguidelines-pro-type-member-init)
 {
-	this->renderer = App::get().renderer.get();
-	this->texture = makeTexture(IMG_LoadTexture(renderer, App::getAssetPath(name)));
+	this->renderer = App::get().renderer;
+	this->texture = makeTexture(IMG_LoadTexture(renderer.get(), App::getAssetPath(name)));
 	if (!texture)
 	{
 		Logger::logErrorImg("Failed to load texture: %s", name);
@@ -20,7 +20,7 @@ Sprite::Sprite(const char* name) // NOLINT(cppcoreguidelines-pro-type-member-ini
 void Sprite::draw(const int x, const int y, const double scale)
 {
 	SDL_Rect dstRect = {x, y, getScaledWidth(scale), getScaledHeight(scale)};
-	SDL_RenderCopy(renderer, texture.get(), nullptr, &dstRect);
+	SDL_RenderCopy(renderer.get(), texture.get(), nullptr, &dstRect);
 }
 
 void Sprite::setState(int state) {}

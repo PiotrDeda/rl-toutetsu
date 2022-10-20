@@ -12,10 +12,12 @@ public:
 	[[nodiscard]] int getScaledWidth(double scale) const;
 	[[nodiscard]] int getScaledHeight(double scale) const;
 
-	SDL_Renderer* renderer;
+	RendererPtr renderer;
 	TexturePtr texture;
 
 protected:
-	int width;
-	int height;
+	Sprite() = default;
+
+	int width = 0;
+	int height = 0;
 };
