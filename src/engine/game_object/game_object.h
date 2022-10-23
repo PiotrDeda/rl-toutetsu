@@ -12,7 +12,7 @@ public:
 
 	void draw() const override;
 	virtual void move(int targetX, int targetY);
-	[[nodiscard]] bool isMouseOver(int mouseX, int mouseY) const;
+	[[nodiscard]] virtual bool isMouseOver(int mouseX, int mouseY);
 	virtual void onClick();
 
 	int x = 0;

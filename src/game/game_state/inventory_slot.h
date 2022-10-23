@@ -8,7 +8,10 @@
 class InventorySlot
 {
 public:
+	InventorySlot(int index, int offsetX, int offsetY) : index(index), offsetX(offsetX), offsetY(offsetY) {}
+
+	int index;
 	std::shared_ptr<Item> item = std::make_shared<BlankItem>();
-	int offsetX = 0;
-	int offsetY = 0;
+	int offsetX;
+	int offsetY;
 };

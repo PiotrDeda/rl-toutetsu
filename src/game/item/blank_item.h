@@ -5,5 +5,5 @@
 class BlankItem : public Item
 {
 public:
-	BlankItem() { this->sprite = App::get().getSprite("blank"); };
+	BlankItem() { this->sprite = App::get().getSprite("blank_item"); };
 };

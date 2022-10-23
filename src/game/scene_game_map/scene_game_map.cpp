@@ -2,6 +2,8 @@
 
 #include <utility>
 #include "../game_state/inventory_view.h"
+#include "../item/test_item.h"
+#include "../item/test_item_2.h"
 
 SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 {
@@ -23,6 +25,9 @@ SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 	auto inventoryView = std::make_shared<InventoryView>(this->gameState->inventory, uiCamera);
 	inventoryView->move(912, 0);
 	renderables.push_back(inventoryView);
+	clickables.push_back(inventoryView);
+	this->gameState->inventory->inventorySlots[0]->item = std::make_shared<TestItem>();
+	this->gameState->inventory->inventorySlots[1]->item = std::make_shared<TestItem2>();
 }
 
 void SceneGameMap::customEvents(SDL_Event event)

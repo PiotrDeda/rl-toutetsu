@@ -21,5 +21,7 @@ public:
 
 	Inventory();
 
+	void switchCursorItem(int index);
+
 	std::vector<std::shared_ptr<InventorySlot>> inventorySlots;
 };

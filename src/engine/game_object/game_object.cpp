@@ -17,7 +17,7 @@ void GameObject::move(const int targetX, const int targetY)
 	y = targetY;
 }
 
-bool GameObject::isMouseOver(int mouseX, int mouseY) const
+bool GameObject::isMouseOver(int mouseX, int mouseY)
 {
 	return mouseX >= camera->getScreenX(x) &&
 		   mouseX <= camera->getScreenX(x) + sprite->getScaledWidth(camera->getScale()) &&
