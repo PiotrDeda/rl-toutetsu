@@ -13,8 +13,7 @@ public:
 
 	void init();
 	void loadSprites(std::map<std::string, std::shared_ptr<Sprite>> loadedSprites);
-	[[nodiscard]] bool isRunning() const;
-	void doEvents(SDL_Event& event);
+	int run();
 	void shutdown();
 	static const char* getAssetPath(const char* name);
 	[[nodiscard]] std::shared_ptr<Sprite> getSprite(const std::string& id) const;
@@ -31,6 +30,8 @@ private:
 	static constexpr const char* assetPath = "assets/";
 
 	App() = default;
+
+	void updateWindowSize();
 
 	bool running = true;
 	float widthMultiplier = 1;

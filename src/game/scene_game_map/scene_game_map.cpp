@@ -4,6 +4,7 @@
 #include "../game_state/inventory_view.h"
 #include "../item/test_item.h"
 #include "../item/test_item_2.h"
+#include "../loaders/scene_loader.h"
 
 SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 {

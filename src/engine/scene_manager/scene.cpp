@@ -3,7 +3,7 @@
 
 Scene::Scene()
 {
-	renderer = App::get().renderer.get();
+	renderer = App::get().renderer;
 }
 
 void Scene::doEvents(SDL_Event event)
@@ -38,10 +38,10 @@ void Scene::doLogic()
 
 void Scene::doRender()
 {
-	SDL_RenderClear(renderer);
+	SDL_RenderClear(renderer.get());
 	for (auto& renderable : renderables)
 		renderable->draw();
-	SDL_RenderPresent(renderer);
+	SDL_RenderPresent(renderer.get());
 
 	customRender();
 }

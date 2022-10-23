@@ -24,5 +24,5 @@ protected:
 	Scene();
 
 	std::vector<std::shared_ptr<GameObject>> clickablesQueued;
-	SDL_Renderer* renderer;
+	RendererPtr renderer;
 };

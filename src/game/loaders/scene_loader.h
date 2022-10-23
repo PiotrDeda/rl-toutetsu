@@ -14,9 +14,7 @@ enum SceneId
 class SceneLoader
 {
 public:
-	static constexpr int sceneCount = 4;
-
-	static std::array<std::shared_ptr<Scene>, sceneCount> getScenes();
+	static std::vector<std::shared_ptr<Scene>> getScenes();
 
 private:
 	SceneLoader() = default;

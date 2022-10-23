@@ -3,12 +3,13 @@
 #include "../scene_game_map/scene_game_map.h"
 #include "../scene_fight/scene_fight.h"
 
-std::array<std::shared_ptr<Scene>, SceneLoader::sceneCount> SceneLoader::getScenes()
+std::vector<std::shared_ptr<Scene>> SceneLoader::getScenes()
 {
-	std::array<std::shared_ptr<Scene>, SceneLoader::sceneCount> scenes;
-	std::shared_ptr<GameState> gameState = std::make_shared<GameState>();
-	scenes[SceneId::MainMenu] = std::make_shared<SceneMainMenu>();
-	scenes[SceneId::GameMap] = std::make_shared<SceneGameMap>(gameState);
-	scenes[SceneId::Fight] = std::make_shared<SceneFight>(gameState);
+	static std::shared_ptr<GameState> gameState = std::make_shared<GameState>();
+	static std::vector<std::shared_ptr<Scene>> scenes = {
+		std::make_shared<SceneMainMenu>(),
+		std::make_shared<SceneGameMap>(gameState),
+		std::make_shared<SceneFight>(gameState)
+	};
 	return scenes;
 }
