@@ -60,6 +60,47 @@ bool App::isRunning() const
 	return running;
 }
 
+void App::doEvents(SDL_Event& event)
+{
+	switch (event.type)
+	{
+		case SDL_WINDOWEVENT:
+		{
+			int w, h;
+			SDL_GetWindowSize(window.get(), &w, &h);
+			auto fw = static_cast<float>(w), fh = static_cast<float>(h),
+					fdw = static_cast<float>(defaultWidth), fdh = static_cast<float>(defaultHeight);
+			if (fw / fh > fdw / fdh)
+			{
+				float newW = fh * fdw / fdh;
+				widthOffset = static_cast<int>(fw - newW) / 2;
+				heightOffset = 0;
+				fw = newW;
+			}
+			else if (fw / fh < fdw / fdh)
+			{
+				float newH = fw * fdh / fdw;
+				widthOffset = 0;
+				heightOffset = static_cast<int>(fh - newH) / 2;
+				fh = newH;
+			}
+			else
+			{
+				widthOffset = 0;
+				heightOffset = 0;
+			}
+			widthMultiplier = fdw / fw;
+			heightMultiplier = fdh / fh;
+			break;
+		}
+		case SDL_QUIT:
+			shutdown();
+			break;
+		default:
+			break;
+	}
+}
+
 void App::shutdown()
 {
 	Logger::logInfo("Shutting down...");
@@ -85,4 +126,18 @@ std::shared_ptr<Sprite> App::getSprite(const std::string& id) const
 		throw std::runtime_error("Sprite not found: " + id);
 	}
 	return sprites.at(id);
+}
+
+int App::getMouseX() const
+{
+	int x;
+	SDL_GetMouseState(&x, nullptr);
+	return static_cast<int>(static_cast<float>(x - widthOffset) * widthMultiplier);
+}
+
+int App::getMouseY() const
+{
+	int y;
+	SDL_GetMouseState(nullptr, &y);
+	return static_cast<int>(static_cast<float>(y - heightOffset) * heightMultiplier);
 }

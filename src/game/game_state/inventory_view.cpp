@@ -14,8 +14,8 @@ void InventoryView::draw() const
 			continue;
 		slot->item->sprite->draw(x + slot->offsetX, y + slot->offsetY, camera->getScale());
 	}
-	int mouseX, mouseY;
-	SDL_GetMouseState(&mouseX, &mouseY);
+	int mouseX = App::get().getMouseX();
+	int mouseY = App::get().getMouseY();
 	auto sprite = inventory->inventorySlots[inventory->cursorIndex]->item->sprite;
 	int width = sprite->getScaledWidth(camera->getScale());
 	int height = sprite->getScaledHeight(camera->getScale());

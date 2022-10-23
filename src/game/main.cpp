@@ -15,7 +15,10 @@ int main(int, char* [])
 		// Events
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
+		{
+			app.doEvents(event);
 			sceneManager.currentScene->doEvents(event);
+		}
 
 		// Logic
 		sceneManager.currentScene->doLogic();
