@@ -7,17 +7,17 @@
 class Inventory
 {
 public:
-	// 0-29: main inventory
-	// 30: weapon
-	// 31: helmet
-	// 32: body armor
-	// 33: boots
-	// 34: trinket
-	// 35: shield
-	// 36: book
-	// 37: cursor
-	static constexpr int inventorySize = 38;
-	static constexpr int cursorIndex = 37;
+	// 0-24: main inventory
+	// 25: weapon
+	// 26: helmet
+	// 27: body armor
+	// 28: boots
+	// 29: trinket
+	// 30: shield
+	// 31: book
+	// 32: cursor
+	static constexpr int inventorySize = 33;
+	static constexpr int cursorIndex = 32;
 
 	Inventory();
 
