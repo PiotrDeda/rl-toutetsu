@@ -29,6 +29,8 @@ SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 	clickables.push_back(inventoryView);
 	this->gameState->inventory->inventorySlots[0]->item = std::make_shared<TestItem>();
 	this->gameState->inventory->inventorySlots[1]->item = std::make_shared<TestItem2>();
+
+	auto testText = createUIObject("test_text", 0, 0);
 }
 
 void SceneGameMap::customEvents(SDL_Event event)

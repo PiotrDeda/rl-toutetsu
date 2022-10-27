@@ -15,13 +15,14 @@ public:
 	void loadSprites(std::map<std::string, std::shared_ptr<Sprite>> loadedSprites);
 	int run();
 	void shutdown();
-	static const char* getAssetPath(const char* name);
+	static const char* getAssetPath(const char* name, const char* fileType = "png");
 	[[nodiscard]] std::shared_ptr<Sprite> getSprite(const std::string& id) const;
 	[[nodiscard]] int getMouseX() const;
 	[[nodiscard]] int getMouseY() const;
 
 	WindowPtr window;
 	RendererPtr renderer;
+	FontPtr font;
 	SceneManager sceneManager;
 
 private:

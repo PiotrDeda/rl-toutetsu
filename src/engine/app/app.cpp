@@ -1,7 +1,6 @@
 #include "app.h"
 
 #include <stdexcept>
-#include <SDL_image.h>
 
 #include "../misc/logger.h"
 
@@ -9,6 +8,7 @@ App::~App()
 {
 	Logger::logInfo("Quitting SDL...");
 	SDL_DestroyWindow(window.get());
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }
@@ -19,7 +19,7 @@ void App::init()
 	Logger::logInfo("Starting SDL...");
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		Logger::logErrorSdl("SDL could not initialize!");
+		Logger::logErrorSDL("SDL could not initialize!");
 		throw std::runtime_error("SDL could not initialize!");
 	}
 
@@ -28,7 +28,7 @@ void App::init()
 										 defaultWidth, defaultHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE));
 	if (!window)
 	{
-		Logger::logErrorSdl("Window could not be created!");
+		Logger::logErrorSDL("Window could not be created!");
 		throw std::runtime_error("Window could not be created!");
 	}
 
@@ -37,7 +37,7 @@ void App::init()
 											   SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
 	if (!renderer)
 	{
-		Logger::logErrorSdl("Renderer could not be created!");
+		Logger::logErrorSDL("Renderer could not be created!");
 		throw std::runtime_error("Renderer could not be created!");
 	}
 	SDL_SetRenderDrawColor(renderer.get(), 0x00, 0x00, 0x00, 0xFF);
@@ -45,7 +45,25 @@ void App::init()
 
 	// SDL_Image
 	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
-		Logger::logErrorImg("SDL_image could not initialize!");
+	{
+		Logger::logErrorIMG("SDL_image could not initialize!");
+		throw std::runtime_error("SDL_image could not initialize!");
+	}
+
+	// SDL_TTF
+	if (TTF_Init() == -1)
+	{
+		Logger::logErrorTTF("SDL_ttf could not initialize!");
+		throw std::runtime_error("SDL_ttf could not initialize!");
+	}
+
+	// Font
+	font = makeFont(TTF_OpenFont(App::getAssetPath("consola", "ttf"), 28));
+	if (!font)
+	{
+		Logger::logErrorTTF("Failed to load font");
+		throw std::runtime_error("Failed to load font");
+	}
 
 	Logger::logInfo("SDL initialized");
 }
@@ -90,14 +108,14 @@ void App::shutdown()
 	running = false;
 }
 
-const char* App::getAssetPath(const char* path)
+const char* App::getAssetPath(const char* path, const char* fileType)
 {
 	const char* prefix = assetPath;
-	const char* suffix = ".png";
-	char* result = new char[strlen(prefix) + strlen(path) + strlen(suffix) + 1];
+	char* result = new char[strlen(prefix) + strlen(path) + strlen(fileType) + 2];
 	strcpy(result, prefix);
 	strcat(result, path);
-	strcat(result, suffix);
+	strcat(result, ".");
+	strcat(result, fileType);
 	return result;
 }
 

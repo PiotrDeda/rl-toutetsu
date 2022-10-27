@@ -2,6 +2,7 @@
 #include "../../engine/sprite/animated_sprite.h"
 #include "../../engine/sprite/state_sprite.h"
 #include "../../engine/sprite/animated_state_sprite.h"
+#include "../../engine/sprite/text_sprite.h"
 
 std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 {
@@ -21,6 +22,9 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	sprites.emplace("blank_item", std::make_shared<Sprite>("blank_item"));
 	sprites.emplace("test_item", std::make_shared<Sprite>("test_item"));
 	sprites.emplace("test_item_2", std::make_shared<Sprite>("test_item_2"));
+
+	// Text
+	sprites.emplace("test_text", std::make_shared<TextSprite>("Test"));
 
 	return sprites;
 }
