@@ -26,3 +26,8 @@ bool GameObject::isMouseOver(int mouseX, int mouseY)
 }
 
 void GameObject::onClick() {}
+
+GameObject::GameObject(const std::shared_ptr<Camera>& camera)
+{
+	this->camera = camera;
+}

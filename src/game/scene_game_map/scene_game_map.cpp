@@ -5,6 +5,7 @@
 #include "../item/test_item.h"
 #include "../item/test_item_2.h"
 #include "../loaders/scene_loader.h"
+#include "../../engine/game_object/text_object.h"
 
 SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 {
@@ -30,7 +31,12 @@ SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 	this->gameState->inventory->inventorySlots[0]->item = std::make_shared<TestItem>();
 	this->gameState->inventory->inventorySlots[1]->item = std::make_shared<TestItem2>();
 
-	auto testText = createUIObject("test_text", 0, 0);
+	auto testText = std::make_shared<TextObject>("Test", uiCamera);
+	renderables.push_back(testText);
+	char* result = new char[2 * strlen(testText->getText()) + 1];
+	strcpy(result, testText->getText());
+	strcat(result, testText->getText());
+	testText->setText(result);
 }
 
 void SceneGameMap::customEvents(SDL_Event event)

@@ -25,7 +25,7 @@ void Sprite::draw(const int x, const int y, const double scale)
 
 void Sprite::setState(int state) {}
 
-void Sprite::updateText(const char* text) {}
+void Sprite::setText(const char* text) {}
 
 int Sprite::getScaledWidth(double scale) const
 {

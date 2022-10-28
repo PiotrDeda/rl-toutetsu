@@ -21,7 +21,7 @@ TextSprite::TextSprite(const char* text)
 	SDL_QueryTexture(texture.get(), nullptr, nullptr, &this->width, &this->height);
 }
 
-void TextSprite::updateText(const char* text)
+void TextSprite::setText(const char* text)
 {
 	SurfacePtr surface = makeSurface(TTF_RenderText_Solid(App::get().font.get(), text, textColor));
 	if (!surface)
