@@ -5,7 +5,6 @@
 #include "../item/test_item.h"
 #include "../item/test_item_2.h"
 #include "../loaders/scene_loader.h"
-#include "../../engine/game_object/text_object.h"
 
 SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 {
@@ -33,10 +32,13 @@ SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 
 	auto testText = std::make_shared<TextObject>("Test", uiCamera);
 	renderables.push_back(testText);
+	testText->move(941, 237);
 	char* result = new char[2 * strlen(testText->getText()) + 1];
 	strcpy(result, testText->getText());
 	strcat(result, testText->getText());
 	testText->setText(result);
+	this->gameState->playerStats.addSprite(testText);
+	this->gameState->playerStats.refreshText();
 }
 
 void SceneGameMap::customEvents(SDL_Event event)

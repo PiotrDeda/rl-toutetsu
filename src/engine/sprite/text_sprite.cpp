@@ -6,7 +6,7 @@ TextSprite::TextSprite(const char* text)
 {
 	this->renderer = App::get().renderer;
 
-	SurfacePtr surface = makeSurface(TTF_RenderText_Solid(App::get().font.get(), text, textColor));
+	SurfacePtr surface = makeSurface(TTF_RenderText_Blended_Wrapped(App::get().font.get(), text, textColor, 2000));
 	if (!surface)
 	{
 		Logger::logErrorTTF("Failed to create surface from text: %s", text);
@@ -23,7 +23,7 @@ TextSprite::TextSprite(const char* text)
 
 void TextSprite::setText(const char* text)
 {
-	SurfacePtr surface = makeSurface(TTF_RenderText_Solid(App::get().font.get(), text, textColor));
+	SurfacePtr surface = makeSurface(TTF_RenderText_Blended_Wrapped(App::get().font.get(), text, textColor, 2000));
 	if (!surface)
 	{
 		Logger::logErrorTTF("Failed to create surface from text: %s", text);

@@ -1,5 +1,9 @@
 #pragma once
 
+#include <vector>
+#include <memory>
+#include "../../engine/game_object/text_object.h"
+
 class PlayerStats
 {
 public:
@@ -11,6 +15,8 @@ public:
 	[[nodiscard]] int getBlackDefense() const;
 	[[nodiscard]] int getCritChance() const;
 	[[nodiscard]] int getAgility() const;
+	void addSprite(const std::shared_ptr<TextObject>& sprite);
+	void refreshText();
 
 private:
 	int hp = 100;
@@ -21,4 +27,6 @@ private:
 	int blackDefense = 50;
 	int critChance = 2;
 	int agility = 1;
+
+	std::vector<std::shared_ptr<TextObject>> sprites;
 };
