@@ -6,5 +6,9 @@
 class TestItem2 : public Item
 {
 public:
-	TestItem2() { this->sprite = App::get().getSprite("test_item_2"); };
+	TestItem2()
+	{
+		this->sprite = App::get().getSprite("test_item_2");
+		this->type = Helmet;
+	};
 };
