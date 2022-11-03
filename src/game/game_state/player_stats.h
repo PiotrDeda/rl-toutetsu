@@ -4,7 +4,7 @@
 #include <memory>
 #include "../../engine/game_object/text_object.h"
 #include "../item/item.h"
-#include "StatsSet.h"
+#include "stats_set.h"
 
 class PlayerStats
 {

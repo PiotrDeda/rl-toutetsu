@@ -3,7 +3,7 @@
 #include <memory>
 #include "../../engine/game_object/i_renderable.h"
 #include "../../engine/sprite/sprite.h"
-#include "../game_state/StatsSet.h"
+#include "../game_state/stats_set.h"
 
 enum ItemType
 {
