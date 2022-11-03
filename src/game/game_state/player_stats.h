@@ -3,30 +3,20 @@
 #include <vector>
 #include <memory>
 #include "../../engine/game_object/text_object.h"
+#include "../item/item.h"
+#include "StatsSet.h"
 
 class PlayerStats
 {
 public:
-	[[nodiscard]] int getHP() const;
-	[[nodiscard]] int getMana() const;
-	[[nodiscard]] int getWhiteAttack() const;
-	[[nodiscard]] int getBlackAttack() const;
-	[[nodiscard]] int getWhiteDefense() const;
-	[[nodiscard]] int getBlackDefense() const;
-	[[nodiscard]] int getCritChance() const;
-	[[nodiscard]] int getAgility() const;
 	void addSprite(const std::shared_ptr<TextObject>& sprite);
-	void refreshText();
+	void updateStats(const std::vector<std::shared_ptr<Item>>& items);
+
+	StatsSet baseStats = StatsSet(100, 50, 50, 50, 50, 50, 2, 1);
+	StatsSet currentStats = baseStats;
 
 private:
-	int hp = 100;
-	int mana = 50;
-	int whiteAttack = 50;
-	int blackAttack = 50;
-	int whiteDefense = 50;
-	int blackDefense = 50;
-	int critChance = 2;
-	int agility = 1;
+	void refreshText();
 
 	std::vector<std::shared_ptr<TextObject>> sprites;
 };

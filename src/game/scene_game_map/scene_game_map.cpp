@@ -37,8 +37,7 @@ SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 	strcpy(result, testText->getText());
 	strcat(result, testText->getText());
 	testText->setText(result);
-	this->gameState->playerStats.addSprite(testText);
-	this->gameState->playerStats.refreshText();
+	this->gameState->playerStats->addSprite(testText);
 }
 
 void SceneGameMap::customEvents(SDL_Event event)

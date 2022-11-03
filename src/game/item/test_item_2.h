@@ -11,4 +11,12 @@ public:
 		this->sprite = App::get().getSprite("test_item_2");
 		this->type = Helmet;
 	};
+
+	[[nodiscard]] StatsSet applyStatModifiers(const StatsSet& stats) const override
+	{
+		StatsSet newStats = stats;
+		newStats.whiteAttack += 10;
+		newStats.blackAttack += 10;
+		return newStats;
+	}
 };

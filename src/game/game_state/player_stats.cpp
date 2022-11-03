@@ -1,45 +1,5 @@
 #include "player_stats.h"
 
-int PlayerStats::getHP() const
-{
-	return hp;
-}
-
-int PlayerStats::getMana() const
-{
-	return mana;
-}
-
-int PlayerStats::getWhiteAttack() const
-{
-	return whiteAttack;
-}
-
-int PlayerStats::getBlackAttack() const
-{
-	return blackAttack;
-}
-
-int PlayerStats::getWhiteDefense() const
-{
-	return whiteDefense;
-}
-
-int PlayerStats::getBlackDefense() const
-{
-	return blackDefense;
-}
-
-int PlayerStats::getCritChance() const
-{
-	return critChance;
-}
-
-int PlayerStats::getAgility() const
-{
-	return agility;
-}
-
 void PlayerStats::addSprite(const std::shared_ptr<TextObject>& sprite)
 {
 	sprites.push_back(sprite);
@@ -47,14 +7,31 @@ void PlayerStats::addSprite(const std::shared_ptr<TextObject>& sprite)
 
 void PlayerStats::refreshText()
 {
-	std::string text = 	"HP:   " + std::to_string(getHP()) 				+ " MANA: " + std::to_string(getMana())			+ "\n" +
-						"WATK: " + std::to_string(getWhiteAttack()) 	+ "  BATK: " + std::to_string(getBlackAttack()) 	+ "\n" +
-						"WDEF: " + std::to_string(getWhiteDefense()) 	+ "  BDEF: " + std::to_string(getBlackDefense()) + "\n" +
-						"CRIT: " + std::to_string(getCritChance())		+ "   AGI:  " + std::to_string(getAgility());
+	std::string text =
+			"HP:   " + std::to_string(currentStats.hp) +
+			" MANA: " + std::to_string(currentStats.mana) + "\n" +
+			"WATK: " + std::to_string(currentStats.whiteAttack) +
+			"  BATK: " + std::to_string(currentStats.blackAttack) + "\n" +
+			"WDEF: " + std::to_string(currentStats.whiteDefense) +
+			"  BDEF: " + std::to_string(currentStats.blackDefense) + "\n" +
+			"CRIT: " + std::to_string(currentStats.critChance) +
+			"   AGI:  " + std::to_string(currentStats.agility);
 	const char* cText = text.c_str();
 
 	for (auto& sprite : sprites)
-	{
 		sprite->setText(cText);
-	}
+}
+
+void PlayerStats::updateStats(const std::vector<std::shared_ptr<Item>>& items)
+{
+	std::vector<std::shared_ptr<Item>> sortedItems(items.size());
+	std::partial_sort_copy(begin(items), end(items), begin(sortedItems), end(sortedItems),
+						   [](const std::shared_ptr<Item>& a, const std::shared_ptr<Item>& b) {
+							   return a->priority > b->priority;
+						   });
+	currentStats = baseStats;
+	for (auto& item : sortedItems)
+		currentStats = item->applyStatModifiers(currentStats);
+
+	refreshText();
 }

@@ -3,6 +3,7 @@
 #include <memory>
 #include "../../engine/game_object/i_renderable.h"
 #include "../../engine/sprite/sprite.h"
+#include "../game_state/StatsSet.h"
 
 enum ItemType
 {
@@ -20,6 +21,9 @@ enum ItemType
 class Item
 {
 public:
+	[[nodiscard]] virtual StatsSet applyStatModifiers(const StatsSet& stats) const { return stats; }
+
 	std::shared_ptr<Sprite> sprite;
 	ItemType type = General;
+	int priority = 1;
 };
