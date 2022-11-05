@@ -1,4 +1,5 @@
 #include "text_sprite.h"
+
 #include "../app/app.h"
 #include "../misc/logger.h"
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "tile.h"
 #include "../../engine/game_object/i_renderable.h"
+#include "tile.h"
 
 class Map : public IRenderable
 {

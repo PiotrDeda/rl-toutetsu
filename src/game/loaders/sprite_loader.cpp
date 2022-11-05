@@ -1,7 +1,8 @@
 #include "sprite_loader.h"
+
 #include "../../engine/sprite/animated_sprite.h"
-#include "../../engine/sprite/state_sprite.h"
 #include "../../engine/sprite/animated_state_sprite.h"
+#include "../../engine/sprite/state_sprite.h"
 
 std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 {

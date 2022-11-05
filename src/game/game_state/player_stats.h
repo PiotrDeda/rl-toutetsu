@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include <memory>
+#include <vector>
 #include "../../engine/game_object/text_object.h"
 #include "../item/item.h"
 #include "stats_set.h"

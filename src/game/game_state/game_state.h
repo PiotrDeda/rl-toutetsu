@@ -1,7 +1,7 @@
 #pragma once
 
-#include "player_stats.h"
 #include "inventory.h"
+#include "player_stats.h"
 
 class GameState
 {

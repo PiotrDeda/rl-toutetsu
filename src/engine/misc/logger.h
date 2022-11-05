@@ -2,8 +2,8 @@
 
 #include <string>
 #include <SDL_error.h>
-#include <SDL_log.h>
 #include <SDL_image.h>
+#include <SDL_log.h>
 #include <SDL_ttf.h>
 
 class Logger

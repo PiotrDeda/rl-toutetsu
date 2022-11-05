@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../engine/app/app.h"
+#include "item.h"
 
 class BlankItem : public Item
 {

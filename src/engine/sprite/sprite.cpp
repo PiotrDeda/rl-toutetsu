@@ -1,9 +1,10 @@
 #include "sprite.h"
+
+#include <SDL_image.h>
+#include <SDL_surface.h>
 #include "../app/app.h"
 #include "../misc/logger.h"
 
-#include <SDL_surface.h>
-#include <SDL_image.h>
 
 Sprite::Sprite(const char* name) // NOLINT(cppcoreguidelines-pro-type-member-init)
 {

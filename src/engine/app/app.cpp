@@ -1,7 +1,6 @@
 #include "app.h"
 
 #include <stdexcept>
-
 #include "../misc/logger.h"
 
 App::~App()

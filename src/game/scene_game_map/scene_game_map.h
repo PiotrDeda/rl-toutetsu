@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../../engine/scene_manager/scene.h"
-#include "map.h"
 #include "../../engine/camera/ui_camera.h"
+#include "../../engine/scene_manager/scene.h"
 #include "../game_state/game_state.h"
+#include "map.h"
 
 class SceneGameMap : public Scene
 {

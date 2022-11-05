@@ -1,9 +1,8 @@
 #pragma once
 
 #include <memory>
-#include "../item/item.h"
-#include "../item/blank_item.h"
 #include "../../engine/game_object/game_object.h"
+#include "../item/blank_item.h"
 
 class InventorySlot
 {

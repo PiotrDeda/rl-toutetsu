@@ -1,4 +1,5 @@
 #include "scene_manager.h"
+
 #include <utility>
 #include "../misc/logger.h"
 

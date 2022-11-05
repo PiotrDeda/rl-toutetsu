@@ -1,4 +1,5 @@
 #include "text_object.h"
+
 #include "../sprite/text_sprite.h"
 
 TextObject::TextObject(const char* initialText, const std::shared_ptr<Camera>& camera) : GameObject(camera)
