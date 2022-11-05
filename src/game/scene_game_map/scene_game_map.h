@@ -8,7 +8,7 @@
 class SceneGameMap : public Scene
 {
 public:
-	explicit SceneGameMap(std::shared_ptr<GameState> gameState);
+	explicit SceneGameMap(const std::shared_ptr<GameState>& gameState);
 
 	void customEvents(SDL_Event event) override;
 	void customLogic() override;

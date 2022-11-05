@@ -28,3 +28,15 @@ void Inventory::switchCursorItem(int index)
 				   [](const std::shared_ptr<InventorySlot>& slot) { return slot->item; });
 	playerStats->updateStats(items);
 }
+
+void Inventory::addItem(const std::shared_ptr<Item>& item)
+{
+	for (int i = mainInventoryStartIndex; i <= mainInventoryEndIndex; i++)
+	{
+		if (inventorySlots[i]->item->type == Blank)
+		{
+			inventorySlots[i]->item = item;
+			return;
+		}
+	}
+}

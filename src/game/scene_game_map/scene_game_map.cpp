@@ -1,14 +1,13 @@
 #include "scene_game_map.h"
 
-#include <utility>
 #include "../game_state/inventory_view.h"
 #include "../item/test_item.h"
 #include "../item/test_item_2.h"
 #include "../loaders/scene_loader.h"
 
-SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
+SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene()
 {
-	this->gameState = std::move(gameState);
+	this->gameState = gameState;
 	renderables.push_back(map);
 	camera->setBoundaries(-64, -64, 784, 784);
 
@@ -23,12 +22,12 @@ SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 
 	auto uiTestEntity = createUIObject("ui_equipment_bg", 912, 0);
 
-	auto inventoryView = std::make_shared<InventoryView>(this->gameState->inventory, uiCamera);
+	auto inventoryView = std::make_shared<InventoryView>(gameState->inventory, uiCamera);
 	inventoryView->move(912, 0);
 	renderables.push_back(inventoryView);
 	clickables.push_back(inventoryView);
-	this->gameState->inventory->inventorySlots[Inventory::mainInventoryStartIndex]->item = std::make_shared<TestItem>();
-	this->gameState->inventory->inventorySlots[Inventory::mainInventoryStartIndex + 1]->item = std::make_shared<TestItem2>();
+	gameState->inventory->addItem(std::make_shared<TestItem>());
+	gameState->inventory->addItem(std::make_shared<TestItem2>());
 
 	auto testText = std::make_shared<TextObject>("Test", uiCamera);
 	renderables.push_back(testText);
@@ -37,7 +36,7 @@ SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 	strcpy(result, testText->getText());
 	strcat(result, testText->getText());
 	testText->setText(result);
-	this->gameState->playerStats->addSprite(testText);
+	gameState->playerStats->addSprite(testText);
 }
 
 void SceneGameMap::customEvents(SDL_Event event)
