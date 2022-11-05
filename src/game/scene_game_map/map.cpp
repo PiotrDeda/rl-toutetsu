@@ -1,13 +1,17 @@
 #include "map.h"
 
-Map::Map()
+Map::Map(int mapSize)
 {
-	for (int i = 0; i < 40; i++)
-		for (int j = 0; j < 40; j++)
+	tiles.resize(mapSize);
+	for (int i = 0; i < mapSize; i++)
+	{
+		tiles[i].resize(mapSize);
+		for (int j = 0; j < mapSize; j++)
 			tiles[i][j].setPosition(i * tileSize, j * tileSize);
+	}
 }
 
-std::array<Tile, Map::mapSize>& Map::operator[](int x)
+std::vector<Tile>& Map::operator[](int x)
 {
 	return tiles[x];
 }
