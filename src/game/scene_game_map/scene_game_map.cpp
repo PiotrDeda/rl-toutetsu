@@ -27,8 +27,8 @@ SceneGameMap::SceneGameMap(std::shared_ptr<GameState> gameState) : Scene()
 	inventoryView->move(912, 0);
 	renderables.push_back(inventoryView);
 	clickables.push_back(inventoryView);
-	this->gameState->inventory->inventorySlots[0]->item = std::make_shared<TestItem>();
-	this->gameState->inventory->inventorySlots[1]->item = std::make_shared<TestItem2>();
+	this->gameState->inventory->inventorySlots[Inventory::mainInventoryStartIndex]->item = std::make_shared<TestItem>();
+	this->gameState->inventory->inventorySlots[Inventory::mainInventoryStartIndex + 1]->item = std::make_shared<TestItem2>();
 
 	auto testText = std::make_shared<TextObject>("Test", uiCamera);
 	renderables.push_back(testText);

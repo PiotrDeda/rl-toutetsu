@@ -3,6 +3,7 @@
 void PlayerStats::addSprite(const std::shared_ptr<TextObject>& sprite)
 {
 	sprites.push_back(sprite);
+	refreshText();
 }
 
 void PlayerStats::refreshText()

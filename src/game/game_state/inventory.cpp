@@ -4,13 +4,13 @@ Inventory::Inventory(const std::shared_ptr<PlayerStats>& playerStats)
 {
 	this->playerStats = playerStats;
 
-	for (int i = 0; i < 25; i++)
-		inventorySlots.emplace_back(std::make_shared<InventorySlot>(i, 32 + (i % 5) * 64, 384 + (i / 5) * 64));
-	inventorySlots.emplace_back(std::make_shared<InventorySlot>(25, 32, 96, Weapon));
+	inventorySlots.emplace_back(std::make_shared<InventorySlot>(cursorIndex, 0, 0));
+	inventorySlots.emplace_back(std::make_shared<InventorySlot>(weaponIndex, 32, 96, Weapon));
 	for (int i = 0; i < 6; i++)
-		inventorySlots.emplace_back(std::make_shared<InventorySlot>(i + 26, 96 + (i / 3) * 64, 32 + (i % 3) * 64,
+		inventorySlots.emplace_back(std::make_shared<InventorySlot>(helmetIndex + i, 96 + (i / 3) * 64, 32 + (i % 3) * 64,
 																	static_cast<ItemType>(Helmet + i)));
-	inventorySlots.emplace_back(std::make_shared<InventorySlot>(32, 0, 0));
+	for (int i = 0; i < mainInventoryEndIndex - mainInventoryStartIndex; i++)
+		inventorySlots.emplace_back(std::make_shared<InventorySlot>(mainInventoryStartIndex + i, 32 + (i % 5) * 64, 384 + (i / 5) * 64));
 }
 
 void Inventory::switchCursorItem(int index)
@@ -24,7 +24,7 @@ void Inventory::switchCursorItem(int index)
 	}
 
 	auto items = std::vector<std::shared_ptr<Item>>(6);
-	std::transform(inventorySlots.begin() + 25, inventorySlots.begin() + 31, items.begin(),
+	std::transform(inventorySlots.begin() + weaponIndex, inventorySlots.begin() + bookIndex, items.begin(),
 				   [](const std::shared_ptr<InventorySlot>& slot) { return slot->item; });
 	playerStats->updateStats(items);
 }
