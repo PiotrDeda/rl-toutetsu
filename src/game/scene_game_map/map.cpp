@@ -1,7 +1,9 @@
 #include "map.h"
 
-Map::Map(int mapSize)
+Map::Map(const std::shared_ptr<Camera>& camera, int mapSize)
 {
+	this->mapSize = mapSize;
+	this->camera = camera;
 	tiles.resize(mapSize);
 	for (int i = 0; i < mapSize; i++)
 	{
@@ -25,5 +27,10 @@ void Map::draw() const
 {
 	for (auto& row : tiles)
 		for (auto& tile : row)
-			tile.draw();
+			tile.draw(camera);
+}
+
+int Map::getSize() const
+{
+	return mapSize;
 }

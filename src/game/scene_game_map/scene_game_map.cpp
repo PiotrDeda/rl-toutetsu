@@ -4,27 +4,34 @@
 #include "../item/test_item.h"
 #include "../item/test_item_2.h"
 #include "../loaders/scene_loader.h"
+#include "../map_algorithms/fully_random_map.h"
 
 SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene()
 {
 	this->gameState = gameState;
-	camera->setBoundaries(-64, -64, 784, 784);
+	camera->setBoundaries(
+			-map->tileSize,
+			-map->tileSize,
+			map->tileSize * map->getSize() + map->tileSize,
+			map->tileSize * map->getSize() + map->tileSize
+	);
 
 	// Map
 	renderables.push_back(map);
+	FullyRandomMap::generateMap(map, camera);
 
 	// Test objects
-	auto testEntity1 = createMapObject("wall", 1, 1);
+	/*auto testEntity1 = createMapObject("wall", 1, 1);
 	auto testEntity2 = createMapObject("wall_torch", 2, 1);
 	auto testEntity3 = createMapObject("player", 3, 1);
 	auto testEntity4 = createMapObject("wall", 0, 0);
 	auto testEntity5 = createMapObject("wall", 10, 10);
 	auto testEntity6 = createMapObject("wall_torch", 11, 11);
 	auto testEntity7 = createMapObject("wall_torch", 22, 22);
-	auto testEntity8 = createMapObject("wall", 23, 23);
-	auto uiTestEntity = createUIObject("ui_equipment_bg", 912, 0);
+	auto testEntity8 = createMapObject("wall", 23, 23);*/
 
 	// Inventory
+	auto inventoryBackgroundObject = createUIObject("ui_equipment_bg", 912, 0);
 	auto inventoryView = std::make_shared<InventoryView>(gameState->inventory, uiCamera);
 	inventoryView->move(912, 0);
 	renderables.push_back(inventoryView);
@@ -90,13 +97,6 @@ void SceneGameMap::customEvents(SDL_Event event)
 }
 
 void SceneGameMap::customLogic() {}
-
-std::shared_ptr<MapObject> SceneGameMap::createMapObject(const std::string& spriteId, int x, int y)
-{
-	auto object = std::make_shared<MapObject>(App::get().getSprite(spriteId), camera);
-	map->addObject(object, x, y);
-	return object;
-}
 
 std::shared_ptr<GameObject> SceneGameMap::createUIObject(const std::string& spriteId, int x, int y)
 {
