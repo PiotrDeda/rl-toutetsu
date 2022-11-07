@@ -8,9 +8,12 @@
 SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene()
 {
 	this->gameState = gameState;
-	renderables.push_back(map);
 	camera->setBoundaries(-64, -64, 784, 784);
 
+	// Map
+	renderables.push_back(map);
+
+	// Test objects
 	auto testEntity1 = createMapObject("wall", 1, 1);
 	auto testEntity2 = createMapObject("wall_torch", 2, 1);
 	auto testEntity3 = createMapObject("player", 3, 1);
@@ -19,9 +22,9 @@ SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene(
 	auto testEntity6 = createMapObject("wall_torch", 11, 11);
 	auto testEntity7 = createMapObject("wall_torch", 22, 22);
 	auto testEntity8 = createMapObject("wall", 23, 23);
-
 	auto uiTestEntity = createUIObject("ui_equipment_bg", 912, 0);
 
+	// Inventory
 	auto inventoryView = std::make_shared<InventoryView>(gameState->inventory, uiCamera);
 	inventoryView->move(912, 0);
 	renderables.push_back(inventoryView);
@@ -29,14 +32,11 @@ SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene(
 	gameState->inventory->addItem(std::make_shared<TestItem>());
 	gameState->inventory->addItem(std::make_shared<TestItem2>());
 
-	auto testText = std::make_shared<TextObject>("Test", uiCamera);
-	renderables.push_back(testText);
-	testText->move(941, 237);
-	char* result = new char[2 * strlen(testText->getText()) + 1];
-	strcpy(result, testText->getText());
-	strcat(result, testText->getText());
-	testText->setText(result);
-	gameState->playerStats->addSprite(testText);
+	// Stats
+	auto statsText = std::make_shared<TextObject>("Stats", uiCamera);
+	renderables.push_back(statsText);
+	statsText->move(941, 237);
+	gameState->playerStats->addViewSprite(statsText);
 }
 
 void SceneGameMap::customEvents(SDL_Event event)

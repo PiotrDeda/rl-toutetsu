@@ -1,6 +1,6 @@
 #include "player_stats.h"
 
-void PlayerStats::addSprite(const std::shared_ptr<TextObject>& sprite)
+void PlayerStats::addViewSprite(const std::shared_ptr<TextObject>& sprite)
 {
 	sprites.push_back(sprite);
 	refreshText();
