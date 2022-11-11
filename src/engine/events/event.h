@@ -10,12 +10,10 @@ enum EventType
 	MouseMotion
 };
 
-struct Event
+union Event
 {
 	EventType type = Unknown;
-	union {
-		std::string_view keyInput;
-		struct { int x, y; } mouseWheelInput;
-		struct { int xrel, yrel; bool leftMouseButton, rightMouseButton; } mouseMotion;
-	} v;
+	struct { EventType type; std::string_view v; } keyInput;
+	struct { EventType type; int x, y; } mouseWheelInput;
+	struct { EventType type; int xrel, yrel; bool leftMouseButton, rightMouseButton; } mouseMotion;
 };

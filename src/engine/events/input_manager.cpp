@@ -4,7 +4,7 @@
 
 std::optional<Event> InputManager::getInputEvent(SDL_Keycode keycode)
 {
-	return inputEvents.contains(keycode) ? std::optional<Event>({KeyInput, inputEvents[keycode]}) : std::nullopt;
+	return inputEvents.contains(keycode) ? std::optional<Event>({.keyInput = {KeyInput, inputEvents[keycode]}}) : std::nullopt;
 }
 
 void InputManager::assignInputEventValue(SDL_Keycode keycode, std::string_view inputEvent)

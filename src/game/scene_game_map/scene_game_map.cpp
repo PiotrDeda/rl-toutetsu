@@ -60,32 +60,32 @@ void SceneGameMap::handleEvent(Event event)
 	switch (event.type)
 	{
 		case KeyInput:
-			if (event.v.keyInput == "MOVE_DOWN")
+			if (event.keyInput.v == "MOVE_DOWN")
 				(*map)[3][1].objects[0]->sprite->setState(0);
-			else if (event.v.keyInput == "MOVE_UP")
+			else if (event.keyInput.v == "MOVE_UP")
 				(*map)[3][1].objects[0]->sprite->setState(1);
-			else if (event.v.keyInput == "MOVE_LEFT")
+			else if (event.keyInput.v == "MOVE_LEFT")
 				(*map)[3][1].objects[0]->sprite->setState(2);
-			else if (event.v.keyInput == "MOVE_RIGHT")
+			else if (event.keyInput.v == "MOVE_RIGHT")
 				(*map)[3][1].objects[0]->sprite->setState(3);
-			else if (event.v.keyInput == "RESET_CAMERA")
+			else if (event.keyInput.v == "RESET_CAMERA")
 				camera->resetCamera();
-			else if (event.v.keyInput == "CAMERA_MOVE_UPPER_LEFT")
+			else if (event.keyInput.v == "CAMERA_MOVE_UPPER_LEFT")
 				camera->move(-15, -15);
-			else if (event.v.keyInput == "CAMERA_MOVE_LOWER_RIGHT")
+			else if (event.keyInput.v == "CAMERA_MOVE_LOWER_RIGHT")
 				camera->move(15, 15);
-			else if (event.v.keyInput == "SCENE_FIGHT")
+			else if (event.keyInput.v == "SCENE_FIGHT")
 				App::get().sceneManager.setNextScene(SceneId::Fight);
 			break;
 		case MouseWheelInput:
-			if (event.v.mouseWheelInput.y > 0)
+			if (event.mouseWheelInput.y > 0)
 				camera->zoomIn();
-			else if (event.v.mouseWheelInput.y < 0)
+			else if (event.mouseWheelInput.y < 0)
 				camera->zoomOut();
 			break;
 		case MouseMotion:
-			if (event.v.mouseMotion.rightMouseButton)
-				camera->move(-event.v.mouseMotion.xrel, -event.v.mouseMotion.yrel);
+			if (event.mouseMotion.rightMouseButton)
+				camera->move(-event.mouseMotion.xrel, -event.mouseMotion.yrel);
 			break;
 		default:
 			break;

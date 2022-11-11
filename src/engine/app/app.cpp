@@ -103,18 +103,20 @@ int App::run()
 					break;
 				}
 				case SDL_MOUSEWHEEL:
-					sceneManager.currentScene->handleEvent({MouseWheelInput, {.mouseWheelInput = {
+					sceneManager.currentScene->handleEvent({.mouseWheelInput = {
+							.type = MouseWheelInput,
 							.x = event.wheel.x,
 							.y = event.wheel.y
-					}}});
+					}});
 					break;
 				case SDL_MOUSEMOTION:
-					sceneManager.currentScene->handleEvent({MouseMotion, {.mouseMotion = {
+					sceneManager.currentScene->handleEvent({.mouseMotion = {
+							.type = MouseMotion,
 							.xrel = event.motion.xrel,
 							.yrel = event.motion.yrel,
 							.leftMouseButton = static_cast<bool>(event.motion.state & SDL_BUTTON_LMASK),
 							.rightMouseButton = static_cast<bool>(event.motion.state & SDL_BUTTON_RMASK)
-					}}});
+					}});
 					break;
 				case SDL_QUIT:
 					shutdown();
