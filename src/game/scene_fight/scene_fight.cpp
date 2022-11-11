@@ -10,10 +10,6 @@ SceneFight::SceneFight(std::shared_ptr<GameState> gameState) : Scene()
 	auto uiTestEntity = createUIObject("ui_equipment_bg", 912, 0);
 }
 
-void SceneFight::customEvents(SDL_Event event) {}
-
-void SceneFight::customLogic() {}
-
 std::shared_ptr<GameObject> SceneFight::createUIObject(const std::string& spriteId, int x, int y)
 {
 	auto object = std::make_shared<GameObject>(App::get().getSprite(spriteId), uiCamera);

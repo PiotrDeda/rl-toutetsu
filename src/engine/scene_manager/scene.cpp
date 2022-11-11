@@ -7,35 +7,7 @@ Scene::Scene()
 	renderer = App::get().renderer;
 }
 
-void Scene::doEvents(SDL_Event event)
-{
-	switch (event.type)
-	{
-		case SDL_MOUSEBUTTONDOWN:
-		{
-			int x = App::get().getMouseX();
-			int y = App::get().getMouseY();
-			if (event.button.button == SDL_BUTTON_LEFT)
-				for (auto& clickable : clickables)
-					if (clickable->isMouseOver(x, y))
-						clickablesQueued.push_back(clickable);
-			break;
-		}
-		default:
-			break;
-	}
-
-	customEvents(event);
-}
-
-void Scene::doLogic()
-{
-	for (auto& clickable : clickablesQueued)
-		clickable->onClick();
-	clickablesQueued.clear();
-
-	customLogic();
-}
+void Scene::handleEvent(Event event) {}
 
 void Scene::doRender()
 {
@@ -46,9 +18,5 @@ void Scene::doRender()
 
 	customRender();
 }
-
-void Scene::customEvents(SDL_Event event) {}
-
-void Scene::customLogic() {}
 
 void Scene::customRender() {}

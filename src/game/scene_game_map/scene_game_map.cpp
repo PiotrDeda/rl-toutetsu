@@ -44,59 +44,53 @@ SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene(
 	renderables.push_back(statsText);
 	statsText->move(941, 237);
 	gameState->playerStats->addViewSprite(statsText);
+
+	App::get().inputManager.assignInputEventValue(SDLK_s, "MOVE_DOWN");
+	App::get().inputManager.assignInputEventValue(SDLK_w, "MOVE_UP");
+	App::get().inputManager.assignInputEventValue(SDLK_a, "MOVE_LEFT");
+	App::get().inputManager.assignInputEventValue(SDLK_d, "MOVE_RIGHT");
+	App::get().inputManager.assignInputEventValue(SDLK_r, "RESET_CAMERA");
+	App::get().inputManager.assignInputEventValue(SDLK_e, "CAMERA_MOVE_UPPER_LEFT");
+	App::get().inputManager.assignInputEventValue(SDLK_q, "CAMERA_MOVE_LOWER_RIGHT");
+	App::get().inputManager.assignInputEventValue(SDLK_f, "SCENE_FIGHT");
 }
 
-void SceneGameMap::customEvents(SDL_Event event)
+void SceneGameMap::handleEvent(Event event)
 {
 	switch (event.type)
 	{
-		case SDL_KEYDOWN:
-			switch (event.key.keysym.sym)
-			{
-				case SDLK_s:
-					(*map)[3][1].objects[0]->sprite->setState(0);
-					break;
-				case SDLK_w:
-					(*map)[3][1].objects[0]->sprite->setState(1);
-					break;
-				case SDLK_a:
-					(*map)[3][1].objects[0]->sprite->setState(2);
-					break;
-				case SDLK_d:
-					(*map)[3][1].objects[0]->sprite->setState(3);
-					break;
-				case SDLK_r:
-					camera->resetCamera();
-					break;
-				case SDLK_e:
-					camera->move(-15, -15);
-					break;
-				case SDLK_q:
-					camera->move(15, 15);
-					break;
-				case SDLK_f:
-					App::get().sceneManager.setNextScene(SceneId::Fight);
-					break;
-				default:
-					break;
-			}
+		case KeyInput:
+			if (event.v.keyInput == "MOVE_DOWN")
+				(*map)[3][1].objects[0]->sprite->setState(0);
+			else if (event.v.keyInput == "MOVE_UP")
+				(*map)[3][1].objects[0]->sprite->setState(1);
+			else if (event.v.keyInput == "MOVE_LEFT")
+				(*map)[3][1].objects[0]->sprite->setState(2);
+			else if (event.v.keyInput == "MOVE_RIGHT")
+				(*map)[3][1].objects[0]->sprite->setState(3);
+			else if (event.v.keyInput == "RESET_CAMERA")
+				camera->resetCamera();
+			else if (event.v.keyInput == "CAMERA_MOVE_UPPER_LEFT")
+				camera->move(-15, -15);
+			else if (event.v.keyInput == "CAMERA_MOVE_LOWER_RIGHT")
+				camera->move(15, 15);
+			else if (event.v.keyInput == "SCENE_FIGHT")
+				App::get().sceneManager.setNextScene(SceneId::Fight);
 			break;
-		case SDL_MOUSEWHEEL:
-			if (event.wheel.y > 0)
+		case MouseWheelInput:
+			if (event.v.mouseWheelInput.y > 0)
 				camera->zoomIn();
-			else if (event.wheel.y < 0)
+			else if (event.v.mouseWheelInput.y < 0)
 				camera->zoomOut();
 			break;
-		case SDL_MOUSEMOTION:
-			if (event.motion.state & SDL_BUTTON_RMASK)
-				camera->move(-event.motion.xrel, -event.motion.yrel);
+		case MouseMotion:
+			if (event.v.mouseMotion.rightMouseButton)
+				camera->move(-event.v.mouseMotion.xrel, -event.v.mouseMotion.yrel);
 			break;
 		default:
 			break;
 	}
 }
-
-void SceneGameMap::customLogic() {}
 
 std::shared_ptr<GameObject> SceneGameMap::createUIObject(const std::string& spriteId, int x, int y)
 {

@@ -10,8 +10,7 @@ class SceneGameMap : public Scene
 public:
 	explicit SceneGameMap(const std::shared_ptr<GameState>& gameState);
 
-	void customEvents(SDL_Event event) override;
-	void customLogic() override;
+	void handleEvent(Event event) override;
 
 	[[nodiscard]] const char* getName() const override { return "SceneGameMap"; }
 

@@ -9,9 +9,6 @@ class SceneFight : public Scene
 public:
 	explicit SceneFight(std::shared_ptr<GameState> gameState);
 
-	void customEvents(SDL_Event event) override;
-	void customLogic() override;
-
 	[[nodiscard]] const char* getName() const override { return "SceneFight"; }
 
 	std::shared_ptr<UICamera> uiCamera = std::make_shared<UICamera>();

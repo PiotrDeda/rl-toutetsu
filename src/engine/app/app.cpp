@@ -85,15 +85,44 @@ int App::run()
 					if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
 						updateWindowSize();
 					break;
+				case SDL_MOUSEBUTTONDOWN:
+				{
+					int x = getMouseX();
+					int y = getMouseY();
+					if (event.button.button == SDL_BUTTON_LEFT)
+						for (auto& clickable : sceneManager.currentScene->clickables)
+							if (clickable->isMouseOver(x, y))
+								clickable->onClick();
+					break;
+				}
+				case SDL_KEYDOWN:
+				{
+					auto e = inputManager.getInputEvent(event.key.keysym.sym);
+					if (e)
+						sceneManager.currentScene->handleEvent(e.value());
+					break;
+				}
+				case SDL_MOUSEWHEEL:
+					sceneManager.currentScene->handleEvent({MouseWheelInput, {.mouseWheelInput = {
+							.x = event.wheel.x,
+							.y = event.wheel.y
+					}}});
+					break;
+				case SDL_MOUSEMOTION:
+					sceneManager.currentScene->handleEvent({MouseMotion, {.mouseMotion = {
+							.xrel = event.motion.xrel,
+							.yrel = event.motion.yrel,
+							.leftMouseButton = static_cast<bool>(event.motion.state & SDL_BUTTON_LMASK),
+							.rightMouseButton = static_cast<bool>(event.motion.state & SDL_BUTTON_RMASK)
+					}}});
+					break;
 				case SDL_QUIT:
 					shutdown();
 					break;
 				default:
 					break;
 			}
-			sceneManager.currentScene->doEvents(event);
 		}
-		sceneManager.currentScene->doLogic();
 		sceneManager.currentScene->doRender();
 		sceneManager.switchScenes();
 	}

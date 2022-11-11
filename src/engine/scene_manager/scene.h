@@ -2,17 +2,14 @@
 
 #include <SDL_events.h>
 #include <vector>
+#include "../events/event.h"
 #include "../game_object/game_object.h"
 
 class Scene
 {
 public:
-	void doEvents(SDL_Event event);
-	void doLogic();
+	virtual void handleEvent(Event event);
 	void doRender();
-
-	virtual void customEvents(SDL_Event event);
-	virtual void customLogic();
 	virtual void customRender();
 
 	[[nodiscard]] virtual const char* getName() const { return "Scene"; }

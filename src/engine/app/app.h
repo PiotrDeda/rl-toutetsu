@@ -1,7 +1,7 @@
 #pragma once
 
 #include <map>
-#include "../input/input_manager.h"
+#include "../events/input_manager.h"
 #include "../misc/sdl_pointers.h"
 #include "../misc/singleton.h"
 #include "../scene_manager/scene_manager.h"
