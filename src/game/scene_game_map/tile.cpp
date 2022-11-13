@@ -1,21 +1,20 @@
 #include "tile.h"
 
-void Tile::setPosition(int newX, int newY)
-{
-	x = newX;
-	y = newY;
-}
-
 void Tile::draw() const {}
 
 void Tile::draw(const std::shared_ptr<Camera>& camera) const
 {
-	for (auto& object : objects)
-		object->draw(camera);
+	if (object)
+		object->sprite->draw(camera->getScreenX(x), camera->getScreenY(y), camera->getScale());
 }
 
-void Tile::addObject(const std::shared_ptr<MapObject>& object)
+void Tile::setObject(const std::shared_ptr<MapObject>& newObject)
 {
-	objects.push_back(object);
+	object = newObject;
 	object->move(x, y);
+}
+
+bool Tile::isMouseOver(int mouseX, int mouseY)
+{
+	return false;
 }

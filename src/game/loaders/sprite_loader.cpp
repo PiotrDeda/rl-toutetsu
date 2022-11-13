@@ -13,10 +13,11 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	sprites.emplace("quit_button", std::make_shared<Sprite>("quit_button"));
 
 	// Game map
+	sprites.emplace("ui_equipment_bg", std::make_shared<Sprite>("ui_equipment_bg"));
 	sprites.emplace("player", std::make_shared<AnimatedStateSprite>("player", 2, 30, 4));
 	sprites.emplace("wall", std::make_shared<Sprite>("wall"));
 	sprites.emplace("wall_torch", std::make_shared<AnimatedSprite>("wall_torch", 3, 10));
-	sprites.emplace("ui_equipment_bg", std::make_shared<Sprite>("ui_equipment_bg"));
+	sprites.emplace("floor", std::make_shared<Sprite>("floor"));
 
 	// Items
 	sprites.emplace("blank_item", std::make_shared<Sprite>("blank_item"));

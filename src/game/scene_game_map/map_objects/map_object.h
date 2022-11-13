@@ -10,9 +10,4 @@ public:
 	void draw() const override {}
 
 	[[nodiscard]] bool isMouseOver(int mouseX, int mouseY) override { return false; }
-
-	void draw(const std::shared_ptr<Camera>& camera) const
-	{
-		sprite->draw(camera->getScreenX(x), camera->getScreenY(y), camera->getScale());
-	}
 };

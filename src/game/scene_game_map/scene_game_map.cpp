@@ -60,7 +60,7 @@ void SceneGameMap::handleEvent(Event event)
 	switch (event.type)
 	{
 		case KeyInput:
-			if (event.keyInput.v == "MOVE_DOWN")
+			/*if (event.keyInput.v == "MOVE_DOWN")
 				(*map)[3][1].objects[0]->sprite->setState(0);
 			else if (event.keyInput.v == "MOVE_UP")
 				(*map)[3][1].objects[0]->sprite->setState(1);
@@ -68,7 +68,7 @@ void SceneGameMap::handleEvent(Event event)
 				(*map)[3][1].objects[0]->sprite->setState(2);
 			else if (event.keyInput.v == "MOVE_RIGHT")
 				(*map)[3][1].objects[0]->sprite->setState(3);
-			else if (event.keyInput.v == "RESET_CAMERA")
+			else */if (event.keyInput.v == "RESET_CAMERA")
 				camera->resetCamera();
 			else if (event.keyInput.v == "CAMERA_MOVE_UPPER_LEFT")
 				camera->move(-15, -15);

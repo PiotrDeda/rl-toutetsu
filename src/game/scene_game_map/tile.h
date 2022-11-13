@@ -5,16 +5,15 @@
 #include "../../engine/game_object/i_renderable.h"
 #include "map_objects/map_object.h"
 
-class Tile : public IRenderable
+class Tile : public GameObject
 {
 public:
-	void setPosition(int x, int y);
-	void addObject(const std::shared_ptr<MapObject>& object);
+	Tile() : GameObject(nullptr, nullptr) {}
+
 	void draw() const override;
 	void draw(const std::shared_ptr<Camera>& camera) const;
-	std::vector<std::shared_ptr<MapObject>> objects;
+	[[nodiscard]] bool isMouseOver(int mouseX, int mouseY) override;
+	void setObject(const std::shared_ptr<MapObject>& newObject);
 
-private:
-	int x;
-	int y;
+	std::shared_ptr<GameObject> object;
 };

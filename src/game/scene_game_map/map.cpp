@@ -4,28 +4,62 @@ Map::Map(const std::shared_ptr<Camera>& camera, int mapSize)
 {
 	this->mapSize = mapSize;
 	this->camera = camera;
-	tiles.resize(mapSize);
+	floorLayer.resize(mapSize);
+	wallLayer.resize(mapSize);
+	interactLayer.resize(mapSize);
 	for (int i = 0; i < mapSize; i++)
 	{
-		tiles[i].resize(mapSize);
+		floorLayer[i].resize(mapSize);
+		wallLayer[i].resize(mapSize);
+		interactLayer[i].resize(mapSize);
 		for (int j = 0; j < mapSize; j++)
-			tiles[i][j].setPosition(i * tileSize, j * tileSize);
+		{
+			floorLayer[i][j].move(i * tileSize, j * tileSize);
+			wallLayer[i][j].move(i * tileSize, j * tileSize);
+			interactLayer[i][j].move(i * tileSize, j * tileSize);
+		}
 	}
 }
 
-std::vector<Tile>& Map::operator[](int x)
+void Map::addFloor(const std::shared_ptr<MapObject>& object, int x, int y)
 {
-	return tiles[x];
+	floorLayer[x][y].setObject(object);
 }
 
-void Map::addObject(const std::shared_ptr<MapObject>& object, int x, int y)
+void Map::addWall(const std::shared_ptr<MapObject>& object, int x, int y)
 {
-	tiles[x][y].addObject(object);
+	wallLayer[x][y].setObject(object);
+}
+
+void Map::addInteract(const std::shared_ptr<MapObject>& object, int x, int y)
+{
+	interactLayer[x][y].setObject(object);
+}
+
+Tile& Map::getFloor(int x, int y)
+{
+	return floorLayer[x][y];
+}
+
+Tile& Map::getWall(int x, int y)
+{
+	return wallLayer[x][y];
+}
+
+Tile& Map::getInteract(int x, int y)
+{
+	return interactLayer[x][y];
 }
 
 void Map::draw() const
 {
-	for (auto& row : tiles)
+	for (auto& row : floorLayer)
+		for (auto& tile : row)
+			tile.draw(camera);
+	for (auto& row : wallLayer)
+		for (auto& tile : row)
+			tile.draw(camera);
+	for (auto& row : interactLayer)
 		for (auto& tile : row)
 			tile.draw(camera);
 }
