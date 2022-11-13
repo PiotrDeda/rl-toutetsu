@@ -7,7 +7,9 @@
 class SceneFight : public Scene
 {
 public:
-	explicit SceneFight(std::shared_ptr<GameState> gameState);
+	explicit SceneFight(const std::shared_ptr<GameState>& gameState);
+
+	void handleEvent(Event event) override;
 
 	[[nodiscard]] const char* getName() const override { return "SceneFight"; }
 
