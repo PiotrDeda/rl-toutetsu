@@ -4,7 +4,6 @@ AnimatedSprite::AnimatedSprite(const char* name, const int frameCount, const int
 {
 	this->frameCount = frameCount;
 	this->delay = delay;
-	this->currentDelay = delay;
 	this->width = width / frameCount;
 	for (int i = 0; i < frameCount; i++)
 		clips.push_back({i * width, 0, width, height});
@@ -13,10 +12,5 @@ AnimatedSprite::AnimatedSprite(const char* name, const int frameCount, const int
 void AnimatedSprite::draw(int x, int y, const double scale)
 {
 	SDL_Rect dstRect = {x, y, getScaledWidth(scale), getScaledHeight(scale)};
-	SDL_RenderCopy(renderer.get(), texture.get(), &clips[currentFrame], &dstRect);
-	if (--currentDelay == 0)
-	{
-		currentFrame = (currentFrame + 1) % frameCount;
-		currentDelay = delay;
-	}
+	SDL_RenderCopy(renderer.get(), texture.get(), &clips[SDL_GetTicks64() / delay % frameCount], &dstRect);
 }

@@ -12,8 +12,6 @@ public:
 
 private:
 	int frameCount;
-	int currentFrame = 0;
 	int delay;
-	int currentDelay;
 	std::vector<SDL_Rect> clips;
 };

@@ -16,7 +16,7 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	sprites.emplace("ui_equipment_bg", std::make_shared<Sprite>("ui_equipment_bg"));
 	sprites.emplace("player", std::make_shared<AnimatedStateSprite>("player", 2, 30, 4));
 	sprites.emplace("wall", std::make_shared<Sprite>("wall"));
-	sprites.emplace("wall_torch", std::make_shared<AnimatedSprite>("wall_torch", 3, 10));
+	sprites.emplace("wall_torch", std::make_shared<AnimatedSprite>("wall_torch", 3, 100));
 	sprites.emplace("floor", std::make_shared<Sprite>("floor"));
 
 	// Items
