@@ -14,6 +14,11 @@ void Tile::setObject(const std::shared_ptr<MapObject>& newObject)
 	object->move(x, y);
 }
 
+void Tile::removeObject()
+{
+	object = nullptr;
+}
+
 bool Tile::isMouseOver(int mouseX, int mouseY)
 {
 	return false;

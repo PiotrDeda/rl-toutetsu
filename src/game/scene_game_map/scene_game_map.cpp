@@ -18,7 +18,7 @@ SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene(
 
 	// Map
 	renderables.push_back(map);
-	FullyRandomMap::generateMap(map, camera);
+	FullyRandomMap::generateMap(map);
 
 	// Test objects
 	/*auto testEntity1 = createMapObject("wall", 1, 1);
@@ -60,15 +60,15 @@ void SceneGameMap::handleEvent(Event event)
 	switch (event.type)
 	{
 		case KeyInput:
-			/*if (event.keyInput.v == "MOVE_DOWN")
-				(*map)[3][1].objects[0]->sprite->setState(0);
+			if (event.keyInput.v == "MOVE_DOWN")
+				map->movePlayer(0, 1);
 			else if (event.keyInput.v == "MOVE_UP")
-				(*map)[3][1].objects[0]->sprite->setState(1);
+				map->movePlayer(0, -1);
 			else if (event.keyInput.v == "MOVE_LEFT")
-				(*map)[3][1].objects[0]->sprite->setState(2);
+				map->movePlayer(-1, 0);
 			else if (event.keyInput.v == "MOVE_RIGHT")
-				(*map)[3][1].objects[0]->sprite->setState(3);
-			else */if (event.keyInput.v == "RESET_CAMERA")
+				map->movePlayer(1, 0);
+			else if (event.keyInput.v == "RESET_CAMERA")
 				camera->resetCamera();
 			else if (event.keyInput.v == "CAMERA_MOVE_UPPER_LEFT")
 				camera->move(-15, -15);

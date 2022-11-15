@@ -7,10 +7,10 @@
 class FullyRandomMap
 {
 public:
-	static void generateMap(const std::shared_ptr<Map>& map, const std::shared_ptr<Camera>& camera);
+	static void generateMap(const std::shared_ptr<Map>& map);
 };
 
-void FullyRandomMap::generateMap(const std::shared_ptr<Map>& map, const std::shared_ptr<Camera>& camera)
+void FullyRandomMap::generateMap(const std::shared_ptr<Map>& map)
 {
 	for (int x = 0; x < map->getSize(); x++)
 	{
@@ -24,6 +24,19 @@ void FullyRandomMap::generateMap(const std::shared_ptr<Map>& map, const std::sha
 					map->addWall(std::make_shared<WallTorch>(), x, y);
 			}
 			map->addFloor(std::make_shared<Floor>(), x, y);
+		}
+	}
+	for (int x = 0; x < map->getSize(); x++)
+	{
+		for (int y = 0; y < map->getSize(); y++)
+		{
+			if (map->getWall(x, y).object == nullptr)
+			{
+				auto player = std::make_shared<PlayerPuppet>();
+				map->addInteract(player, x, y);
+				map->player = player;
+				return;
+			}
 		}
 	}
 }

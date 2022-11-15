@@ -21,6 +21,24 @@ Map::Map(const std::shared_ptr<Camera>& camera, int mapSize)
 	}
 }
 
+void Map::draw() const
+{
+	for (auto& row : floorLayer)
+		for (auto& tile : row)
+			tile.draw(camera);
+	for (auto& row : wallLayer)
+		for (auto& tile : row)
+			tile.draw(camera);
+	for (auto& row : interactLayer)
+		for (auto& tile : row)
+			tile.draw(camera);
+}
+
+int Map::getSize() const
+{
+	return mapSize;
+}
+
 void Map::addFloor(const std::shared_ptr<MapObject>& object, int x, int y)
 {
 	floorLayer[x][y].setObject(object);
@@ -51,20 +69,37 @@ Tile& Map::getInteract(int x, int y)
 	return interactLayer[x][y];
 }
 
-void Map::draw() const
+void Map::moveInteract(int x, int y, int newX, int newY)
 {
-	for (auto& row : floorLayer)
-		for (auto& tile : row)
-			tile.draw(camera);
-	for (auto& row : wallLayer)
-		for (auto& tile : row)
-			tile.draw(camera);
-	for (auto& row : interactLayer)
-		for (auto& tile : row)
-			tile.draw(camera);
+	interactLayer[newX][newY].setObject(interactLayer[x][y].object);
+	interactLayer[x][y].removeObject();
 }
 
-int Map::getSize() const
+void Map::movePlayer(int directionX, int directionY)
 {
-	return mapSize;
+	if (player == nullptr)
+		return;
+
+	int playerX = player->x / tileSize;
+	int playerY = player->y / tileSize;
+
+	if (playerX + directionX >= 0 && playerX + directionX < mapSize &&
+		playerY + directionY >= 0 && playerY + directionY < mapSize)
+	{
+		if (wallLayer[playerX + directionX][playerY + directionY].object == nullptr &&
+			floorLayer[playerX + directionX][playerY + directionY].object != nullptr)
+		{
+			moveInteract(playerX, playerY, playerX + directionX, playerY + directionY);
+			camera->move(directionX * tileSize, directionY * tileSize);
+		}
+	}
+
+	if (directionX == 0 && directionY == 1)
+		player->sprite->setState(0);
+	else if (directionX == 0 && directionY == -1)
+		player->sprite->setState(1);
+	else if (directionX == -1 && directionY == 0)
+		player->sprite->setState(2);
+	else if (directionX == 1 && directionY == 0)
+		player->sprite->setState(3);
 }

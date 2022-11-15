@@ -14,6 +14,7 @@ public:
 	void draw(const std::shared_ptr<Camera>& camera) const;
 	[[nodiscard]] bool isMouseOver(int mouseX, int mouseY) override;
 	void setObject(const std::shared_ptr<MapObject>& newObject);
+	void removeObject();
 
-	std::shared_ptr<GameObject> object;
+	std::shared_ptr<MapObject> object;
 };
