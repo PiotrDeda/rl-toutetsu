@@ -90,7 +90,8 @@ void Map::movePlayer(int directionX, int directionY)
 			floorLayer[playerX + directionX][playerY + directionY].object != nullptr)
 		{
 			moveInteract(playerX, playerY, playerX + directionX, playerY + directionY);
-			camera->move(directionX * tileSize, directionY * tileSize);
+			camera->move(static_cast<int>(directionX * tileSize * camera->getScale()),
+						 static_cast<int>(directionY * tileSize * camera->getScale()));
 		}
 	}
 

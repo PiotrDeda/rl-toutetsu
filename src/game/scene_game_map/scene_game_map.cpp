@@ -4,7 +4,7 @@
 #include "../item/test_item.h"
 #include "../item/test_item_2.h"
 #include "../loaders/scene_loader.h"
-#include "../map_algorithms/fully_random_map.h"
+#include "random_map_generator.h"
 
 SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene()
 {
@@ -18,17 +18,7 @@ SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene(
 
 	// Map
 	renderables.push_back(map);
-	FullyRandomMap::generateMap(map);
-
-	// Test objects
-	/*auto testEntity1 = createMapObject("wall", 1, 1);
-	auto testEntity2 = createMapObject("wall_torch", 2, 1);
-	auto testEntity3 = createMapObject("player", 3, 1);
-	auto testEntity4 = createMapObject("wall", 0, 0);
-	auto testEntity5 = createMapObject("wall", 10, 10);
-	auto testEntity6 = createMapObject("wall_torch", 11, 11);
-	auto testEntity7 = createMapObject("wall_torch", 22, 22);
-	auto testEntity8 = createMapObject("wall", 23, 23);*/
+	RandomMapGenerator::generateMap(map, RandomMapParameters(), 0);
 
 	// Inventory
 	auto inventoryBackgroundObject = createUIObject("ui_equipment_bg", 912, 0);
@@ -92,7 +82,10 @@ void SceneGameMap::handleEvent(Event event)
 	}
 }
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantParameter"
 std::shared_ptr<GameObject> SceneGameMap::createUIObject(const std::string& spriteId, int x, int y)
+#pragma clang diagnostic pop
 {
 	auto object = std::make_shared<GameObject>(App::get().getSprite(spriteId), uiCamera);
 	object->move(x, y);

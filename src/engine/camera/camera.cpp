@@ -66,9 +66,9 @@ void Camera::resetCamera()
 
 void Camera::updateBoundaries()
 {
-	curMinX = static_cast<int>(minX * scales[selectedScale]);
-	curMinY = static_cast<int>(minY * scales[selectedScale]);
-	curMaxX = static_cast<int>(maxX * scales[selectedScale]);
-	curMaxY = static_cast<int>(maxY * scales[selectedScale]);
+	curMinX = static_cast<int>(minX * scales[selectedScale] - 320);
+	curMinY = static_cast<int>(minY * scales[selectedScale] - 320);
+	curMaxX = static_cast<int>(maxX * scales[selectedScale] + 320);
+	curMaxY = static_cast<int>(maxY * scales[selectedScale] + 320);
 	move(0, 0);
 }
