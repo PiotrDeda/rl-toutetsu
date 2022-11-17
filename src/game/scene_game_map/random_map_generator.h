@@ -1,6 +1,7 @@
 #pragma once
 
 #include <random>
+#include "../../engine/misc/logger.h"
 #include "map_objects/floor.h"
 #include "map_objects/wall.h"
 #include "map_objects/wall_torch.h"
@@ -18,9 +19,8 @@ struct RandomMapParameters
 {
 	int minRoomAmount = 8;
 	int maxRoomAmount = 10;
-	int minRoomSize = 3;
-	int maxRoomSize = 5;
-	int minRoomDistance = 4;
+	int minRoomSize = 2;
+	int maxRoomSize = 4;
 	int torchChance = 10;
 };
 
@@ -51,31 +51,30 @@ void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& map, RandomMapP
 	std::uniform_int_distribution<> roomDistr(p.minRoomAmount, p.maxRoomAmount);
 	int roomAmount = roomDistr(gen);
 
-	// generate room centers
+	// generate room grid locations
+	int gridSize = floor(sqrt(roomAmount * 2));
+	std::vector<std::pair<int, int>> roomGridLocations(gridSize * gridSize);
+	for (int x = 0; x < gridSize; x++)
+		for (int y = 0; y < gridSize; y++)
+			roomGridLocations[x * gridSize + y] = std::make_pair(x, y);
+	std::shuffle(roomGridLocations.begin(), roomGridLocations.end(), gen);
+
+	// generate rooms
 	std::vector<std::pair<int, int>> roomCenters;
-	std::uniform_int_distribution<> xDistr(2, map->getSize() - 3);
-	std::uniform_int_distribution<> yDistr(2, map->getSize() - 3);
+	std::uniform_int_distribution<> sizeDistr(p.minRoomSize, p.maxRoomSize);
 	for (int i = 0; i < roomAmount; i++)
 	{
-		auto coords = std::make_pair(xDistr(gen), yDistr(gen));
-		bool placeable = true;
-		for (auto& otherCoords : roomCenters)
-		{
-			if (std::abs(coords.first - otherCoords.first) < p.minRoomDistance || std::abs(coords.second - otherCoords.second) < p.minRoomDistance)
-			{
-				placeable = false;
-				i--;
-				break;
-			}
-		}
-		if (placeable)
-			roomCenters.emplace_back(coords);
+		std::uniform_int_distribution<> roomXDistr(roomGridLocations[i].first * map->getSize() / gridSize,
+												   (roomGridLocations[i].first + 1) * map->getSize() / gridSize - 1);
+		std::uniform_int_distribution<> roomYDistr(roomGridLocations[i].second * map->getSize() / gridSize,
+												   (roomGridLocations[i].second + 1) * map->getSize() / gridSize - 1);
+		roomCenters.emplace_back(std::make_pair(roomXDistr(gen), roomYDistr(gen)));
+		int sizeX = sizeDistr(gen), sizeY = sizeDistr(gen);
+		placeRoom(mapValues, roomCenters[i].first, roomCenters[i].second, sizeX, sizeY);
+		Logger::logInfo("Placing room with grid position [%d, %d] at [%d, %d] with size [%d, %d]",
+						roomGridLocations[i].first, roomGridLocations[i].second,
+						roomCenters[i].first, roomCenters[i].second, sizeX, sizeY);
 	}
-
-	// place rooms
-	std::uniform_int_distribution<> sizeDistr(p.minRoomSize, p.maxRoomSize);
-	for (auto& roomCenter : roomCenters)
-		placeRoom(mapValues, roomCenter.first, roomCenter.second, sizeDistr(gen), sizeDistr(gen));
 
 	// place entrance and exit
 	int maxDistance = 0;
@@ -105,27 +104,27 @@ void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& map, RandomMapP
 		{
 			switch (mapValues[x][y])
 			{
-			case TileWall:
-				if (torchDistr(gen) < p.torchChance)
-					map->addWall(std::make_shared<WallTorch>(), x, y);
-				else
-					map->addWall(std::make_shared<Wall>(), x, y);
-				break;
-			case TileFloor:
-				map->addFloor(std::make_shared<Floor>(), x, y);
-				break;
-			case TileEntrance:
-			{
-				map->addFloor(std::make_shared<Floor>(), x, y);
-				auto player = std::make_shared<PlayerPuppet>();
-				map->addInteract(player, x, y);
-				map->player = player;
-				break;
-			}
-			case TileExit:
-				map->addFloor(std::make_shared<Floor>(), x, y);
-				map->addInteract(std::make_shared<WallTorch>(), x, y);
-				break;
+				case TileWall:
+					if (torchDistr(gen) < p.torchChance)
+						map->addWall(std::make_shared<WallTorch>(), x, y);
+					else
+						map->addWall(std::make_shared<Wall>(), x, y);
+					break;
+				case TileFloor:
+					map->addFloor(std::make_shared<Floor>(), x, y);
+					break;
+				case TileEntrance:
+				{
+					map->addFloor(std::make_shared<Floor>(), x, y);
+					auto player = std::make_shared<PlayerPuppet>();
+					map->addInteract(player, x, y);
+					map->player = player;
+					break;
+				}
+				case TileExit:
+					map->addFloor(std::make_shared<Floor>(), x, y);
+					map->addInteract(std::make_shared<WallTorch>(), x, y);
+					break;
 			}
 		}
 	}
