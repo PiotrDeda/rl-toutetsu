@@ -21,6 +21,7 @@ public:
 	Tile& getInteract(int x, int y);
 	void moveInteract(int x, int y, int newX, int newY);
 	void movePlayer(int directionX, int directionY);
+	void clear();
 
 	std::shared_ptr<PlayerPuppet> player;
 

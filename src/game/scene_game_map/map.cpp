@@ -104,3 +104,16 @@ void Map::movePlayer(int directionX, int directionY)
 	else if (directionX == 1 && directionY == 0)
 		player->sprite->setState(3);
 }
+
+void Map::clear()
+{
+	for (auto& row : floorLayer)
+		for (auto& tile : row)
+			tile.removeObject();
+	for (auto& row : wallLayer)
+		for (auto& tile : row)
+			tile.removeObject();
+	for (auto& row : interactLayer)
+		for (auto& tile : row)
+			tile.removeObject();
+}
