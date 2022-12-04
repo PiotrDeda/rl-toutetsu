@@ -7,9 +7,9 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXE_LINKER_FLAGS -static)
 
 set(CMAKE_MODULE_PATH "D:/Libraries/FindSDL2")
-set(SDL2_PATH "D:/Libraries/SDL2-2.0.22/x86_64-w64-mingw32")
-set(SDL2_IMAGE_PATH "D:/Libraries/SDL2_image-2.6.0/x86_64-w64-mingw32")
-set(SDL2_TTF_PATH "D:/Libraries/SDL2_ttf-2.20.0/x86_64-w64-mingw32")
+set(SDL2_PATH "D:/Libraries/SDL2-2.26.1/x86_64-w64-mingw32")
+set(SDL2_IMAGE_PATH "D:/Libraries/SDL2_image-2.6.2/x86_64-w64-mingw32")
+set(SDL2_TTF_PATH "D:/Libraries/SDL2_ttf-2.20.1/x86_64-w64-mingw32")
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
@@ -34,6 +34,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         ${SDL2_TTF_LIBRARIES}
         fmt::fmt)
 
-file(GLOB_RECURSE ASSETS "${CMAKE_BINARY_DIR}/assets/*")
+file(GLOB_RECURSE ASSETS "${CMAKE_BINARY_DIR}/assets/*" "${CMAKE_BINARY_DIR}/*.dll")
 file(REMOVE ${ASSETS})
 file(COPY src/assets DESTINATION ${CMAKE_BINARY_DIR})
+file(GLOB DLLS "src/bin/*.dll")
+file(COPY ${DLLS} DESTINATION ${CMAKE_BINARY_DIR})
