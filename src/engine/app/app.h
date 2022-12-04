@@ -9,6 +9,9 @@
 class App
 {
 public:
+	static constexpr int defaultWidth = 1280;
+	static constexpr int defaultHeight = 720;
+
 	SINGLETON(App)
 	~App();
 
@@ -28,8 +31,6 @@ public:
 	InputManager inputManager;
 
 private:
-	static constexpr int defaultWidth = 1280;
-	static constexpr int defaultHeight = 720;
 	static constexpr const char* assetPath = "assets/";
 
 	App() = default;

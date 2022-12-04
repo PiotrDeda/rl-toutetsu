@@ -9,6 +9,7 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	std::map<std::string, std::shared_ptr<Sprite>> sprites;
 
 	// Main menu
+	sprites.emplace("title", std::make_shared<Sprite>("title"));
 	sprites.emplace("play_button", std::make_shared<Sprite>("play_button"));
 	sprites.emplace("quit_button", std::make_shared<Sprite>("quit_button"));
 
