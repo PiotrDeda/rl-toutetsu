@@ -51,7 +51,7 @@ void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& objectMap, Rand
 {
 	// seed random number generator
 	std::mt19937 gen(seed);
-	Logger::logInfo("Generating random map with seed %u", seed);
+	LOG_INFO("Generating random map with seed {}", seed);
 
 	// create int objectMap to store tiles
 	std::vector<std::vector<int>> valueMap;
@@ -88,7 +88,7 @@ void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& objectMap, Rand
 		roomCenters.emplace_back(std::make_pair(roomXDistr(gen), roomYDistr(gen)));
 		int sizeX = sizeDistr(gen), sizeY = sizeDistr(gen);
 		placeRoom(valueMap, roomCenters[i].first, roomCenters[i].second, sizeX, sizeX, sizeY, sizeY);
-		Logger::logInfo("Placed room [%d] with grid position [%d, %d] at [%d, %d] with size [%d, %d]",
+		LOG_INFO("Placed room [{}] with grid position [{}, {}] at [{}, {}] with size [{}, {}]",
 						i, roomGridLocations[i].first, roomGridLocations[i].second,
 						roomCenters[i].first, roomCenters[i].second, sizeX, sizeY);
 	}
@@ -107,7 +107,7 @@ void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& objectMap, Rand
 		int x1 = roomCenters[room1].first, y1 = roomCenters[room1].second;
 		int x2 = roomCenters[room2].first, y2 = roomCenters[room2].second;
 		placeCorridor(valueMap, x1, y1, x2, y2, gen);
-		Logger::logInfo("Placed corridor between rooms [%d] and [%d]", room1, room2);
+		LOG_INFO("Placed corridor between rooms [{}] and [{}]", room1, room2);
 	}
 
 	// detect room clusters
@@ -165,14 +165,14 @@ void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& objectMap, Rand
 		int x1 = roomCenters[room1].first, y1 = roomCenters[room1].second;
 		int x2 = roomCenters[room2].first, y2 = roomCenters[room2].second;
 		placeCorridor(valueMap, x1, y1, x2, y2, gen);
-		Logger::logInfo("Placed corridor between clustered rooms [%d] and [%d]", room1, room2);
+		LOG_INFO("Placed corridor between clustered rooms [{}] and [{}]", room1, room2);
 	}
 
 	// place entrance and exit
 	int startRoom = roomConnections.back().room1, endRoom = roomConnections.back().room2;
 	valueMap[roomCenters[startRoom].first][roomCenters[startRoom].second] = TileEntrance;
 	valueMap[roomCenters[endRoom].first][roomCenters[endRoom].second] = TileExit;
-	Logger::logInfo("Placed entrance in room [%d] and exit in room [%d]", startRoom, endRoom);
+	LOG_INFO("Placed entrance in room [{}] and exit in room [{}]", startRoom, endRoom);
 
 	// convert to real map
 	convertValueMapToObjectMap(valueMap, objectMap, p, gen);

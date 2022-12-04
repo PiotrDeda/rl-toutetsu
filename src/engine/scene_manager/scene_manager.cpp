@@ -13,7 +13,7 @@ void SceneManager::loadScenes(std::vector<std::shared_ptr<Scene>> loadedScenes)
 void SceneManager::setNextScene(int nextSceneId)
 {
 	nextScene = scenes[nextSceneId];
-	Logger::logInfo("Switching from %s to %s...", currentScene->getName(), nextScene->getName());
+	LOG_INFO("Switching from {} to {}...", currentScene->getName(), nextScene->getName());
 }
 
 void SceneManager::switchScenes()

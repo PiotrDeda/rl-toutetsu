@@ -5,7 +5,7 @@
 
 App::~App()
 {
-	Logger::logInfo("Quitting SDL...");
+	LOG_INFO("Quitting SDL...");
 	SDL_DestroyWindow(window.get());
 	TTF_Quit();
 	IMG_Quit();
@@ -15,56 +15,38 @@ App::~App()
 void App::init()
 {
 	// SDL
-	Logger::logInfo("Starting SDL...");
+	LOG_INFO("Starting SDL...");
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		Logger::logErrorSDL("SDL could not initialize!");
-		throw std::runtime_error("SDL could not initialize!");
-	}
+		THROW_ERROR_SDL("SDL could not initialize!");
 
 	// Window
 	window = makeWindow(SDL_CreateWindow("Sandbox", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 										 defaultWidth, defaultHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE));
 	if (!window)
-	{
-		Logger::logErrorSDL("Window could not be created!");
-		throw std::runtime_error("Window could not be created!");
-	}
+		THROW_ERROR_SDL("Window could not be created!");
 
 	// Renderer
 	renderer = makeRenderer(SDL_CreateRenderer(window.get(), -1,
 											   SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
 	if (!renderer)
-	{
-		Logger::logErrorSDL("Renderer could not be created!");
-		throw std::runtime_error("Renderer could not be created!");
-	}
+		THROW_ERROR_SDL("Renderer could not be created!");
 	SDL_SetRenderDrawColor(renderer.get(), 0x00, 0x00, 0x00, 0xFF);
 	SDL_RenderSetLogicalSize(renderer.get(), defaultWidth, defaultHeight);
 
 	// SDL_Image
 	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
-	{
-		Logger::logErrorIMG("SDL_image could not initialize!");
-		throw std::runtime_error("SDL_image could not initialize!");
-	}
+		THROW_ERROR_IMG("SDL_image could not initialize!");
 
 	// SDL_TTF
 	if (TTF_Init() == -1)
-	{
-		Logger::logErrorTTF("SDL_ttf could not initialize!");
-		throw std::runtime_error("SDL_ttf could not initialize!");
-	}
+		THROW_ERROR_TTF("SDL_ttf could not initialize!");
 
 	// Font
 	font = makeFont(TTF_OpenFont(App::getAssetPath("CascadiaMono", "ttf"), 20));
 	if (!font)
-	{
-		Logger::logErrorTTF("Failed to load font");
-		throw std::runtime_error("Failed to load font");
-	}
+		THROW_ERROR_TTF("Failed to load font");
 
-	Logger::logInfo("SDL initialized");
+	LOG_INFO("SDL initialized");
 }
 
 void App::loadSprites(std::map<std::string, std::shared_ptr<Sprite>> loadedSprites)
@@ -134,7 +116,7 @@ int App::run()
 
 void App::shutdown()
 {
-	Logger::logInfo("Shutting down...");
+	LOG_INFO("Shutting down...");
 	running = false;
 }
 
@@ -152,10 +134,7 @@ const char* App::getAssetPath(const char* path, const char* fileType)
 std::shared_ptr<Sprite> App::getSprite(const std::string& id) const
 {
 	if (sprites.find(id) == sprites.end())
-	{
-		Logger::logError("Sprite not found: %s", id.c_str());
-		throw std::runtime_error("Sprite not found: " + id);
-	}
+		THROW_ERROR("Sprite not found: {}", id);
 	return sprites.at(id);
 }
 
@@ -175,7 +154,7 @@ int App::getMouseY() const
 
 void App::updateWindowSize()
 {
-	Logger::logInfo("Updating window size...");
+	LOG_INFO("Updating window size...");
 	int w, h;
 	SDL_GetWindowSize(window.get(), &w, &h);
 	auto fw = static_cast<float>(w), fh = static_cast<float>(h),

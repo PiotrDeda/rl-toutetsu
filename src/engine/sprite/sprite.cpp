@@ -11,10 +11,7 @@ Sprite::Sprite(const char* name) // NOLINT(cppcoreguidelines-pro-type-member-ini
 	this->renderer = App::get().renderer;
 	this->texture = makeTexture(IMG_LoadTexture(renderer.get(), App::getAssetPath(name)));
 	if (!texture)
-	{
-		Logger::logErrorIMG("Failed to load texture: %s", name);
-		throw std::runtime_error("Failed to load texture " + std::string(name));
-	}
+		THROW_ERROR_IMG("Failed to load texture: {}", name);
 	SDL_QueryTexture(texture.get(), nullptr, nullptr, &this->width, &this->height);
 }
 
