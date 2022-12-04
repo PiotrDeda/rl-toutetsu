@@ -20,7 +20,7 @@ void App::init()
 		THROW_ERROR_SDL("SDL could not initialize!");
 
 	// Window
-	window = makeWindow(SDL_CreateWindow("Sandbox", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+	window = makeWindow(SDL_CreateWindow("Toutetsu", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 										 defaultWidth, defaultHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE));
 	if (!window)
 		THROW_ERROR_SDL("Window could not be created!");

@@ -6,6 +6,8 @@ include(FetchContent)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXE_LINKER_FLAGS -static)
 
+set(ICON icon.rc)
+
 set(CMAKE_MODULE_PATH "D:/Libraries/FindSDL2")
 set(SDL2_PATH "D:/Libraries/SDL2-2.26.1/x86_64-w64-mingw32")
 set(SDL2_IMAGE_PATH "D:/Libraries/SDL2_image-2.6.2/x86_64-w64-mingw32")
@@ -26,7 +28,7 @@ include_directories(${SDL2_INCLUDE_DIR}
 
 file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
-add_executable(RLToutetsu ${SOURCES})
+add_executable(RLToutetsu ${SOURCES} ${ICON})
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
         ${SDL2_LIBRARY}
