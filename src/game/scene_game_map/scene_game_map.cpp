@@ -4,11 +4,13 @@
 #include "../item/test_item.h"
 #include "../item/test_item_2.h"
 #include "../loaders/scene_loader.h"
+#include "map_objects/pickup_item.h"
 #include "random_map_generator.h"
 
 SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene()
 {
 	this->gameState = gameState;
+	this->map = std::make_shared<Map>(camera, gameState, 40);
 	camera->setBoundaries(
 			-map->tileSize,
 			-map->tileSize,
@@ -27,7 +29,8 @@ SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene(
 	renderables.push_back(inventoryView);
 	clickables.push_back(inventoryView);
 	gameState->inventory->addItem(std::make_shared<TestItem>());
-	gameState->inventory->addItem(std::make_shared<TestItem2>());
+	map->addInteract(std::make_shared<PickupItem>(std::make_shared<TestItem2>()),
+					 map->player->x / map->tileSize + 1, map->player->y / map->tileSize);
 
 	// Stats
 	auto statsText = std::make_shared<TextObject>("Stats", uiCamera);

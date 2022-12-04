@@ -1,9 +1,10 @@
 #include "map.h"
 
-Map::Map(const std::shared_ptr<Camera>& camera, int mapSize)
+Map::Map(const std::shared_ptr<Camera>& camera, const std::shared_ptr<GameState>& gameState, int mapSize)
 {
 	this->mapSize = mapSize;
 	this->camera = camera;
+	this->gameState = gameState;
 	floorLayer.resize(mapSize);
 	wallLayer.resize(mapSize);
 	interactLayer.resize(mapSize);
@@ -89,6 +90,8 @@ void Map::movePlayer(int directionX, int directionY)
 		if (wallLayer[playerX + directionX][playerY + directionY].object == nullptr &&
 			floorLayer[playerX + directionX][playerY + directionY].object != nullptr)
 		{
+			if (interactLayer[playerX + directionX][playerY + directionY].object != nullptr)
+				interactLayer[playerX + directionX][playerY + directionY].object->onInteract(gameState);
 			moveInteract(playerX, playerY, playerX + directionX, playerY + directionY);
 			camera->move(static_cast<int>(directionX * tileSize * camera->getScale()),
 						 static_cast<int>(directionY * tileSize * camera->getScale()));
