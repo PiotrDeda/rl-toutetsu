@@ -57,7 +57,7 @@ void App::init()
 	}
 
 	// Font
-	font = makeFont(TTF_OpenFont(App::getAssetPath("consola", "ttf"), 20));
+	font = makeFont(TTF_OpenFont(App::getAssetPath("CascadiaMono", "ttf"), 20));
 	if (!font)
 	{
 		Logger::logErrorTTF("Failed to load font");

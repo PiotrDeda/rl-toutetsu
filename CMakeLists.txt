@@ -25,4 +25,6 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         ${SDL2_IMAGE_LIBRARIES}
         ${SDL2_TTF_LIBRARIES})
 
+file(GLOB_RECURSE ASSETS "${CMAKE_BINARY_DIR}/assets/*")
+file(REMOVE ${ASSETS})
 file(COPY src/assets DESTINATION ${CMAKE_BINARY_DIR})
