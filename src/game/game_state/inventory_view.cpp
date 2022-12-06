@@ -41,5 +41,5 @@ bool InventoryView::isMouseOver(int mouseX, int mouseY)
 
 void InventoryView::onClick()
 {
-	inventory->switchCursorItem(lastClickedIndex);
+	inventory->switchCursorItem(lastClickedIndex, equipmentLocked);
 }

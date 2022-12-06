@@ -11,6 +11,7 @@ SceneFight::SceneFight(const std::shared_ptr<GameState>& gameState) : Scene()
 	auto inventoryBackgroundObject = createUIObject("ui_equipment_bg", 912, 0);
 	auto inventoryView = std::make_shared<InventoryView>(gameState->inventory, uiCamera);
 	inventoryView->move(912, 0);
+	inventoryView->equipmentLocked = true;
 	renderables.push_back(inventoryView);
 	clickables.push_back(inventoryView);
 

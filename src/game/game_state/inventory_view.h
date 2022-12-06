@@ -12,6 +12,7 @@ public:
 	void onClick() override;
 
 	std::shared_ptr<Inventory> inventory;
+	bool equipmentLocked = false;
 
 private:
 	int lastClickedIndex = 0;

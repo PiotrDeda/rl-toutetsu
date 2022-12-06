@@ -21,9 +21,12 @@ public:
 
 	explicit Inventory(const std::shared_ptr<PlayerStats>& playerStats);
 
-	void switchCursorItem(int index);
+	void switchCursorItem(int index, bool equipmentLocked);
 	void addItem(const std::shared_ptr<Item>& item);
 
 	std::vector<std::shared_ptr<InventorySlot>> inventorySlots;
 	std::shared_ptr<PlayerStats> playerStats;
+
+private:
+	void refreshStats();
 };
