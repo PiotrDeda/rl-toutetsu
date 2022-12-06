@@ -7,16 +7,16 @@
 SceneMainMenu::SceneMainMenu() : Scene()
 {
 	auto title = std::make_shared<GameObject>(App::get().getSprite("title"), camera);
-	title->move(482, 64);
+	title->setPosition(482, 64);
 	renderables.push_back(title);
 
 	auto playButton = std::make_shared<PlayButton>(App::get().getSprite("play_button"), camera);
-	playButton->move(482, 317);
+	playButton->setPosition(482, 317);
 	renderables.push_back(playButton);
 	clickables.push_back(playButton);
 
 	auto quitButton = std::make_shared<QuitButton>(App::get().getSprite("quit_button"), camera);
-	quitButton->move(482, 445);
+	quitButton->setPosition(482, 445);
 	renderables.push_back(quitButton);
 	clickables.push_back(quitButton);
 }

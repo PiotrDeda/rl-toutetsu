@@ -11,7 +11,7 @@ public:
 	GameObject(const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<Camera>& camera);
 
 	void draw() const override;
-	virtual void move(int targetX, int targetY);
+	virtual void setPosition(int targetX, int targetY);
 	[[nodiscard]] virtual bool isMouseOver(int mouseX, int mouseY);
 	virtual void onClick();
 

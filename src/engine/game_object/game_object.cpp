@@ -11,7 +11,7 @@ void GameObject::draw() const
 	sprite->draw(camera->getScreenX(x), camera->getScreenY(y), camera->getScale());
 }
 
-void GameObject::move(const int targetX, const int targetY)
+void GameObject::setPosition(const int targetX, const int targetY)
 {
 	x = targetX;
 	y = targetY;

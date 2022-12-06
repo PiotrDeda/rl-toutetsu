@@ -15,9 +15,9 @@ Map::Map(const std::shared_ptr<Camera>& camera, const std::shared_ptr<GameState>
 		interactLayer[i].resize(mapSize);
 		for (int j = 0; j < mapSize; j++)
 		{
-			floorLayer[i][j].move(i * tileSize, j * tileSize);
-			wallLayer[i][j].move(i * tileSize, j * tileSize);
-			interactLayer[i][j].move(i * tileSize, j * tileSize);
+			floorLayer[i][j].setPosition(i * tileSize, j * tileSize);
+			wallLayer[i][j].setPosition(i * tileSize, j * tileSize);
+			interactLayer[i][j].setPosition(i * tileSize, j * tileSize);
 		}
 	}
 }

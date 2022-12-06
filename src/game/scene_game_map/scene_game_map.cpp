@@ -25,7 +25,7 @@ SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene(
 	// Inventory
 	auto inventoryBackgroundObject = createUIObject("ui_equipment_bg", 912, 0);
 	auto inventoryView = std::make_shared<InventoryView>(gameState->inventory, uiCamera);
-	inventoryView->move(912, 0);
+	inventoryView->setPosition(912, 0);
 	renderables.push_back(inventoryView);
 	clickables.push_back(inventoryView);
 	gameState->inventory->addItem(std::make_shared<TestItem>());
@@ -35,7 +35,7 @@ SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene(
 	// Stats
 	auto statsText = std::make_shared<TextObject>("Stats", uiCamera);
 	renderables.push_back(statsText);
-	statsText->move(941, 237);
+	statsText->setPosition(941, 237);
 	gameState->playerStats->addViewSprite(statsText);
 
 	App::get().inputManager.assignInputEventValue(SDLK_s, "MOVE_DOWN");
@@ -94,7 +94,7 @@ std::shared_ptr<GameObject> SceneGameMap::createUIObject(const std::string& spri
 #pragma clang diagnostic pop
 {
 	auto object = std::make_shared<GameObject>(App::get().getSprite(spriteId), uiCamera);
-	object->move(x, y);
+	object->setPosition(x, y);
 	renderables.push_back(object);
 	return object;
 }

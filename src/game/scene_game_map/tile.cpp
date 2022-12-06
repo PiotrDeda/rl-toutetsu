@@ -11,7 +11,7 @@ void Tile::draw(const std::shared_ptr<Camera>& camera) const
 void Tile::setObject(const std::shared_ptr<MapObject>& newObject)
 {
 	object = newObject;
-	object->move(x, y);
+	object->setPosition(x, y);
 }
 
 void Tile::removeObject()
