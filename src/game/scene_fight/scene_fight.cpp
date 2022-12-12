@@ -1,5 +1,6 @@
 #include "scene_fight.h"
 
+#include "../game_state/game_state.h"
 #include "../game_state/inventory_view.h"
 #include "../loaders/scene_loader.h"
 

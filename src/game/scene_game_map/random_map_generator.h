@@ -4,6 +4,7 @@
 #include <queue>
 #include "../../engine/misc/logger.h"
 #include "map_objects/floor.h"
+#include "map_objects/floor_exit.h"
 #include "map_objects/wall.h"
 #include "map_objects/wall_torch.h"
 
@@ -275,7 +276,9 @@ void RandomMapGenerator::convertValueMapToObjectMap(const std::vector<std::vecto
 				}
 				case TileExit:
 					objectMap->addFloor(std::make_shared<Floor>(), x, y);
-					objectMap->addInteract(std::make_shared<WallTorch>(), x, y);
+					objectMap->addInteract(std::make_shared<FloorExit>(), x, y);
+					objectMap->exitX = x;
+					objectMap->exitY = y;
 					break;
 			}
 		}

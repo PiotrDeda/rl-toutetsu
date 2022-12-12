@@ -5,6 +5,7 @@
 #include "../item/test_item_2.h"
 #include "../loaders/scene_loader.h"
 #include "map_objects/pickup_item.h"
+#include "map_objects/unit_toutetsu.h"
 #include "random_map_generator.h"
 
 SceneGameMap::SceneGameMap() : Scene()
@@ -19,7 +20,7 @@ SceneGameMap::SceneGameMap() : Scene()
 
 	// Map
 	renderables.push_back(map);
-	RandomMapGenerator::generateMap(map, RandomMapParameters(), std::random_device{}());
+	nextLevel();
 
 	// Inventory
 	auto inventoryBackgroundObject = createUIObject("ui_equipment_bg", 912, 0);
@@ -85,6 +86,14 @@ void SceneGameMap::handleEvent(Event event)
 		default:
 			break;
 	}
+}
+
+void SceneGameMap::nextLevel()
+{
+	currentLevel++;
+	RandomMapGenerator::generateMap(map, RandomMapParameters(), std::random_device{}());
+	if (currentLevel == 4)
+		map->addInteract(std::make_shared<UnitToutetsu>(), map->exitX, map->exitY);
 }
 
 #pragma clang diagnostic push

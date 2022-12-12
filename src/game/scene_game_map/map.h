@@ -24,6 +24,7 @@ public:
 	void clear();
 
 	std::shared_ptr<PlayerPuppet> player;
+	int exitX = 0, exitY = 0;
 
 private:
 	std::shared_ptr<Camera> camera;

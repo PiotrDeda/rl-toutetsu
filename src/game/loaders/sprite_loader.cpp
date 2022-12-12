@@ -19,6 +19,10 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	sprites.emplace("wall", std::make_shared<Sprite>("wall"));
 	sprites.emplace("wall_torch", std::make_shared<AnimatedSprite>("wall_torch", 3, 100));
 	sprites.emplace("floor", std::make_shared<Sprite>("floor"));
+	sprites.emplace("floor_exit", std::make_shared<Sprite>("floor_exit"));
+
+	// Units
+	sprites.emplace("unit_toutetsu", std::make_shared<Sprite>("unit_toutetsu"));
 
 	// Items
 	sprites.emplace("blank_item", std::make_shared<Sprite>("blank_item"));

@@ -2,7 +2,6 @@
 
 #include "../../engine/camera/ui_camera.h"
 #include "../../engine/scene_manager/scene.h"
-#include "../game_state/game_state.h"
 
 class SceneFight : public Scene
 {
