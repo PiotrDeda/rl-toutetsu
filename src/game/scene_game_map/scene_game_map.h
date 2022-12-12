@@ -8,7 +8,7 @@
 class SceneGameMap : public Scene
 {
 public:
-	explicit SceneGameMap(const std::shared_ptr<GameState>& gameState);
+	SceneGameMap();
 
 	void handleEvent(Event event) override;
 
@@ -16,7 +16,6 @@ public:
 
 	std::shared_ptr<Camera> camera = std::make_shared<Camera>();
 	std::shared_ptr<UICamera> uiCamera = std::make_shared<UICamera>();
-	std::shared_ptr<GameState> gameState;
 	std::shared_ptr<Map> map;
 
 private:

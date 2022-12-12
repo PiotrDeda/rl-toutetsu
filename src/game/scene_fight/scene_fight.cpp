@@ -3,13 +3,11 @@
 #include "../game_state/inventory_view.h"
 #include "../loaders/scene_loader.h"
 
-SceneFight::SceneFight(const std::shared_ptr<GameState>& gameState) : Scene()
+SceneFight::SceneFight() : Scene()
 {
-	this->gameState = gameState;
-
 	// Inventory
 	auto inventoryBackgroundObject = createUIObject("ui_equipment_bg", 912, 0);
-	auto inventoryView = std::make_shared<InventoryView>(gameState->inventory, uiCamera);
+	auto inventoryView = std::make_shared<InventoryView>(GameState::get().inventory, uiCamera);
 	inventoryView->setPosition(912, 0);
 	inventoryView->equipmentLocked = true;
 	renderables.push_back(inventoryView);
@@ -19,7 +17,7 @@ SceneFight::SceneFight(const std::shared_ptr<GameState>& gameState) : Scene()
 	auto statsText = std::make_shared<TextObject>("Stats", uiCamera);
 	renderables.push_back(statsText);
 	statsText->setPosition(941, 237);
-	gameState->playerStats->addViewSprite(statsText);
+	GameState::get().playerStats->addViewSprite(statsText);
 
 	App::get().inputManager.assignInputEventValue(SDLK_m, "SCENE_GAME_MAP");
 }

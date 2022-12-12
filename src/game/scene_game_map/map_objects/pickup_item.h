@@ -9,9 +9,9 @@ class PickupItem : public MapObject
 public:
 	explicit PickupItem(const std::shared_ptr<Item>& item) : MapObject(item->sprite), item(item) {}
 
-	void onInteract(const std::shared_ptr<GameState>& gameState) override
+	void onInteract() override
 	{
-		gameState->inventory->addItem(item);
+		GameState::get().inventory->addItem(item);
 	}
 
 private:

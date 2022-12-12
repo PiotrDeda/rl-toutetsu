@@ -6,11 +6,10 @@
 
 std::vector<std::shared_ptr<Scene>> SceneLoader::getScenes()
 {
-	static std::shared_ptr<GameState> gameState = std::make_shared<GameState>();
 	static std::vector<std::shared_ptr<Scene>> scenes = {
 		std::make_shared<SceneMainMenu>(),
-		std::make_shared<SceneGameMap>(gameState),
-		std::make_shared<SceneFight>(gameState)
+		std::make_shared<SceneGameMap>(),
+		std::make_shared<SceneFight>()
 	};
 	return scenes;
 }

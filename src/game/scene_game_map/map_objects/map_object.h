@@ -10,7 +10,7 @@ public:
 
 	void draw() const override {}
 
-	virtual void onInteract(const std::shared_ptr<GameState>& gameState) {}
+	virtual void onInteract() {}
 
 	[[nodiscard]] bool isMouseOver(int mouseX, int mouseY) override { return false; }
 };

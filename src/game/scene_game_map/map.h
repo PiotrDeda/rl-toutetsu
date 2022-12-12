@@ -9,7 +9,7 @@ class Map : public IRenderable
 public:
 	static constexpr int tileSize = 64;
 
-	Map(const std::shared_ptr<Camera>& camera, const std::shared_ptr<GameState>& gameState, int mapSize);
+	Map(const std::shared_ptr<Camera>& camera, int mapSize);
 
 	void draw() const override;
 	[[nodiscard]] int getSize() const;
@@ -27,7 +27,6 @@ public:
 
 private:
 	std::shared_ptr<Camera> camera;
-	std::shared_ptr<GameState> gameState;
 	std::vector<std::vector<Tile>> floorLayer;
 	std::vector<std::vector<Tile>> wallLayer;
 	std::vector<std::vector<Tile>> interactLayer;

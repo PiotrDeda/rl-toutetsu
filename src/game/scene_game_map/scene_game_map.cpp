@@ -7,10 +7,9 @@
 #include "map_objects/pickup_item.h"
 #include "random_map_generator.h"
 
-SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene()
+SceneGameMap::SceneGameMap() : Scene()
 {
-	this->gameState = gameState;
-	this->map = std::make_shared<Map>(camera, gameState, 40);
+	this->map = std::make_shared<Map>(camera, 40);
 	camera->setBoundaries(
 			-map->tileSize,
 			-map->tileSize,
@@ -24,11 +23,11 @@ SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene(
 
 	// Inventory
 	auto inventoryBackgroundObject = createUIObject("ui_equipment_bg", 912, 0);
-	auto inventoryView = std::make_shared<InventoryView>(gameState->inventory, uiCamera);
+	auto inventoryView = std::make_shared<InventoryView>(GameState::get().inventory, uiCamera);
 	inventoryView->setPosition(912, 0);
 	renderables.push_back(inventoryView);
 	clickables.push_back(inventoryView);
-	gameState->inventory->addItem(std::make_shared<TestItem>());
+	GameState::get().inventory->addItem(std::make_shared<TestItem>());
 	map->addInteract(std::make_shared<PickupItem>(std::make_shared<TestItem2>()),
 					 map->player->x / map->tileSize + 1, map->player->y / map->tileSize);
 
@@ -36,7 +35,7 @@ SceneGameMap::SceneGameMap(const std::shared_ptr<GameState>& gameState) : Scene(
 	auto statsText = std::make_shared<TextObject>("Stats", uiCamera);
 	renderables.push_back(statsText);
 	statsText->setPosition(941, 237);
-	gameState->playerStats->addViewSprite(statsText);
+	GameState::get().playerStats->addViewSprite(statsText);
 
 	App::get().inputManager.assignInputEventValue(SDLK_s, "MOVE_DOWN");
 	App::get().inputManager.assignInputEventValue(SDLK_w, "MOVE_UP");
