@@ -12,7 +12,7 @@ public:
 
 	bool onInteract() override
 	{
-		App::get().shutdown();
+		App::get().sceneManager.setNextScene(SceneId::Win);
 		return false;
 	}
 };

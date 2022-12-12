@@ -8,7 +8,8 @@ enum SceneId
 {
 	MainMenu,
 	GameMap,
-	Fight
+	Fight,
+	Win
 };
 
 class SceneLoader

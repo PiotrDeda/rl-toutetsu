@@ -12,6 +12,7 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	sprites.emplace("title", std::make_shared<Sprite>("title"));
 	sprites.emplace("play_button", std::make_shared<Sprite>("play_button"));
 	sprites.emplace("quit_button", std::make_shared<Sprite>("quit_button"));
+	sprites.emplace("win_screen", std::make_shared<Sprite>("win_screen"));
 
 	// Game map
 	sprites.emplace("ui_equipment_bg", std::make_shared<Sprite>("ui_equipment_bg"));
