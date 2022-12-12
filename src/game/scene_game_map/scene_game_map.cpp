@@ -23,7 +23,7 @@ SceneGameMap::SceneGameMap() : Scene()
 	nextLevel();
 
 	// Inventory
-	auto inventoryBackgroundObject = std::make_shared<GameObject>(App::get().getSprite("ui_equipment_bg"), uiCamera);
+	auto inventoryBackgroundObject = std::make_shared<GameObject>(App::get().getSprite("equipment_bg"), uiCamera);
 	inventoryBackgroundObject->setPosition(912, 0);
 	renderables.push_back(inventoryBackgroundObject);
 	auto inventoryView = std::make_shared<InventoryView>(GameState::get().inventory, uiCamera);

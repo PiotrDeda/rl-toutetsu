@@ -7,7 +7,7 @@
 SceneFight::SceneFight() : Scene()
 {
 	// Inventory
-	auto inventoryBackgroundObject = createUIObject("ui_equipment_bg", 912, 0);
+	auto inventoryBackgroundObject = createUIObject("equipment_bg", 912, 0);
 	auto inventoryView = std::make_shared<InventoryView>(GameState::get().inventory, uiCamera);
 	inventoryView->setPosition(912, 0);
 	inventoryView->equipmentLocked = true;
