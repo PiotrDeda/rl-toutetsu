@@ -23,7 +23,9 @@ SceneGameMap::SceneGameMap() : Scene()
 	nextLevel();
 
 	// Inventory
-	auto inventoryBackgroundObject = createUIObject("ui_equipment_bg", 912, 0);
+	auto inventoryBackgroundObject = std::make_shared<GameObject>(App::get().getSprite("ui_equipment_bg"), uiCamera);
+	inventoryBackgroundObject->setPosition(912, 0);
+	renderables.push_back(inventoryBackgroundObject);
 	auto inventoryView = std::make_shared<InventoryView>(GameState::get().inventory, uiCamera);
 	inventoryView->setPosition(912, 0);
 	renderables.push_back(inventoryView);
@@ -94,15 +96,4 @@ void SceneGameMap::nextLevel()
 	RandomMapGenerator::generateMap(map, RandomMapParameters(), std::random_device{}());
 	if (currentLevel == 4)
 		map->addInteract(std::make_shared<UnitToutetsu>(), map->exitX, map->exitY);
-}
-
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "ConstantParameter"
-std::shared_ptr<GameObject> SceneGameMap::createUIObject(const std::string& spriteId, int x, int y)
-#pragma clang diagnostic pop
-{
-	auto object = std::make_shared<GameObject>(App::get().getSprite(spriteId), uiCamera);
-	object->setPosition(x, y);
-	renderables.push_back(object);
-	return object;
 }

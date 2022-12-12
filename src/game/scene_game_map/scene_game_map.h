@@ -18,7 +18,4 @@ public:
 	std::shared_ptr<UICamera> uiCamera = std::make_shared<UICamera>();
 	std::shared_ptr<Map> map;
 	int currentLevel = 0;
-
-private:
-	std::shared_ptr<GameObject> createUIObject(const std::string& spriteId, int x, int y);
 };
