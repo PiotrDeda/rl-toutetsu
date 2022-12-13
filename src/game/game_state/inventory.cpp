@@ -36,7 +36,7 @@ void Inventory::switchCursorItem(int index, bool equipmentLocked)
 
 void Inventory::addItem(const std::shared_ptr<Item>& item)
 {
-	for (int i = mainInventoryStartIndex; i <= mainInventoryEndIndex; i++)
+	for (int i = mainInventoryStartIndex; i < mainInventoryEndIndex; i++)
 	{
 		if (inventorySlots[i]->item->type == Blank)
 		{

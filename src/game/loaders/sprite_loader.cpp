@@ -24,6 +24,8 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 
 	// Units
 	sprites.emplace("unit_toutetsu", std::make_shared<Sprite>("units/unit_toutetsu"));
+	sprites.emplace("test_unit", std::make_shared<Sprite>("units/test_unit"));
+	sprites.emplace("test_unit_2", std::make_shared<Sprite>("units/test_unit_2"));
 
 	// Items
 	sprites.emplace("blank_item", std::make_shared<Sprite>("items/blank_item"));

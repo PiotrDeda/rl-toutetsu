@@ -3,18 +3,29 @@
 #include <random>
 #include <queue>
 #include "../../engine/misc/logger.h"
+#include "../enemy/random_enemy.h"
+#include "../item/random_item.h"
 #include "map_objects/floor.h"
 #include "map_objects/floor_exit.h"
+#include "map_objects/pickup_item.h"
+#include "map_objects/unit.h"
 #include "map_objects/wall.h"
 #include "map_objects/wall_torch.h"
 
-enum MapValues
+enum MapValues : char
 {
-	TileNothing = 0,
-	TileWall = 1,
-	TileFloor = 2,
-	TileEntrance = 3,
-	TileExit = 4
+	TileNothing = ' ',
+	TileWallRandom = 'W',
+	TileWall = 'w',
+	TileWallTorch = 't',
+	TileFloor = '.',
+	TileEntrance = 'O',
+	TileExit = 'X',
+	TileItem = 'I',
+	TileEnemy = 'E',
+	TileGold = 'G',
+	TileShop = 'S',
+	ReservedFloor = -1
 };
 
 struct RandomMapParameters
@@ -24,6 +35,8 @@ struct RandomMapParameters
 	int minRoomSize = 2;
 	int maxRoomSize = 4;
 	int torchChance = 10;
+	int itemChance = 3;
+	int enemyChance = 6;
 };
 
 struct RoomConnection
@@ -86,7 +99,7 @@ void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& objectMap, Rand
 		std::uniform_int_distribution<> roomYDistr(roomGridLocations[i].second * objectMap->getSize() / gridSize + 1,
 												   (roomGridLocations[i].second + 1) * objectMap->getSize() / gridSize -
 												   2);
-		roomCenters.emplace_back(std::make_pair(roomXDistr(gen), roomYDistr(gen)));
+		roomCenters.emplace_back(roomXDistr(gen), roomYDistr(gen));
 		int sizeX = sizeDistr(gen), sizeY = sizeDistr(gen);
 		placeRoom(valueMap, roomCenters[i].first, roomCenters[i].second, sizeX, sizeX, sizeY, sizeY);
 		LOG_INFO("Placed room [{}] with grid position [{}, {}] at [{}, {}] with size [{}, {}]",
@@ -175,6 +188,27 @@ void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& objectMap, Rand
 	valueMap[roomCenters[endRoom].first][roomCenters[endRoom].second] = TileExit;
 	LOG_INFO("Placed entrance in room [{}] and exit in room [{}]", startRoom, endRoom);
 
+	// reserve room around entrance
+	for (int i = -1; i <= 1; i++)
+		for (int j = -1; j <= 1; j++)
+			if (valueMap[roomCenters[startRoom].first + i][roomCenters[startRoom].second + j] == TileFloor)
+				valueMap[roomCenters[startRoom].first + i][roomCenters[startRoom].second + j] = ReservedFloor;
+
+	// generate items and enemies
+	std::uniform_int_distribution<int> percentDistr(0, 100);
+	for (auto & i : valueMap)
+		for (auto & j : i)
+			if (j == TileFloor && percentDistr(gen) < p.itemChance)
+				j = TileItem;
+			else if (j == TileFloor && percentDistr(gen) < p.enemyChance)
+				j = TileEnemy;
+
+	// convert reserved floor to floor
+	for (auto & i : valueMap)
+		for (int & j : i)
+			if (j == ReservedFloor)
+				j = TileFloor;
+
 	// convert to real map
 	convertValueMapToObjectMap(valueMap, objectMap, p, gen);
 }
@@ -201,18 +235,18 @@ void RandomMapGenerator::placeRoom(std::vector<std::vector<int>>& mapValues, int
 	for (int x = centerX - sizeXLeft; x <= centerX + sizeXRight; x++)
 	{
 		if (mapValues[x][centerY - sizeYTop] == TileNothing)
-			mapValues[x][centerY - sizeYTop] = TileWall;
+			mapValues[x][centerY - sizeYTop] = TileWallRandom;
 		if (mapValues[x][centerY + sizeYBottom] == TileNothing)
-			mapValues[x][centerY + sizeYBottom] = TileWall;
+			mapValues[x][centerY + sizeYBottom] = TileWallRandom;
 	}
 
 	// place left and right walls
 	for (int y = centerY - sizeYTop; y <= centerY + sizeYBottom; y++)
 	{
 		if (mapValues[centerX - sizeXLeft][y] == TileNothing)
-			mapValues[centerX - sizeXLeft][y] = TileWall;
+			mapValues[centerX - sizeXLeft][y] = TileWallRandom;
 		if (mapValues[centerX + sizeXRight][y] == TileNothing)
-			mapValues[centerX + sizeXRight][y] = TileWall;
+			mapValues[centerX + sizeXRight][y] = TileWallRandom;
 	}
 }
 
@@ -222,11 +256,11 @@ void RandomMapGenerator::placeCorridor(std::vector<std::vector<int>>& valueMap, 
 	std::uniform_int_distribution<> boolDistr(0, 1);
 
 	auto placeCorridorTile = [&](int x, int y) {
-		valueMap[x][y] = TileFloor;
+		valueMap[x][y] = ReservedFloor;
 		for (int i = -1; i <= 1; i++)
 			for (int j = -1; j <= 1; j++)
 				if (valueMap[x + i][y + j] == TileNothing)
-					valueMap[x + i][y + j] = TileWall;
+					valueMap[x + i][y + j] = TileWallRandom;
 	};
 
 	if (boolDistr(gen))
@@ -258,6 +292,10 @@ void RandomMapGenerator::convertValueMapToObjectMap(const std::vector<std::vecto
 			switch (valueMap[x][y])
 			{
 				case TileWall:
+					objectMap->addWall(std::make_shared<Wall>(), x, y);
+				case TileWallTorch:
+					objectMap->addWall(std::make_shared<WallTorch>(), x, y);
+				case TileWallRandom:
 					if (percentDistr(gen) < p.torchChance)
 						objectMap->addWall(std::make_shared<WallTorch>(), x, y);
 					else
@@ -279,6 +317,14 @@ void RandomMapGenerator::convertValueMapToObjectMap(const std::vector<std::vecto
 					objectMap->addInteract(std::make_shared<FloorExit>(), x, y);
 					objectMap->exitX = x;
 					objectMap->exitY = y;
+					break;
+				case TileItem:
+					objectMap->addFloor(std::make_shared<Floor>(), x, y);
+					objectMap->addInteract(std::make_shared<PickupItem>(RandomItem::generate(gen)), x, y);
+					break;
+				case TileEnemy:
+					objectMap->addFloor(std::make_shared<Floor>(), x, y);
+					objectMap->addInteract(std::make_shared<Unit>(RandomEnemy::generate(gen)), x, y);
 					break;
 			}
 		}

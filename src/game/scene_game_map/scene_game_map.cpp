@@ -30,9 +30,6 @@ SceneGameMap::SceneGameMap() : Scene()
 	inventoryView->setPosition(912, 0);
 	renderables.push_back(inventoryView);
 	clickables.push_back(inventoryView);
-	GameState::get().inventory->addItem(std::make_shared<TestItem>());
-	map->addInteract(std::make_shared<PickupItem>(std::make_shared<TestItem2>()),
-					 map->player->x / map->tileSize + 1, map->player->y / map->tileSize);
 
 	// Stats
 	auto statsText = std::make_shared<TextObject>("Stats", uiCamera);
