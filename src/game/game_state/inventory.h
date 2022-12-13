@@ -16,8 +16,10 @@ public:
 	static constexpr int trinketIndex = 5;
 	static constexpr int shieldIndex = 6;
 	static constexpr int bookIndex = 7;
-	static constexpr int mainInventoryStartIndex = 8;
-	static constexpr int mainInventoryEndIndex = 33;
+	static constexpr int spellStartIndex = 8;
+	static constexpr int spellEndIndex = 11;
+	static constexpr int mainInventoryStartIndex = 12;
+	static constexpr int mainInventoryEndIndex = 36;
 
 	explicit Inventory(const std::shared_ptr<PlayerStats>& playerStats);
 

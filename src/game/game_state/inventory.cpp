@@ -11,7 +11,12 @@ Inventory::Inventory(const std::shared_ptr<PlayerStats>& playerStats)
 																	96 + (i / 3) * 64,
 																	32 + (i % 3) * 64,
 																	static_cast<ItemType>(Helmet + i)));
-	for (int i = 0; i < mainInventoryEndIndex - mainInventoryStartIndex; i++)
+	for (int i = 0; i < spellEndIndex - spellStartIndex + 1; i++)
+		inventorySlots.emplace_back(std::make_shared<InventorySlot>(spellStartIndex + i,
+																	272,
+																	40 + i * 80,
+																	Spell));
+	for (int i = 0; i < mainInventoryEndIndex - mainInventoryStartIndex + 1; i++)
 		inventorySlots.emplace_back(std::make_shared<InventorySlot>(mainInventoryStartIndex + i,
 																	32 + (i % 5) * 64,
 																	384 + (i / 5) * 64,
@@ -36,7 +41,7 @@ void Inventory::switchCursorItem(int index, bool equipmentLocked)
 
 void Inventory::addItem(const std::shared_ptr<Item>& item)
 {
-	for (int i = mainInventoryStartIndex; i < mainInventoryEndIndex; i++)
+	for (int i = mainInventoryStartIndex; i <= mainInventoryEndIndex; i++)
 	{
 		if (inventorySlots[i]->item->type == Blank)
 		{

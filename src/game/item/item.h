@@ -14,7 +14,8 @@ enum ItemType
 	Boots,
 	Trinket,
 	Shield,
-	Book
+	Book,
+	Spell
 };
 
 class Item
