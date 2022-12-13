@@ -11,4 +11,6 @@ public:
 		this->sprite = App::get().getSprite("test_item");
 		this->type = Spell;
 	};
+
+	[[nodiscard]] SpellStats getSpellStats() const override { return {40, 2, 20, 20, 1}; }
 };

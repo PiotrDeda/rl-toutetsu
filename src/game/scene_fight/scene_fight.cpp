@@ -6,6 +6,10 @@
 
 SceneFight::SceneFight() : Scene()
 {
+	// Background
+	auto background = std::make_shared<GameObject>(App::get().getSprite("fight_bg"), uiCamera);
+	renderables.push_back(background);
+
 	// Inventory
 	auto inventoryBackgroundObject = createUIObject("equipment_bg", 912, 0);
 	auto inventoryView = std::make_shared<InventoryView>(GameState::get().inventory, uiCamera);
@@ -19,6 +23,12 @@ SceneFight::SceneFight() : Scene()
 	renderables.push_back(statsText);
 	statsText->setPosition(941, 237);
 	GameState::get().playerStats->addViewSprite(statsText);
+
+	// Player sprite
+	auto playerSprite = std::make_shared<GameObject>(App::get().getSprite("player_fight"), uiCamera);
+	renderables.push_back(playerSprite);
+	playerSprite->setPosition(150, 480);
+	playerSprite->sprite->setState(3);
 
 	App::get().inputManager.assignInputEventValue(SDLK_m, "SCENE_GAME_MAP");
 }
