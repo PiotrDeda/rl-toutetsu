@@ -44,7 +44,6 @@ SceneGameMap::SceneGameMap() : Scene()
 	App::get().inputManager.assignInputEventValue(SDLK_r, "RESET_CAMERA");
 	App::get().inputManager.assignInputEventValue(SDLK_e, "CAMERA_MOVE_UPPER_LEFT");
 	App::get().inputManager.assignInputEventValue(SDLK_q, "CAMERA_MOVE_LOWER_RIGHT");
-	App::get().inputManager.assignInputEventValue(SDLK_f, "SCENE_FIGHT");
 	App::get().inputManager.assignInputEventValue(SDLK_g, "REGENERATE_MAP");
 }
 
@@ -67,8 +66,6 @@ void SceneGameMap::handleEvent(Event event)
 				camera->move(-15, -15);
 			else if (event.keyInput.v == "CAMERA_MOVE_LOWER_RIGHT")
 				camera->move(15, 15);
-			else if (event.keyInput.v == "SCENE_FIGHT")
-				App::get().sceneManager.setNextScene(SceneId::Fight);
 			else if (event.keyInput.v == "REGENERATE_MAP")
 				RandomMapGenerator::generateMap(map, RandomMapParameters(), std::random_device{}());
 			break;

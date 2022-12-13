@@ -11,8 +11,8 @@ std::vector<std::shared_ptr<Scene>> SceneLoader::getScenes()
 	auto sceneFight = std::make_shared<SceneFight>();
 	auto sceneWin = std::make_shared<SceneWin>();
 
-	GameState::get().sceneGameMap = sceneGameMap;
-	GameState::get().sceneFight = sceneFight;
+	GameState::get().setSceneGameMap(sceneGameMap);
+	GameState::get().setSceneFight(sceneFight);
 
 	return {sceneMainMenu, sceneGameMap, sceneFight, sceneWin};
 }

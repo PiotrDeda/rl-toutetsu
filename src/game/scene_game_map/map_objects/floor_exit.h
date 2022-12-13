@@ -12,7 +12,7 @@ public:
 
 	bool onInteract() override
 	{
-		GameState::get().sceneGameMap->nextLevel();
+		GameState::get().nextLevel();
 		return true;
 	}
 };

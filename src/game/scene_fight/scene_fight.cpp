@@ -2,7 +2,6 @@
 
 #include "../game_state/game_state.h"
 #include "../game_state/inventory_view.h"
-#include "../loaders/scene_loader.h"
 
 SceneFight::SceneFight() : Scene()
 {
@@ -11,7 +10,10 @@ SceneFight::SceneFight() : Scene()
 	renderables.push_back(background);
 
 	// Inventory
-	auto inventoryBackgroundObject = createUIObject("equipment_bg", 912, 0);
+	auto inventoryBackgroundObject = std::make_shared<GameObject>(App::get().getSprite("equipment_bg"), uiCamera);
+	inventoryBackgroundObject->setPosition(912, 0);
+	renderables.push_back(inventoryBackgroundObject);
+
 	auto inventoryView = std::make_shared<InventoryView>(GameState::get().inventory, uiCamera);
 	inventoryView->setPosition(912, 0);
 	inventoryView->equipmentLocked = true;
@@ -46,10 +48,7 @@ void SceneFight::handleEvent(Event event)
 	}
 }
 
-std::shared_ptr<GameObject> SceneFight::createUIObject(const std::string& spriteId, int x, int y)
+void SceneFight::setEnemy(const std::shared_ptr<Enemy>& enemy)
 {
-	auto object = std::make_shared<GameObject>(App::get().getSprite(spriteId), uiCamera);
-	object->setPosition(x, y);
-	renderables.push_back(object);
-	return object;
+
 }

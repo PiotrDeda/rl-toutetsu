@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../../../engine/app/app.h"
 #include "../../enemy/enemy.h"
 #include "../../game_state/game_state.h"
 #include "../../loaders/scene_loader.h"
@@ -13,7 +12,7 @@ public:
 
 	bool onInteract() override
 	{
-		App::get().sceneManager.setNextScene(SceneId::Fight);
+		GameState::get().fight(enemy);
 		return false;
 	}
 
