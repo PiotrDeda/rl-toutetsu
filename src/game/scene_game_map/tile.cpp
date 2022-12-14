@@ -4,7 +4,7 @@ void Tile::draw() const {}
 
 void Tile::draw(const std::shared_ptr<Camera>& camera) const
 {
-	if (object)
+	if (enabled && object)
 		object->sprite->draw(camera->getScreenX(x), camera->getScreenY(y), camera->getScale());
 }
 

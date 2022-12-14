@@ -17,6 +17,7 @@ public:
 
 	int x = 0;
 	int y = 0;
+	bool enabled = true;
 	std::shared_ptr<Sprite> sprite;
 	std::shared_ptr<Camera> camera;
 

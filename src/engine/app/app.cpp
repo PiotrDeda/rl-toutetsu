@@ -16,7 +16,7 @@ void App::init()
 {
 	// SDL
 	LOG_INFO("Starting SDL...");
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0)
 		THROW_ERROR_SDL("SDL could not initialize!");
 
 	// Window

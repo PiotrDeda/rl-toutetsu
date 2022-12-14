@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../enemy/enemy.h"
+#include "../enemy/enemy_data.h"
 #include "../loaders/scene_loader.h"
 #include "../scene_fight/scene_fight.h"
 #include "../scene_game_map/scene_game_map.h"
@@ -15,7 +15,8 @@ public:
 	void setSceneGameMap(const std::shared_ptr<SceneGameMap>& scene);
 	void setSceneFight(const std::shared_ptr<SceneFight>& scene);
 	void nextLevel();
-	void fight(const std::shared_ptr<Enemy>& enemy);
+	void startFight(const std::shared_ptr<EnemyData>& enemyData);
+	void changeTurn();
 
 	std::shared_ptr<PlayerStats> playerStats = std::make_shared<PlayerStats>();
 	std::shared_ptr<Inventory> inventory = std::make_shared<Inventory>(playerStats);

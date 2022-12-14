@@ -3,7 +3,7 @@
 #include <memory>
 #include "../../engine/sprite/sprite.h"
 
-class Enemy
+class EnemyData
 {
 public:
 	std::shared_ptr<Sprite> sprite;

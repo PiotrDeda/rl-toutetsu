@@ -15,8 +15,13 @@ void GameState::nextLevel()
 	sceneGameMap->nextLevel();
 }
 
-void GameState::fight(const std::shared_ptr<Enemy>& enemy)
+void GameState::startFight(const std::shared_ptr<EnemyData>& enemyData)
 {
 	App::get().sceneManager.setNextScene(SceneId::Fight);
-	sceneFight->setEnemy(enemy);
+	sceneFight->setupFight(enemyData, inventory);
+}
+
+void GameState::changeTurn()
+{
+	sceneFight->changeTurn();
 }
