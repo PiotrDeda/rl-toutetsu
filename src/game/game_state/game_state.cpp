@@ -21,7 +21,13 @@ void GameState::startFight(const std::shared_ptr<EnemyData>& enemyData)
 	sceneFight->setupFight(enemyData, inventory);
 }
 
-void GameState::changeTurn()
+void GameState::playAttackAnimationOnPlayer()
 {
-	sceneFight->changeTurn();
+	sceneFight->attackAnimationPlayer->sprite->play(SceneFight::endTurn, sceneFight.get());
+}
+
+void GameState::playAttackAnimationOnEnemy()
+{
+	sceneFight->lockSpells();
+	sceneFight->attackAnimationEnemy->sprite->play(SceneFight::endTurn, sceneFight.get());
 }

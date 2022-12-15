@@ -14,12 +14,20 @@ public:
 	void handleEvent(Event event) override;
 	void setupFight(const std::shared_ptr<EnemyData>& enemyData, const std::shared_ptr<Inventory>& inventory);
 	void changeTurn();
-	static Uint32 endEnemyTurn(Uint32, void* object);
+	void doPlayerTurn();
+	void doEnemyTurn();
+	void lockSpells();
+	void unlockSpells();
+
+	static void endTurn(void* object);
 
 	[[nodiscard]] const char* getName() const override { return "SceneFight"; }
 
 	std::shared_ptr<UICamera> uiCamera = std::make_shared<UICamera>();
 	std::vector<std::shared_ptr<SpellButton>> spellButtons;
 	std::shared_ptr<GameObject> enemySprite;
-	bool playersTurn = true;
+	std::shared_ptr<GameObject> attackAnimationPlayer;
+	std::shared_ptr<GameObject> attackAnimationEnemy;
+	bool playerTurn = true;
+	int playerTurnCount = 0;
 };

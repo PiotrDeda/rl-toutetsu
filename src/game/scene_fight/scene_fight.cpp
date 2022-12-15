@@ -1,6 +1,5 @@
 #include "scene_fight.h"
 
-#include "../../engine/misc/timer.h"
 #include "../game_state/game_state.h"
 #include "../game_state/inventory_view.h"
 
@@ -37,6 +36,15 @@ SceneFight::SceneFight() : Scene()
 	enemySprite = std::make_shared<GameObject>(App::get().getSprite("blank_item"), uiCamera);
 	enemySprite->setPosition(750, 480);
 	renderables.push_back(enemySprite);
+
+	// Attack animations
+	attackAnimationPlayer = std::make_shared<GameObject>(App::get().getSprite("attack_animation_player"), uiCamera);
+	attackAnimationPlayer->setPosition(150, 480);
+	renderables.push_back(attackAnimationPlayer);
+
+	attackAnimationEnemy = std::make_shared<GameObject>(App::get().getSprite("attack_animation_enemy"), uiCamera);
+	attackAnimationEnemy->setPosition(750, 480);
+	renderables.push_back(attackAnimationEnemy);
 
 	// Spell buttons
 	for (int i = 0; i < 4; i++)
@@ -79,27 +87,56 @@ void SceneFight::setupFight(const std::shared_ptr<EnemyData>& enemyData, const s
 			spellButtons[i]->enabled = false;
 		}
 	}
+	playerTurn = true;
+	playerTurnCount = GameState::get().playerStats->currentStats.agility;
 }
 
 void SceneFight::changeTurn()
 {
-	playersTurn = !playersTurn;
+	if (GameState::get().playerStats->currentStats.hp <= 0)
+	{
+		App::get().shutdown();
+		return;
+	}
 
-	if (playersTurn)
-	{
-		for (auto& spellButton : spellButtons)
-			spellButton->clickable = true;
-	}
+	if (playerTurn)
+		if (--playerTurnCount == 0)
+			doEnemyTurn();
+		else
+			doPlayerTurn();
 	else
-	{
-		for (auto& spellButton : spellButtons)
-			spellButton->clickable = false;
-		Timer::startTimer(1000, endEnemyTurn, this);
-	}
+		doPlayerTurn();
 }
 
-Uint32 SceneFight::endEnemyTurn(Uint32, void* object)
+void SceneFight::doPlayerTurn()
+{
+	playerTurn = true;
+	unlockSpells();
+}
+
+void SceneFight::doEnemyTurn()
+{
+	playerTurn = false;
+	playerTurnCount = GameState::get().playerStats->currentStats.agility;
+	lockSpells();
+	GameState::get().playerStats->currentStats.hp -= 10;
+	GameState::get().playerStats->refreshText();
+	GameState::get().playAttackAnimationOnPlayer();
+}
+
+void SceneFight::lockSpells()
+{
+	for (auto& spellButton : spellButtons)
+		spellButton->clickable = false;
+}
+
+void SceneFight::unlockSpells()
+{
+	for (auto& spellButton : spellButtons)
+		spellButton->clickable = true;
+}
+
+void SceneFight::endTurn(void* object)
 {
 	static_cast<SceneFight*>(object)->changeTurn();
-	return 0;
 }

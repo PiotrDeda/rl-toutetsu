@@ -2,7 +2,7 @@
 
 #include "../../engine/sprite/animated_sprite.h"
 #include "../../engine/sprite/animated_state_sprite.h"
-#include "../../engine/sprite/state_sprite.h"
+#include "../../engine/sprite/playable_sprite.h"
 
 std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 {
@@ -16,6 +16,8 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	sprites.emplace("win_screen", std::make_shared<Sprite>("ui/win_screen"));
 	sprites.emplace("player_fight", std::make_shared<AnimatedStateSprite>("tiles/player", 2, 30, 4));
 	sprites.emplace("fight_bg", std::make_shared<Sprite>("ui/fight_bg"));
+	sprites.emplace("attack_animation_player", std::make_shared<PlayableSprite>("ui/attack_animation", 3, 100));
+	sprites.emplace("attack_animation_enemy", std::make_shared<PlayableSprite>("ui/attack_animation", 3, 100));
 
 	// Tiles
 	sprites.emplace("player", std::make_shared<AnimatedStateSprite>("tiles/player", 2, 30, 4));

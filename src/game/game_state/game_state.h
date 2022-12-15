@@ -16,7 +16,8 @@ public:
 	void setSceneFight(const std::shared_ptr<SceneFight>& scene);
 	void nextLevel();
 	void startFight(const std::shared_ptr<EnemyData>& enemyData);
-	void changeTurn();
+	void playAttackAnimationOnPlayer();
+	void playAttackAnimationOnEnemy();
 
 	std::shared_ptr<PlayerStats> playerStats = std::make_shared<PlayerStats>();
 	std::shared_ptr<Inventory> inventory = std::make_shared<Inventory>(playerStats);

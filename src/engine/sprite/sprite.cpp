@@ -5,8 +5,7 @@
 #include "../app/app.h"
 #include "../misc/logger.h"
 
-
-Sprite::Sprite(const char* name) // NOLINT(cppcoreguidelines-pro-type-member-init)
+Sprite::Sprite(const char* name)
 {
 	this->renderer = App::get().renderer;
 	this->texture = makeTexture(IMG_LoadTexture(renderer.get(), App::getAssetPath(name)));
@@ -24,6 +23,11 @@ void Sprite::draw(const int x, const int y, const double scale)
 void Sprite::setState(int state) {}
 
 void Sprite::setText(const char* text) {}
+
+void Sprite::play(PlayCallback callback, void* param)
+{
+	callback(param);
+}
 
 int Sprite::getScaledWidth(double scale) const
 {

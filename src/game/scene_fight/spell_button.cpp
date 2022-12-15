@@ -24,8 +24,6 @@ void SpellButton::onClick()
 {
 	if (clickable)
 	{
-		x += 10;
-		y += 10;
-		GameState::get().changeTurn();
+		GameState::get().playAttackAnimationOnEnemy();
 	}
 }

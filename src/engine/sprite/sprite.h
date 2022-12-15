@@ -2,6 +2,8 @@
 
 #include "../misc/sdl_pointers.h"
 
+typedef void (* PlayCallback)(void* param);
+
 class Sprite
 {
 public:
@@ -10,6 +12,7 @@ public:
 	virtual void draw(int x, int y, double scale);
 	virtual void setState(int state);
 	virtual void setText(const char* text);
+	virtual void play(PlayCallback callback, void* param);
 	[[nodiscard]] int getScaledWidth(double scale) const;
 	[[nodiscard]] int getScaledHeight(double scale) const;
 
