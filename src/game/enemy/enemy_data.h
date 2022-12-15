@@ -2,9 +2,12 @@
 
 #include <memory>
 #include "../../engine/sprite/sprite.h"
+#include "../game_state/stats_set.h"
 
 class EnemyData
 {
 public:
-	std::shared_ptr<Sprite> sprite;
+	std::shared_ptr<Sprite> mapSprite;
+	std::shared_ptr<Sprite> fightSprite;
+	StatsSet stats{};
 };

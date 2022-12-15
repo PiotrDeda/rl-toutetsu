@@ -13,6 +13,8 @@ public:
 	virtual void setState(int state);
 	virtual void setText(const char* text);
 	virtual void play(PlayCallback callback, void* param);
+	[[nodiscard]] int getWidth() const;
+	[[nodiscard]] int getHeight() const;
 	[[nodiscard]] int getScaledWidth(double scale) const;
 	[[nodiscard]] int getScaledHeight(double scale) const;
 

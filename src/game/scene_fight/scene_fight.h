@@ -26,8 +26,10 @@ public:
 	std::shared_ptr<UICamera> uiCamera = std::make_shared<UICamera>();
 	std::vector<std::shared_ptr<SpellButton>> spellButtons;
 	std::shared_ptr<GameObject> enemySprite;
+	StatsSet enemyStats{};
 	std::shared_ptr<GameObject> attackAnimationPlayer;
 	std::shared_ptr<GameObject> attackAnimationEnemy;
 	bool playerTurn = true;
 	int playerTurnCount = 0;
+	int enemyTurnCount = 0;
 };

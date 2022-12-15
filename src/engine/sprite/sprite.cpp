@@ -29,6 +29,16 @@ void Sprite::play(PlayCallback callback, void* param)
 	callback(param);
 }
 
+int Sprite::getWidth() const
+{
+	return width;
+}
+
+int Sprite::getHeight() const
+{
+	return height;
+}
+
 int Sprite::getScaledWidth(double scale) const
 {
 	return static_cast<int>(width * scale);

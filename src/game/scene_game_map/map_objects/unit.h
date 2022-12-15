@@ -8,7 +8,7 @@
 class Unit : public MapObject
 {
 public:
-	explicit Unit(const std::shared_ptr<EnemyData>& enemyData) : MapObject(enemyData->sprite), enemyData(enemyData) {}
+	explicit Unit(const std::shared_ptr<EnemyData>& enemyData) : MapObject(enemyData->mapSprite), enemyData(enemyData) {}
 
 	bool onInteract() override
 	{

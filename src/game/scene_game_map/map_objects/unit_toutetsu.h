@@ -8,7 +8,7 @@
 class UnitToutetsu : public MapObject
 {
 public:
-	explicit UnitToutetsu() : MapObject(App::get().getSprite("unit_toutetsu")) {}
+	explicit UnitToutetsu() : MapObject(App::get().getSprite("toutetsu_map")) {}
 
 	bool onInteract() override
 	{

@@ -34,7 +34,7 @@ SceneFight::SceneFight() : Scene()
 
 	// Enemy sprite
 	enemySprite = std::make_shared<GameObject>(App::get().getSprite("blank_item"), uiCamera);
-	enemySprite->setPosition(750, 480);
+	enemySprite->setPosition(700, 480);
 	renderables.push_back(enemySprite);
 
 	// Attack animations
@@ -43,7 +43,7 @@ SceneFight::SceneFight() : Scene()
 	renderables.push_back(attackAnimationPlayer);
 
 	attackAnimationEnemy = std::make_shared<GameObject>(App::get().getSprite("attack_animation_enemy"), uiCamera);
-	attackAnimationEnemy->setPosition(750, 480);
+	attackAnimationEnemy->setPosition(700, 480);
 	renderables.push_back(attackAnimationEnemy);
 
 	// Spell buttons
@@ -74,7 +74,10 @@ void SceneFight::handleEvent(Event event)
 
 void SceneFight::setupFight(const std::shared_ptr<EnemyData>& enemyData, const std::shared_ptr<Inventory>& inventory)
 {
-	enemySprite->sprite = enemyData->sprite;
+	enemySprite->sprite = enemyData->fightSprite;
+	enemySprite->sprite->setState(2);
+	enemySprite->setPosition(700 - (enemySprite->sprite->getWidth() - 64) / 2, 480 - (enemySprite->sprite->getHeight() - 64) / 2);
+	enemyStats = enemyData->stats;
 	for (int i = 0; i < 4; i++)
 	{
 		if (inventory->inventorySlots[Inventory::spellStartIndex + i]->item->type == ItemType::Spell)
@@ -87,8 +90,9 @@ void SceneFight::setupFight(const std::shared_ptr<EnemyData>& enemyData, const s
 			spellButtons[i]->enabled = false;
 		}
 	}
-	playerTurn = true;
 	playerTurnCount = GameState::get().playerStats->currentStats.agility;
+	enemyTurnCount = enemyStats.agility;
+	doPlayerTurn();
 }
 
 void SceneFight::changeTurn()
@@ -98,20 +102,30 @@ void SceneFight::changeTurn()
 		App::get().shutdown();
 		return;
 	}
+	if (enemyStats.hp <= 0)
+	{
+		App::get().sceneManager.setNextScene(SceneId::GameMap);
+		return;
+	}
 
 	if (playerTurn)
-		if (--playerTurnCount == 0)
+		if (--playerTurnCount <= 0)
 			doEnemyTurn();
 		else
 			doPlayerTurn();
 	else
-		doPlayerTurn();
+		if (--enemyTurnCount <= 0)
+			doPlayerTurn();
+		else
+			doEnemyTurn();
 }
 
 void SceneFight::doPlayerTurn()
 {
 	playerTurn = true;
+	enemyTurnCount = enemyStats.agility;
 	unlockSpells();
+	enemyStats.hp -= 10;
 }
 
 void SceneFight::doEnemyTurn()

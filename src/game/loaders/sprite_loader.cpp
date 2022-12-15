@@ -26,10 +26,12 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	sprites.emplace("floor", std::make_shared<Sprite>("tiles/floor"));
 	sprites.emplace("floor_exit", std::make_shared<Sprite>("tiles/floor_exit"));
 
-	// Units
-	sprites.emplace("unit_toutetsu", std::make_shared<Sprite>("units/unit_toutetsu"));
-	sprites.emplace("test_unit", std::make_shared<Sprite>("units/test_unit"));
-	sprites.emplace("test_unit_2", std::make_shared<Sprite>("units/test_unit_2"));
+	// Enemies
+	sprites.emplace("test_unit_map", std::make_shared<Sprite>("enemies/test_unit"));
+	sprites.emplace("test_unit_fight", std::make_shared<Sprite>("enemies/test_unit"));
+	sprites.emplace("test_unit_2_map", std::make_shared<Sprite>("enemies/test_unit_2_map"));
+	sprites.emplace("test_unit_2_fight", std::make_shared<Sprite>("enemies/test_unit_2_fight"));
+	sprites.emplace("toutetsu_map", std::make_shared<Sprite>("enemies/unit_toutetsu"));
 
 	// Items
 	sprites.emplace("blank_item", std::make_shared<Sprite>("items/blank_item"));
