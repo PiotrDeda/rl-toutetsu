@@ -14,6 +14,7 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	sprites.emplace("quit_button", std::make_shared<Sprite>("ui/quit_button"));
 	sprites.emplace("equipment_bg", std::make_shared<Sprite>("ui/equipment_bg"));
 	sprites.emplace("win_screen", std::make_shared<Sprite>("ui/win_screen"));
+	sprites.emplace("lose_screen", std::make_shared<Sprite>("ui/lose_screen"));
 	sprites.emplace("player_fight", std::make_shared<AnimatedStateSprite>("tiles/player", 2, 30, 4));
 	sprites.emplace("fight_bg", std::make_shared<Sprite>("ui/fight_bg"));
 	sprites.emplace("attack_animation_player", std::make_shared<PlayableSprite>("ui/attack_animation", 3, 100));

@@ -99,7 +99,7 @@ void SceneFight::changeTurn()
 {
 	if (GameState::get().playerStats->currentStats.hp <= 0)
 	{
-		App::get().shutdown();
+		App::get().sceneManager.setNextScene(SceneId::Lose);
 		return;
 	}
 	if (enemyStats.hp <= 0)

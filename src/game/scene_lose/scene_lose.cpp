@@ -1,12 +1,12 @@
-#include "scene_win.h"
+#include "scene_lose.h"
 
 #include "../../engine/app/app.h"
 #include "../scene_main_menu/quit_button.h"
 
-SceneWin::SceneWin() : Scene()
+SceneLose::SceneLose() : Scene()
 {
-	auto winScreen = std::make_shared<GameObject>(App::get().getSprite("win_screen"), camera);
-	renderables.push_back(winScreen);
+	auto loseScreen = std::make_shared<GameObject>(App::get().getSprite("lose_screen"), camera);
+	renderables.push_back(loseScreen);
 
 	auto quitButton = std::make_shared<QuitButton>(App::get().getSprite("quit_button"), camera);
 	quitButton->setPosition(482, 445);
