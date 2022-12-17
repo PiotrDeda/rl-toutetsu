@@ -21,10 +21,13 @@ SceneFight::SceneFight() : Scene()
 	clickables.push_back(inventoryView);
 
 	// Stats
-	auto statsText = std::make_shared<TextObject>("Stats", uiCamera);
-	statsText->setPosition(941, 237);
-	renderables.push_back(statsText);
-	GameState::get().playerStats->addViewSprite(statsText);
+	auto statsTextA = std::make_shared<TextObject>("StatsA", uiCamera);
+	renderables.push_back(statsTextA);
+	statsTextA->setPosition(970, 240);
+	auto statsTextB = std::make_shared<TextObject>("StatsB", uiCamera);
+	renderables.push_back(statsTextB);
+	statsTextB->setPosition(1082, 264);
+	GameState::get().playerStats->addViewSprites(statsTextA, statsTextB);
 
 	// Player sprite
 	auto playerSprite = std::make_shared<GameObject>(App::get().getSprite("player_fight"), uiCamera);
@@ -97,7 +100,7 @@ void SceneFight::setupFight(const std::shared_ptr<EnemyData>& enemyData, const s
 
 void SceneFight::changeTurn()
 {
-	if (GameState::get().playerStats->currentStats.hp <= 0)
+	if (GameState::get().playerStats->currentHp <= 0)
 	{
 		App::get().sceneManager.setNextScene(SceneId::Lose);
 		return;
@@ -133,7 +136,7 @@ void SceneFight::doEnemyTurn()
 	playerTurn = false;
 	playerTurnCount = GameState::get().playerStats->currentStats.agility;
 	lockSpells();
-	GameState::get().playerStats->currentStats.hp -= 10;
+	GameState::get().playerStats->currentHp -= 10;
 	GameState::get().playerStats->refreshText();
 	GameState::get().playAttackAnimationOnPlayer();
 }

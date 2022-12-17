@@ -1,26 +1,32 @@
 #include "player_stats.h"
 
-void PlayerStats::addViewSprite(const std::shared_ptr<TextObject>& sprite)
+void PlayerStats::addViewSprites(const std::shared_ptr<TextObject>& spriteA, const std::shared_ptr<TextObject>& spriteB)
 {
-	sprites.push_back(sprite);
+	spritesA.push_back(spriteA);
+	spritesB.push_back(spriteB);
 	refreshText();
 }
 
 void PlayerStats::refreshText()
 {
-	std::string text =
-			"HP:   " + std::to_string(currentStats.hp) +
-			" MANA: " + std::to_string(currentStats.mana) + "\n" +
-			"WATK: " + std::to_string(currentStats.whiteAttack) +
-			"  BATK: " + std::to_string(currentStats.blackAttack) + "\n" +
-			"WDEF: " + std::to_string(currentStats.whiteDefense) +
-			"  BDEF: " + std::to_string(currentStats.blackDefense) + "\n" +
-			"CRIT: " + std::to_string(currentStats.critChance) +
-			"   AGI:  " + std::to_string(currentStats.agility);
-	const char* cText = text.c_str();
+	std::string textA =
+			std::to_string(currentHp) + "/" + std::to_string(currentStats.hp) + "\n" +
+			std::to_string(currentStats.whiteAttack) + "\n" +
+			std::to_string(currentStats.whiteDefense) + "\n" +
+			std::to_string(currentStats.critChance);
+	const char* cTextA = textA.c_str();
 
-	for (auto& sprite : sprites)
-		sprite->setText(cText);
+	for (auto& sprite : spritesA)
+		sprite->setText(cTextA);
+
+	std::string textB =
+			std::to_string(currentStats.blackAttack) + "\n" +
+			std::to_string(currentStats.blackDefense) + "\n" +
+			std::to_string(currentStats.agility);
+	const char* cTextB = textB.c_str();
+
+	for (auto& sprite : spritesB)
+		sprite->setText(cTextB);
 }
 
 void PlayerStats::updateStats(const std::vector<std::shared_ptr<Item>>& items)

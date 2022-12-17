@@ -1,8 +1,6 @@
 #include "scene_game_map.h"
 
 #include "../game_state/inventory_view.h"
-#include "../item/test_item.h"
-#include "../item/test_item_2.h"
 #include "../loaders/scene_loader.h"
 #include "map_objects/pickup_item.h"
 #include "map_objects/unit_toutetsu.h"
@@ -32,10 +30,13 @@ SceneGameMap::SceneGameMap() : Scene()
 	clickables.push_back(inventoryView);
 
 	// Stats
-	auto statsText = std::make_shared<TextObject>("Stats", uiCamera);
-	renderables.push_back(statsText);
-	statsText->setPosition(941, 237);
-	GameState::get().playerStats->addViewSprite(statsText);
+	auto statsTextA = std::make_shared<TextObject>("StatsA", uiCamera);
+	renderables.push_back(statsTextA);
+	statsTextA->setPosition(970, 240);
+	auto statsTextB = std::make_shared<TextObject>("StatsB", uiCamera);
+	renderables.push_back(statsTextB);
+	statsTextB->setPosition(1082, 264);
+	GameState::get().playerStats->addViewSprites(statsTextA, statsTextB);
 
 	App::get().inputManager.assignInputEventValue(SDLK_s, "MOVE_DOWN");
 	App::get().inputManager.assignInputEventValue(SDLK_w, "MOVE_UP");

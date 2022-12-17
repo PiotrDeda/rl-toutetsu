@@ -1,5 +1,8 @@
 #pragma once
 
+#include "test_item.h"
+#include "test_item_2.h"
+
 class RandomItem
 {
 public:
