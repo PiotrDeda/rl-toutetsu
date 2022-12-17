@@ -19,7 +19,7 @@ public:
 	void lockSpells();
 	void unlockSpells();
 
-	static void endTurn(void* object);
+	static void changeTurnCallback(void* object);
 
 	[[nodiscard]] const char* getName() const override { return "SceneFight"; }
 

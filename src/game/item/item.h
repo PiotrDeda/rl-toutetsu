@@ -24,7 +24,7 @@ class Item
 public:
 	[[nodiscard]] virtual StatsSet applyStatModifiers(const StatsSet& stats) const { return stats; }
 
-	[[nodiscard]] virtual SpellStats getSpellStats() const { return {0, 0, 0, 0, 0}; }
+	[[nodiscard]] virtual SpellStats getSpellStats() const { return {0, 0, 0}; }
 
 	std::shared_ptr<Sprite> sprite;
 	ItemType type = General;

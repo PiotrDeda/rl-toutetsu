@@ -23,7 +23,5 @@ bool SpellButton::isMouseOver(int mouseX, int mouseY)
 void SpellButton::onClick()
 {
 	if (clickable)
-	{
-		GameState::get().playAttackAnimationOnEnemy();
-	}
+		GameState::get().doPlayerAttack(spell);
 }

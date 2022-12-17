@@ -3,12 +3,9 @@
 class SpellStats
 {
 public:
-	SpellStats(int manaCost, int attackCount, int whiteAttack, int blackAttack, int critChance) :
-			manaCost(manaCost), attackCount(attackCount),
+	SpellStats(int whiteAttack, int blackAttack, int critChance) :
 			whiteAttack(whiteAttack), blackAttack(blackAttack), critChance(critChance) {}
 
-	int manaCost;
-	int attackCount;
 	int whiteAttack;
 	int blackAttack;
 	int critChance;

@@ -195,7 +195,7 @@ void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& objectMap, Rand
 				valueMap[roomCenters[startRoom].first + i][roomCenters[startRoom].second + j] = ReservedFloor;
 
 	// generate items and enemies
-	std::uniform_int_distribution<int> percentDistr(0, 100);
+	std::uniform_int_distribution<int> percentDistr(0, 99);
 	for (auto & i : valueMap)
 		for (auto & j : i)
 			if (j == TileFloor && percentDistr(gen) < p.itemChance)

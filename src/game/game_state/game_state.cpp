@@ -21,13 +21,15 @@ void GameState::startFight(const std::shared_ptr<EnemyData>& enemyData)
 	sceneFight->setupFight(enemyData, inventory);
 }
 
-void GameState::playAttackAnimationOnPlayer()
-{
-	sceneFight->attackAnimationPlayer->sprite->play(SceneFight::endTurn, sceneFight.get());
-}
-
-void GameState::playAttackAnimationOnEnemy()
+void GameState::doPlayerAttack(const std::shared_ptr<Item>& spell)
 {
 	sceneFight->lockSpells();
-	sceneFight->attackAnimationEnemy->sprite->play(SceneFight::endTurn, sceneFight.get());
+	sceneFight->enemyStats.hp = GameState::get().playerStats->dealDamage(spell->getSpellStats(), sceneFight->enemyStats);
+	sceneFight->attackAnimationEnemy->sprite->play(SceneFight::changeTurnCallback, sceneFight.get());
+}
+
+void GameState::doEnemyAttack()
+{
+	playerStats->takeDamage(sceneFight->enemyStats);
+	sceneFight->attackAnimationPlayer->sprite->play(SceneFight::changeTurnCallback, sceneFight.get());
 }

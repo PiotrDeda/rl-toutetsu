@@ -128,7 +128,6 @@ void SceneFight::doPlayerTurn()
 	playerTurn = true;
 	enemyTurnCount = enemyStats.agility;
 	unlockSpells();
-	enemyStats.hp -= 10;
 }
 
 void SceneFight::doEnemyTurn()
@@ -136,9 +135,7 @@ void SceneFight::doEnemyTurn()
 	playerTurn = false;
 	playerTurnCount = GameState::get().playerStats->currentStats.agility;
 	lockSpells();
-	GameState::get().playerStats->currentHp -= 10;
-	GameState::get().playerStats->refreshText();
-	GameState::get().playAttackAnimationOnPlayer();
+	GameState::get().doEnemyAttack();
 }
 
 void SceneFight::lockSpells()
@@ -153,7 +150,7 @@ void SceneFight::unlockSpells()
 		spellButton->clickable = true;
 }
 
-void SceneFight::endTurn(void* object)
+void SceneFight::changeTurnCallback(void* object)
 {
 	static_cast<SceneFight*>(object)->changeTurn();
 }

@@ -16,14 +16,15 @@ public:
 	void setSceneFight(const std::shared_ptr<SceneFight>& scene);
 	void nextLevel();
 	void startFight(const std::shared_ptr<EnemyData>& enemyData);
-	void playAttackAnimationOnPlayer();
-	void playAttackAnimationOnEnemy();
+	void doPlayerAttack(const std::shared_ptr<Item>& spell);
+	void doEnemyAttack();
 
 	std::shared_ptr<PlayerStats> playerStats = std::make_shared<PlayerStats>();
 	std::shared_ptr<Inventory> inventory = std::make_shared<Inventory>(playerStats);
 
 private:
 	GameState() = default;
+
 	std::shared_ptr<SceneGameMap> sceneGameMap;
 	std::shared_ptr<SceneFight> sceneFight;
 };
