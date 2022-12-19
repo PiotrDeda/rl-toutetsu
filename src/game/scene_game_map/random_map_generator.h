@@ -36,7 +36,7 @@ struct RandomMapParameters
 	int maxRoomSize = 4;
 	int torchChance = 10;
 	int itemChance = 3;
-	int enemyChance = 6;
+	int enemyChance = 5;
 };
 
 struct RoomConnection
