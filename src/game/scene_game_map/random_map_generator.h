@@ -194,20 +194,25 @@ void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& objectMap, Rand
 			if (valueMap[roomCenters[startRoom].first + i][roomCenters[startRoom].second + j] == TileFloor)
 				valueMap[roomCenters[startRoom].first + i][roomCenters[startRoom].second + j] = ReservedFloor;
 
-	// generate items and enemies
+	// generate items
 	std::uniform_int_distribution<int> percentDistr(0, 99);
 	for (auto & i : valueMap)
 		for (auto & j : i)
 			if (j == TileFloor && percentDistr(gen) < p.itemChance)
 				j = TileItem;
-			else if (j == TileFloor && percentDistr(gen) < p.enemyChance)
-				j = TileEnemy;
 
 	// convert reserved floor to floor
 	for (auto & i : valueMap)
 		for (int & j : i)
 			if (j == ReservedFloor)
 				j = TileFloor;
+
+	// generate enemies
+	for (auto & i : valueMap)
+		for (auto & j : i)
+			if (j == TileFloor && percentDistr(gen) < p.enemyChance)
+				j = TileEnemy;
+
 
 	// convert to real map
 	convertValueMapToObjectMap(valueMap, objectMap, p, gen);
