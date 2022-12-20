@@ -6,6 +6,7 @@
 App::~App()
 {
 	LOG_INFO("Quitting SDL...");
+	font.reset();
 	SDL_DestroyWindow(window.get());
 	TTF_Quit();
 	IMG_Quit();

@@ -14,7 +14,7 @@ inline void surfaceDeleter(SDL_Surface* ptr) { if (ptr) SDL_FreeSurface(ptr); }
 inline void textureDeleter(SDL_Texture* ptr) { if (ptr) SDL_DestroyTexture(ptr); }
 inline void rendererDeleter(SDL_Renderer* ptr) { if (ptr) SDL_DestroyRenderer(ptr); }
 inline void windowDeleter(SDL_Window* ptr) { if (ptr) SDL_DestroyWindow(ptr); }
-inline void fontDeleter(TTF_Font*) {}
+inline void fontDeleter(TTF_Font* ptr) { if (ptr) TTF_CloseFont(ptr); }
 
 inline SurfacePtr makeSurface(SDL_Surface* surface) { return {surface, surfaceDeleter}; }
 inline TexturePtr makeTexture(SDL_Texture* texture) { return {texture, textureDeleter}; }
