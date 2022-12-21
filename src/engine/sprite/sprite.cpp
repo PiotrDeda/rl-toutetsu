@@ -24,6 +24,8 @@ void Sprite::setState(int state) {}
 
 void Sprite::setText(const char* text) {}
 
+void Sprite::setTextColor(SDL_Color color) {}
+
 void Sprite::play(PlayCallback callback, void* param)
 {
 	callback(param);

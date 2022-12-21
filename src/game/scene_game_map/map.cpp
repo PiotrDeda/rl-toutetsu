@@ -80,8 +80,8 @@ void Map::movePlayer(int directionX, int directionY)
 	if (player == nullptr)
 		return;
 
-	int playerX = player->x / tileSize;
-	int playerY = player->y / tileSize;
+	int playerX = player->getX() / tileSize;
+	int playerY = player->getY() / tileSize;
 
 	if (playerX + directionX >= 0 && playerX + directionX < mapSize &&
 		playerY + directionY >= 0 && playerY + directionY < mapSize)

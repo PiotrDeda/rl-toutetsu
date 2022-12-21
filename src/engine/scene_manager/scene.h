@@ -10,7 +10,6 @@ class Scene
 public:
 	virtual void handleEvent(Event event);
 	void doRender();
-	virtual void customRender();
 
 	[[nodiscard]] virtual const char* getName() const { return "Scene"; }
 
@@ -20,6 +19,5 @@ public:
 protected:
 	Scene();
 
-	std::vector<std::shared_ptr<GameObject>> clickablesQueued;
 	RendererPtr renderer;
 };

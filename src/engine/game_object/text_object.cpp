@@ -18,3 +18,8 @@ void TextObject::setText(const char* newText)
 	text = newText;
 	sprite->setText(text);
 }
+
+void TextObject::setTextColor(SDL_Color color)
+{
+	sprite->setTextColor(color);
+}

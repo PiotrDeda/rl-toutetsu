@@ -12,6 +12,7 @@ public:
 	virtual void draw(int x, int y, double scale);
 	virtual void setState(int state);
 	virtual void setText(const char* text);
+	virtual void setTextColor(SDL_Color color);
 	virtual void play(PlayCallback callback, void* param);
 	[[nodiscard]] int getWidth() const;
 	[[nodiscard]] int getHeight() const;

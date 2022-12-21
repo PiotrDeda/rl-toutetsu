@@ -12,15 +12,18 @@ public:
 
 	void draw() const override;
 	virtual void setPosition(int targetX, int targetY);
+	[[nodiscard]] int getX() const;
+	[[nodiscard]] int getY() const;
 	[[nodiscard]] virtual bool isMouseOver(int mouseX, int mouseY);
 	virtual void onClick();
 
-	int x = 0;
-	int y = 0;
 	bool enabled = true;
 	std::shared_ptr<Sprite> sprite;
 	std::shared_ptr<Camera> camera;
 
 protected:
 	explicit GameObject(const std::shared_ptr<Camera>& camera);
+
+	int x = 0;
+	int y = 0;
 };

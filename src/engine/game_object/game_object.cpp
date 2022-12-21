@@ -18,6 +18,16 @@ void GameObject::setPosition(const int targetX, const int targetY)
 	y = targetY;
 }
 
+int GameObject::getX() const
+{
+	return x;
+}
+
+int GameObject::getY() const
+{
+	return y;
+}
+
 bool GameObject::isMouseOver(int mouseX, int mouseY)
 {
 	return enabled &&

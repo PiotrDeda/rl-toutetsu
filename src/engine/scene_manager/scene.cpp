@@ -20,8 +20,4 @@ void Scene::doRender()
 	for (auto& renderable : renderables)
 		renderable->draw();
 	SDL_RenderPresent(renderer.get());
-
-	customRender();
 }
-
-void Scene::customRender() {}

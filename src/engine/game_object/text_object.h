@@ -9,6 +9,7 @@ public:
 
 	const char* getText();
 	void setText(const char* text);
+	void setTextColor(SDL_Color color);
 
 private:
 	const char* text;

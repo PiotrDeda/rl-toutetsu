@@ -26,3 +26,8 @@ void TextSprite::setText(const char* text)
 		THROW_ERROR_SDL("Failed to create texture from text surface: {}", text);
 	SDL_QueryTexture(texture.get(), nullptr, nullptr, &this->width, &this->height);
 }
+
+void TextSprite::setTextColor(SDL_Color color)
+{
+	textColor = color;
+}
