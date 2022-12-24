@@ -3,14 +3,14 @@
 #include <memory>
 #include <vector>
 #include "../../engine/game_object/text_object.h"
-#include "../item/item.h"
+#include "../item/item_data.h"
 #include "stats_set.h"
 
 class PlayerStats
 {
 public:
 	void addViewSprites(const std::shared_ptr<TextObject>& spriteA, const std::shared_ptr<TextObject>& spriteB);
-	void updateStats(const std::vector<std::shared_ptr<Item>>& items);
+	void updateStats(const std::vector<std::shared_ptr<ItemData>>& items);
 	void refreshText();
 	void takeDamage(StatsSet enemyStats);
 	[[nodiscard]] int dealDamage(SpellStats spellStats, StatsSet enemyStats) const;

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "../../engine/app/app.h"
-#include "item.h"
+#include "item_data.h"
 
-class BlankItem : public Item
+class BlankItem : public ItemData
 {
 public:
 	BlankItem()

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "../../engine/app/app.h"
-#include "item.h"
+#include "item_data.h"
 
-class TestItem2 : public Item
+class TestItem2 : public ItemData
 {
 public:
 	TestItem2()
@@ -19,4 +19,6 @@ public:
 		newStats.blackAttack += 10;
 		return newStats;
 	}
+
+	void generate() override {}
 };

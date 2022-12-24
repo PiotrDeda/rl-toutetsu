@@ -10,7 +10,7 @@ public:
 	InventorySlot(int index, int offsetX, int offsetY, ItemType type) : index(index), offsetX(offsetX), offsetY(offsetY), type(type) {}
 
 	int index;
-	std::shared_ptr<Item> item = std::make_shared<BlankItem>();
+	std::shared_ptr<ItemData> item = std::make_shared<BlankItem>();
 	int offsetX;
 	int offsetY;
 	ItemType type;

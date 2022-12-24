@@ -1,9 +1,9 @@
 #pragma once
 
 #include "../../engine/app/app.h"
-#include "item.h"
+#include "item_data.h"
 
-class TestItem : public Item
+class TestItem : public ItemData
 {
 public:
 	TestItem()
@@ -13,4 +13,6 @@ public:
 	};
 
 	[[nodiscard]] SpellStats getSpellStats() const override { return {5, 5, 1}; }
+
+	void generate() override {}
 };

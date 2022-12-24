@@ -42,9 +42,7 @@ SceneGameMap::SceneGameMap() : Scene()
 	App::get().inputManager.assignInputEventValue(SDLK_w, "MOVE_UP");
 	App::get().inputManager.assignInputEventValue(SDLK_a, "MOVE_LEFT");
 	App::get().inputManager.assignInputEventValue(SDLK_d, "MOVE_RIGHT");
-	App::get().inputManager.assignInputEventValue(SDLK_r, "RESET_CAMERA");
-	App::get().inputManager.assignInputEventValue(SDLK_e, "CAMERA_MOVE_UPPER_LEFT");
-	App::get().inputManager.assignInputEventValue(SDLK_q, "CAMERA_MOVE_LOWER_RIGHT");
+	App::get().inputManager.assignInputEventValue(SDLK_r, "CENTER_CAMERA");
 	App::get().inputManager.assignInputEventValue(SDLK_g, "REGENERATE_MAP");
 }
 
@@ -61,12 +59,8 @@ void SceneGameMap::handleEvent(Event event)
 				map->movePlayer(-1, 0);
 			else if (event.keyInput.v == "MOVE_RIGHT")
 				map->movePlayer(1, 0);
-			else if (event.keyInput.v == "RESET_CAMERA")
+			else if (event.keyInput.v == "CENTER_CAMERA")
 				camera->resetCamera();
-			else if (event.keyInput.v == "CAMERA_MOVE_UPPER_LEFT")
-				camera->move(-15, -15);
-			else if (event.keyInput.v == "CAMERA_MOVE_LOWER_RIGHT")
-				camera->move(15, 15);
 			else if (event.keyInput.v == "REGENERATE_MAP")
 				RandomMapGenerator::generateMap(map, RandomMapParameters(), std::random_device{}());
 			break;

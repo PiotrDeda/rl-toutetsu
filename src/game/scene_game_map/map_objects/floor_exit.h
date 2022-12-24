@@ -2,7 +2,7 @@
 
 #include "../../../engine/app/app.h"
 #include "../../game_state/game_state.h"
-#include "../../item/item.h"
+#include "../../item/item_data.h"
 #include "map_object.h"
 
 class FloorExit : public MapObject

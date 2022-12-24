@@ -21,7 +21,7 @@ void GameState::startFight(const std::shared_ptr<EnemyData>& enemyData)
 	sceneFight->setupFight(enemyData, inventory);
 }
 
-void GameState::doPlayerAttack(const std::shared_ptr<Item>& spell)
+void GameState::doPlayerAttack(const std::shared_ptr<ItemData>& spell)
 {
 	sceneFight->lockSpells();
 	sceneFight->enemyStats.hp = GameState::get().playerStats->dealDamage(spell->getSpellStats(), sceneFight->enemyStats);

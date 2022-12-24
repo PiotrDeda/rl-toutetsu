@@ -16,7 +16,7 @@ public:
 	void setSceneFight(const std::shared_ptr<SceneFight>& scene);
 	void nextLevel();
 	void startFight(const std::shared_ptr<EnemyData>& enemyData);
-	void doPlayerAttack(const std::shared_ptr<Item>& spell);
+	void doPlayerAttack(const std::shared_ptr<ItemData>& spell);
 	void doEnemyAttack();
 
 	std::shared_ptr<PlayerStats> playerStats = std::make_shared<PlayerStats>();

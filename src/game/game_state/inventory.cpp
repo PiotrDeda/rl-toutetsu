@@ -39,7 +39,7 @@ void Inventory::switchCursorItem(int index, bool equipmentLocked)
 	refreshStats();
 }
 
-void Inventory::addItem(const std::shared_ptr<Item>& item)
+void Inventory::addItem(const std::shared_ptr<ItemData>& item)
 {
 	for (int i = mainInventoryStartIndex; i <= mainInventoryEndIndex; i++)
 	{
@@ -52,7 +52,7 @@ void Inventory::addItem(const std::shared_ptr<Item>& item)
 }
 void Inventory::refreshStats()
 {
-	auto items = std::vector<std::shared_ptr<Item>>(6);
+	auto items = std::vector<std::shared_ptr<ItemData>>(6);
 	std::transform(inventorySlots.begin() + weaponIndex, inventorySlots.begin() + bookIndex, items.begin(),
 				   [](const std::shared_ptr<InventorySlot>& slot) { return slot->item; });
 	playerStats->updateStats(items);

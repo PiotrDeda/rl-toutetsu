@@ -9,11 +9,11 @@ void PlayerStats::addViewSprites(const std::shared_ptr<TextObject>& spriteA, con
 	refreshText();
 }
 
-void PlayerStats::updateStats(const std::vector<std::shared_ptr<Item>>& items)
+void PlayerStats::updateStats(const std::vector<std::shared_ptr<ItemData>>& items)
 {
-	std::vector<std::shared_ptr<Item>> sortedItems(items.size());
+	std::vector<std::shared_ptr<ItemData>> sortedItems(items.size());
 	std::partial_sort_copy(begin(items), end(items), begin(sortedItems), end(sortedItems),
-						   [](const std::shared_ptr<Item>& a, const std::shared_ptr<Item>& b) {
+						   [](const std::shared_ptr<ItemData>& a, const std::shared_ptr<ItemData>& b) {
 							   return a->priority > b->priority;
 						   });
 	currentStats = baseStats;
