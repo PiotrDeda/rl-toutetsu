@@ -37,7 +37,7 @@ SceneFight::SceneFight() : Scene()
 
 	// Enemy sprite
 	enemySprite = std::make_shared<GameObject>(App::get().getSprite("blank_item"), uiCamera);
-	enemySprite->setPosition(700, 480);
+	enemySprite->setPosition(enemyPositionX, enemyPositionY);
 	renderables.push_back(enemySprite);
 
 	// Attack animations
@@ -46,7 +46,7 @@ SceneFight::SceneFight() : Scene()
 	renderables.push_back(attackAnimationPlayer);
 
 	attackAnimationEnemy = std::make_shared<GameObject>(App::get().getSprite("attack_animation_enemy"), uiCamera);
-	attackAnimationEnemy->setPosition(700, 480);
+	attackAnimationEnemy->setPosition(enemyPositionX + 32, enemyPositionY + 32);
 	renderables.push_back(attackAnimationEnemy);
 
 	// Spell buttons
@@ -79,7 +79,8 @@ void SceneFight::setupFight(const std::shared_ptr<EnemyData>& enemyData, const s
 {
 	enemySprite->sprite = enemyData->fightSprite;
 	enemySprite->sprite->setState(2);
-	enemySprite->setPosition(700 - (enemySprite->sprite->getWidth() - 64) / 2, 480 - (enemySprite->sprite->getHeight() - 64) / 2);
+	enemySprite->setPosition(enemyPositionX - enemySprite->sprite->getWidth() / 2,
+							 enemyPositionY - enemySprite->sprite->getHeight());
 	enemyStats = enemyData->stats;
 	for (int i = 0; i < 4; i++)
 	{
@@ -116,11 +117,10 @@ void SceneFight::changeTurn()
 			doEnemyTurn();
 		else
 			doPlayerTurn();
+	else if (--enemyTurnCount <= 0)
+		doPlayerTurn();
 	else
-		if (--enemyTurnCount <= 0)
-			doPlayerTurn();
-		else
-			doEnemyTurn();
+		doEnemyTurn();
 }
 
 void SceneFight::doPlayerTurn()

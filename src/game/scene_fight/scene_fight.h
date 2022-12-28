@@ -9,6 +9,9 @@
 class SceneFight : public Scene
 {
 public:
+	const static int enemyPositionX = 732;
+	const static int enemyPositionY = 544;
+
 	SceneFight();
 
 	void handleEvent(Event event) override;
