@@ -47,9 +47,8 @@ void PlayerStats::refreshText()
 
 void PlayerStats::takeDamage(StatsSet enemyStats)
 {
-	int whiteDamage = enemyStats.whiteAttack - currentStats.whiteDefense;
-	int blackDamage = enemyStats.blackAttack - currentStats.blackDefense;
-	int totalDamage = whiteDamage + blackDamage;
+	int totalDamage = calculateDamage(enemyStats.whiteAttack, currentStats.whiteDefense) +
+					  calculateDamage(enemyStats.blackAttack, currentStats.blackDefense);
 
 	std::mt19937 gen(std::random_device{}());
 	std::uniform_int_distribution<> percentDistr(0, 99);
@@ -63,9 +62,8 @@ void PlayerStats::takeDamage(StatsSet enemyStats)
 
 int PlayerStats::dealDamage(SpellStats spellStats, StatsSet enemyStats) const
 {
-	int whiteDamage = spellStats.whiteAttack + currentStats.whiteAttack - enemyStats.whiteDefense;
-	int blackDamage = spellStats.blackAttack + currentStats.blackAttack - enemyStats.blackDefense;
-	int totalDamage = whiteDamage + blackDamage;
+	int totalDamage = calculateDamage(currentStats.whiteAttack + spellStats.whiteAttack, enemyStats.whiteDefense) +
+					  calculateDamage(currentStats.blackAttack + spellStats.blackAttack, enemyStats.blackDefense);
 
 	std::mt19937 gen(std::random_device{}());
 	std::uniform_int_distribution<> percentDistr(0, 99);
@@ -73,4 +71,12 @@ int PlayerStats::dealDamage(SpellStats spellStats, StatsSet enemyStats) const
 		totalDamage *= 2;
 
 	return enemyStats.hp - totalDamage;
+}
+
+int PlayerStats::calculateDamage(int attack, int defense)
+{
+	if (attack < defense)
+		return (attack * attack) / (2 * defense);
+	else
+		return attack - defense / 2;
 }

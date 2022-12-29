@@ -20,6 +20,8 @@ public:
 	int currentHp = currentStats.hp;
 
 private:
+	[[nodiscard]] static int calculateDamage(int attack, int defense);
+
 	std::vector<std::shared_ptr<TextObject>> spritesA;
 	std::vector<std::shared_ptr<TextObject>> spritesB;
 };
