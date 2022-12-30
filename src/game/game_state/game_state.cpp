@@ -24,7 +24,7 @@ void GameState::startFight(const std::shared_ptr<EnemyData>& enemyData)
 void GameState::doPlayerAttack(const std::shared_ptr<ItemData>& spell)
 {
 	sceneFight->lockSpells();
-	sceneFight->enemyStats.hp = GameState::get().playerStats->dealDamage(spell->getSpellStats(), sceneFight->enemyStats);
+	sceneFight->enemyStats.maxHP = GameState::get().playerStats->dealDamage(spell->getSpellStats(), sceneFight->enemyStats);
 	sceneFight->attackAnimationEnemy->sprite->play(SceneFight::changeTurnCallback, sceneFight.get());
 }
 

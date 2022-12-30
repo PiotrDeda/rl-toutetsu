@@ -46,7 +46,7 @@ SceneFight::SceneFight() : Scene()
 	renderables.push_back(attackAnimationPlayer);
 
 	attackAnimationEnemy = std::make_shared<GameObject>(App::get().getSprite("attack_animation_enemy"), uiCamera);
-	attackAnimationEnemy->setPosition(enemyPositionX + 32, enemyPositionY + 32);
+	attackAnimationEnemy->setPosition(enemyPositionX - 32, enemyPositionY - 64);
 	renderables.push_back(attackAnimationEnemy);
 
 	// Spell buttons
@@ -106,7 +106,7 @@ void SceneFight::changeTurn()
 		App::get().sceneManager.setNextScene(SceneId::Lose);
 		return;
 	}
-	if (enemyStats.hp <= 0)
+	if (enemyStats.maxHP <= 0)
 	{
 		App::get().sceneManager.setNextScene(SceneId::GameMap);
 		return;

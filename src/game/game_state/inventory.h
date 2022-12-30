@@ -9,13 +9,8 @@ class Inventory
 {
 public:
 	static constexpr int cursorIndex = 0;
-	static constexpr int weaponIndex = 1;
-	static constexpr int helmetIndex = 2;
-	static constexpr int bodyArmorIndex = 3;
-	static constexpr int bootsIndex = 4;
-	static constexpr int trinketIndex = 5;
-	static constexpr int shieldIndex = 6;
-	static constexpr int bookIndex = 7;
+	static constexpr int equipmentStartIndex = 1;
+	static constexpr int equipmentEndIndex = 7;
 	static constexpr int spellStartIndex = 8;
 	static constexpr int spellEndIndex = 11;
 	static constexpr int mainInventoryStartIndex = 12;

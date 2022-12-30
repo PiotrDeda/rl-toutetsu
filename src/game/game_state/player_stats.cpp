@@ -26,7 +26,7 @@ void PlayerStats::updateStats(const std::vector<std::shared_ptr<ItemData>>& item
 void PlayerStats::refreshText()
 {
 	std::string textA =
-			std::to_string(currentHp) + "/" + std::to_string(currentStats.hp) + "\n" +
+			std::to_string(currentHp) + "/" + std::to_string(currentStats.maxHP) + "\n" +
 			std::to_string(currentStats.whiteAttack) + "\n" +
 			std::to_string(currentStats.whiteDefense) + "\n" +
 			std::to_string(currentStats.critChance);
@@ -70,7 +70,7 @@ int PlayerStats::dealDamage(SpellStats spellStats, StatsSet enemyStats) const
 	if (percentDistr(gen) < currentStats.critChance + spellStats.critChance)
 		totalDamage *= 2;
 
-	return enemyStats.hp - totalDamage;
+	return enemyStats.maxHP - totalDamage;
 }
 
 int PlayerStats::calculateDamage(int attack, int defense)

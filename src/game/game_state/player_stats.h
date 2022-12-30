@@ -15,9 +15,9 @@ public:
 	void takeDamage(StatsSet enemyStats);
 	[[nodiscard]] int dealDamage(SpellStats spellStats, StatsSet enemyStats) const;
 
-	StatsSet baseStats = StatsSet(100, 5, 5, 0, 0, 2, 1);
+	StatsSet baseStats = StatsSet(100, 0, 0, 0, 0, 2, 1);
 	StatsSet currentStats = baseStats;
-	int currentHp = currentStats.hp;
+	int currentHp = currentStats.maxHP;
 
 private:
 	[[nodiscard]] static int calculateDamage(int attack, int defense);

@@ -62,7 +62,7 @@ void SceneGameMap::handleEvent(Event event)
 			else if (event.keyInput.v == "CENTER_CAMERA")
 				camera->resetCamera();
 			else if (event.keyInput.v == "REGENERATE_MAP")
-				RandomMapGenerator::generateMap(map, RandomMapParameters(), std::random_device{}());
+				RandomMapGenerator::generateMap(map, currentLevel, RandomMapParameters(), std::random_device{}());
 			break;
 		case MouseWheelInput:
 			if (event.mouseWheelInput.y > 0)
@@ -82,7 +82,7 @@ void SceneGameMap::handleEvent(Event event)
 void SceneGameMap::nextLevel()
 {
 	currentLevel++;
-	RandomMapGenerator::generateMap(map, RandomMapParameters(), std::random_device{}());
+	RandomMapGenerator::generateMap(map, currentLevel, RandomMapParameters(), std::random_device{}());
 	if (currentLevel == 4)
 		map->addInteract(std::make_shared<UnitToutetsu>(), map->exitX, map->exitY);
 }

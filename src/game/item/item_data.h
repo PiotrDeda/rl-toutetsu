@@ -26,8 +26,6 @@ public:
 
 	[[nodiscard]] virtual SpellStats getSpellStats() const { return {0, 0, 0}; }
 
-	virtual void generate() {}
-
 	std::shared_ptr<Sprite> sprite;
 	ItemType type = General;
 	int priority = 1;

@@ -13,6 +13,4 @@ public:
 	};
 
 	[[nodiscard]] SpellStats getSpellStats() const override { return {5, 5, 1}; }
-
-	void generate() override {}
 };

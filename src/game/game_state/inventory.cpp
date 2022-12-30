@@ -5,9 +5,9 @@ Inventory::Inventory(const std::shared_ptr<PlayerStats>& playerStats)
 	this->playerStats = playerStats;
 
 	inventorySlots.emplace_back(std::make_shared<InventorySlot>(cursorIndex, 0, 0, General));
-	inventorySlots.emplace_back(std::make_shared<InventorySlot>(weaponIndex, 32, 96, Weapon));
+	inventorySlots.emplace_back(std::make_shared<InventorySlot>(equipmentStartIndex, 32, 96, Weapon));
 	for (int i = 0; i < 6; i++)
-		inventorySlots.emplace_back(std::make_shared<InventorySlot>(helmetIndex + i,
+		inventorySlots.emplace_back(std::make_shared<InventorySlot>(equipmentStartIndex + 1 + i,
 																	96 + (i / 3) * 64,
 																	32 + (i % 3) * 64,
 																	static_cast<ItemType>(Helmet + i)));
@@ -49,11 +49,13 @@ void Inventory::addItem(const std::shared_ptr<ItemData>& item)
 			return;
 		}
 	}
+	inventorySlots[mainInventoryEndIndex]->item = item;
 }
+
 void Inventory::refreshStats()
 {
 	auto items = std::vector<std::shared_ptr<ItemData>>(6);
-	std::transform(inventorySlots.begin() + weaponIndex, inventorySlots.begin() + bookIndex, items.begin(),
-				   [](const std::shared_ptr<InventorySlot>& slot) { return slot->item; });
+	std::transform(inventorySlots.begin() + equipmentStartIndex, inventorySlots.begin() + equipmentEndIndex + 1,
+				   items.begin(), [](const std::shared_ptr<InventorySlot>& slot) { return slot->item; });
 	playerStats->updateStats(items);
 }
