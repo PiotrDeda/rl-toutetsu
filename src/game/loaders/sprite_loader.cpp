@@ -85,5 +85,21 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	sprites.emplace("black_book_ii", std::make_shared<Sprite>("items/black_book_ii"));
 	sprites.emplace("black_book_iii", std::make_shared<Sprite>("items/black_book_iii"));
 
+	sprites.emplace("spell_zap", std::make_shared<Sprite>("items/spell_zap"));
+	sprites.emplace("spell_burn", std::make_shared<Sprite>("items/spell_burn"));
+	sprites.emplace("spell_arrow", std::make_shared<Sprite>("items/spell_arrow"));
+
+	sprites.emplace("spell_holy_strike", std::make_shared<Sprite>("items/spell_holy_strike"));
+	sprites.emplace("spell_keystone", std::make_shared<Sprite>("items/spell_keystone"));
+	sprites.emplace("spell_dark_orb", std::make_shared<Sprite>("items/spell_dark_orb"));
+
+	sprites.emplace("spell_star_shower", std::make_shared<Sprite>("items/spell_star_shower"));
+	sprites.emplace("spell_water_gun", std::make_shared<Sprite>("items/spell_water_gun"));
+	sprites.emplace("spell_dark_orb", std::make_shared<Sprite>("items/spell_poison"));
+
+	sprites.emplace("spell_sunray", std::make_shared<Sprite>("items/spell_sunray"));
+	sprites.emplace("spell_elemental_seal", std::make_shared<Sprite>("items/spell_elemental_seal"));
+	sprites.emplace("spell_darkness", std::make_shared<Sprite>("items/spell_darkness"));
+
 	return sprites;
 }
