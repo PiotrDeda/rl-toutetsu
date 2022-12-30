@@ -90,8 +90,8 @@ protected:
 class NAME : public EquippableItemTemplate \
 { \
 protected: \
-    [[nodiscard]] virtual const char* getSpriteName() const { return #SPRITE_NAME; } \
-	[[nodiscard]] virtual ItemType getType() const { return TYPE; } \
+    [[nodiscard]] virtual const char* getSpriteName() const override { return #SPRITE_NAME; } \
+	[[nodiscard]] virtual ItemType getType() const override { return TYPE; } \
 	[[nodiscard]] int getMaxHPMean() const override { return HPM; } \
 	[[nodiscard]] int getMaxHPDeviation() const override { return HPD; } \
     [[nodiscard]] int getWhiteAttackMean() const override { return WAM; } \
