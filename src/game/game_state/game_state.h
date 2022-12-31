@@ -18,6 +18,7 @@ public:
 	void startFight(const std::shared_ptr<EnemyData>& enemyData);
 	void doPlayerAttack(const std::shared_ptr<ItemData>& spell);
 	void doEnemyAttack();
+	void healPlayer();
 
 	std::shared_ptr<PlayerStats> playerStats = std::make_shared<PlayerStats>();
 	std::shared_ptr<Inventory> inventory = std::make_shared<Inventory>(playerStats);

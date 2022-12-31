@@ -3,12 +3,12 @@
 #include "../../engine/app/app.h"
 #include "item_data.h"
 
-class TestItem : public ItemData
+class SpellWeapon : public ItemData
 {
 public:
-	TestItem()
+	SpellWeapon()
 	{
-		this->sprite = App::get().getSprite("spell_zap");
+		this->sprite = App::get().getSprite("spell_weapon");
 		this->type = Spell;
 	};
 

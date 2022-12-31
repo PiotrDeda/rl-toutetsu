@@ -33,3 +33,9 @@ void GameState::doEnemyAttack()
 	playerStats->takeDamage(sceneFight->enemyStats);
 	sceneFight->attackAnimationPlayer->sprite->play(SceneFight::changeTurnCallback, sceneFight.get());
 }
+
+void GameState::healPlayer()
+{
+	playerStats->currentHp = playerStats->currentStats.maxHP;
+	playerStats->refreshText();
+}

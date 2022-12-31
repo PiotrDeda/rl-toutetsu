@@ -54,7 +54,7 @@ void Inventory::addItem(const std::shared_ptr<ItemData>& item)
 
 void Inventory::refreshStats()
 {
-	auto items = std::vector<std::shared_ptr<ItemData>>(6);
+	auto items = std::vector<std::shared_ptr<ItemData>>(7);
 	std::transform(inventorySlots.begin() + equipmentStartIndex, inventorySlots.begin() + equipmentEndIndex + 1,
 				   items.begin(), [](const std::shared_ptr<InventorySlot>& slot) { return slot->item; });
 	playerStats->updateStats(items);

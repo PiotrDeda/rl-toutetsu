@@ -36,7 +36,6 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 
 	// Items
 	sprites.emplace("blank_item", std::make_shared<Sprite>("items/blank_item"));
-	sprites.emplace("test_item", std::make_shared<Sprite>("items/test_item"));
 
 	sprites.emplace("wooden_wand", std::make_shared<Sprite>("items/wooden_wand"));
 	sprites.emplace("iron_wand", std::make_shared<Sprite>("items/iron_wand"));
@@ -84,6 +83,8 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	sprites.emplace("black_book_i", std::make_shared<Sprite>("items/black_book_i"));
 	sprites.emplace("black_book_ii", std::make_shared<Sprite>("items/black_book_ii"));
 	sprites.emplace("black_book_iii", std::make_shared<Sprite>("items/black_book_iii"));
+
+	sprites.emplace("spell_weapon", std::make_shared<Sprite>("items/spell_weapon"));
 
 	sprites.emplace("spell_zap", std::make_shared<Sprite>("items/spell_zap"));
 	sprites.emplace("spell_burn", std::make_shared<Sprite>("items/spell_burn"));

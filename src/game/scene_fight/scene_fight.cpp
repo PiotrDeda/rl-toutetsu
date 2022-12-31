@@ -2,6 +2,7 @@
 
 #include "../game_state/game_state.h"
 #include "../game_state/inventory_view.h"
+#include "../item/spell_weapon.h"
 
 SceneFight::SceneFight() : Scene()
 {
@@ -50,7 +51,7 @@ SceneFight::SceneFight() : Scene()
 	renderables.push_back(attackAnimationEnemy);
 
 	// Spell buttons
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		spellButtons.push_back(std::make_shared<SpellButton>(uiCamera));
 		spellButtons[i]->setPosition(64 + i * 128, 64);
@@ -58,6 +59,8 @@ SceneFight::SceneFight() : Scene()
 		renderables.push_back(spellButtons[i]);
 		clickables.push_back(spellButtons[i]);
 	}
+	spellButtons[0]->enabled = true;
+	spellButtons[0]->spell = std::make_shared<SpellWeapon>();
 
 	App::get().inputManager.assignInputEventValue(SDLK_m, "SCENE_GAME_MAP");
 }
@@ -82,12 +85,12 @@ void SceneFight::setupFight(const std::shared_ptr<EnemyData>& enemyData, const s
 	enemySprite->setPosition(enemyPositionX - enemySprite->sprite->getWidth() / 2,
 							 enemyPositionY - enemySprite->sprite->getHeight());
 	enemyStats = enemyData->stats;
-	for (int i = 0; i < 4; i++)
+	for (int i = 1; i < 5; i++)
 	{
-		if (inventory->inventorySlots[Inventory::spellStartIndex + i]->item->type == ItemType::Spell)
+		if (inventory->inventorySlots[Inventory::spellStartIndex + i - 1]->item->type == ItemType::Spell)
 		{
 			spellButtons[i]->enabled = true;
-			spellButtons[i]->spell = inventory->inventorySlots[Inventory::spellStartIndex + i]->item;
+			spellButtons[i]->spell = inventory->inventorySlots[Inventory::spellStartIndex + i - 1]->item;
 		}
 		else
 		{

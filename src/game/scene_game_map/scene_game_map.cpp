@@ -5,6 +5,7 @@
 #include "map_objects/pickup_item.h"
 #include "map_objects/unit_toutetsu.h"
 #include "random_map_generator.h"
+#include "../item/random_item.h"
 
 SceneGameMap::SceneGameMap() : Scene()
 {
@@ -28,6 +29,9 @@ SceneGameMap::SceneGameMap() : Scene()
 	inventoryView->setPosition(912, 0);
 	renderables.push_back(inventoryView);
 	clickables.push_back(inventoryView);
+	auto [weapon, spell] = RandomItem::get().generateStartingItems();
+	GameState::get().inventory->addItem(weapon);
+	GameState::get().inventory->addItem(spell);
 
 	// Stats
 	auto statsTextA = std::make_shared<TextObject>("StatsA", uiCamera);
@@ -82,6 +86,7 @@ void SceneGameMap::handleEvent(Event event)
 void SceneGameMap::nextLevel()
 {
 	currentLevel++;
+	GameState::get().healPlayer();
 	RandomMapGenerator::generateMap(map, currentLevel, RandomMapParameters(), std::random_device{}());
 	if (currentLevel == 4)
 		map->addInteract(std::make_shared<UnitToutetsu>(), map->exitX, map->exitY);

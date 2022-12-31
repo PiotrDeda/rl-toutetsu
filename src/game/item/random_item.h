@@ -17,6 +17,16 @@ public:
 		return item;
 	}
 
+	std::tuple<std::shared_ptr<ItemData>, std::shared_ptr<ItemData>> generateStartingItems()
+	{
+		std::mt19937 gen(std::random_device{}());
+		std::uniform_int_distribution<> weaponDistr(0, static_cast<int>(startingWeapons.size() - 1));
+		std::shared_ptr<ItemData> weapon = startingWeapons[weaponDistr(gen)]->generate();
+		std::uniform_int_distribution<> spellDistr(0, static_cast<int>(startingSpells.size() - 1));
+		std::shared_ptr<ItemData> spell = startingSpells[spellDistr(gen)]->generate();
+		return { weapon, spell };
+	}
+
 	static int getTier(int currentLevel, int tierPercentage)
 	{
 		switch (currentLevel)
@@ -110,5 +120,16 @@ private:
 					std::make_shared<WhiteBookIII>(),
 					std::make_shared<BlackBookIII>(),
 			}
+	};
+
+	std::vector<std::shared_ptr<EquippableItemTemplate>> startingWeapons = {
+				std::make_shared<WoodenWand>(),
+				std::make_shared<WoodenSword>(),
+				std::make_shared<WoodenAxe>(),
+				std::make_shared<WoodenStaff>(),
+	};
+
+	std::vector<std::shared_ptr<EquippableItemTemplate>> startingSpells = {
+			std::make_shared<WoodenWand>(),
 	};
 };
