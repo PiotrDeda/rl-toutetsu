@@ -1,9 +1,9 @@
 #include "inventory.h"
 
-Inventory::Inventory(const std::shared_ptr<PlayerStats>& playerStats)
-{
-	this->playerStats = playerStats;
+#include "game_state.h"
 
+Inventory::Inventory()
+{
 	inventorySlots.emplace_back(std::make_shared<InventorySlot>(cursorIndex, 0, 0, General));
 	inventorySlots.emplace_back(std::make_shared<InventorySlot>(equipmentStartIndex, 32, 96, Weapon));
 	for (int i = 0; i < 6; i++)
@@ -57,5 +57,5 @@ void Inventory::refreshStats()
 	auto items = std::vector<std::shared_ptr<ItemData>>(7);
 	std::transform(inventorySlots.begin() + equipmentStartIndex, inventorySlots.begin() + equipmentEndIndex + 1,
 				   items.begin(), [](const std::shared_ptr<InventorySlot>& slot) { return slot->item; });
-	playerStats->updateStats(items);
+	GameState::get().playerStats->updateStats(items);
 }

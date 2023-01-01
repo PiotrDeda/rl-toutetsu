@@ -2,16 +2,17 @@
 
 #include "equippable_items.h"
 #include "test_item.h"
+#include "../game_state/game_state.h"
 
 class RandomItem
 {
 public:
 	SINGLETON(RandomItem)
 
-	std::shared_ptr<ItemData> generate(std::mt19937& gen, int currentLevel)
+	std::shared_ptr<ItemData> generate(std::mt19937& gen)
 	{
 		std::uniform_int_distribution<> percentageDistr(0, 99);
-		int tier = getTier(currentLevel, percentageDistr(gen));
+		int tier = getTier(GameState::get().getCurrentLevel(), percentageDistr(gen));
 		std::uniform_int_distribution<> itemDistr(0, static_cast<int>(items[tier].size() - 1));
 		std::shared_ptr<ItemData> item = items[tier][itemDistr(gen)]->generate();
 		return item;
@@ -22,8 +23,9 @@ public:
 		std::mt19937 gen(std::random_device{}());
 		std::uniform_int_distribution<> weaponDistr(0, static_cast<int>(startingWeapons.size() - 1));
 		std::shared_ptr<ItemData> weapon = startingWeapons[weaponDistr(gen)]->generate();
-		std::uniform_int_distribution<> spellDistr(0, static_cast<int>(startingSpells.size() - 1));
-		std::shared_ptr<ItemData> spell = startingSpells[spellDistr(gen)]->generate();
+		//std::uniform_int_distribution<> spellDistr(0, static_cast<int>(startingSpells.size() - 1));
+		//std::shared_ptr<ItemData> spell = startingSpells[spellDistr(gen)]->generate();
+		std::shared_ptr<ItemData> spell = std::make_shared<TestItem>();
 		return { weapon, spell };
 	}
 

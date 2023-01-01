@@ -16,13 +16,12 @@ public:
 	static constexpr int mainInventoryStartIndex = 12;
 	static constexpr int mainInventoryEndIndex = 36;
 
-	explicit Inventory(const std::shared_ptr<PlayerStats>& playerStats);
+	Inventory();
 
 	void switchCursorItem(int index, bool equipmentLocked);
 	void addItem(const std::shared_ptr<ItemData>& item);
 
 	std::vector<std::shared_ptr<InventorySlot>> inventorySlots;
-	std::shared_ptr<PlayerStats> playerStats;
 
 private:
 	void refreshStats();

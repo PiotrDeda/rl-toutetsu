@@ -19,9 +19,10 @@ public:
 	void doPlayerAttack(const std::shared_ptr<ItemData>& spell);
 	void doEnemyAttack();
 	void healPlayer();
+	[[nodiscard]] int getCurrentLevel();
 
 	std::shared_ptr<PlayerStats> playerStats = std::make_shared<PlayerStats>();
-	std::shared_ptr<Inventory> inventory = std::make_shared<Inventory>(playerStats);
+	std::shared_ptr<Inventory> inventory = std::make_shared<Inventory>();
 
 private:
 	GameState() = default;

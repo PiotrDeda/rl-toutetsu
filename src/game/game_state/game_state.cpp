@@ -39,3 +39,8 @@ void GameState::healPlayer()
 	playerStats->currentHp = playerStats->currentStats.maxHP;
 	playerStats->refreshText();
 }
+
+int GameState::getCurrentLevel()
+{
+	return sceneGameMap->currentLevel;
+}

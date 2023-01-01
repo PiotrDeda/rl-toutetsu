@@ -275,7 +275,7 @@ void RandomMapGenerator::convertValueMapToObjectMap(const std::vector<std::vecto
 					break;
 				case TileItem:
 					objectMap->addFloor(std::make_shared<Floor>(), x, y);
-					objectMap->addInteract(std::make_shared<PickupItem>(RandomItem::get().generate(gen, currentLevel)), x, y);
+					objectMap->addInteract(std::make_shared<PickupItem>(RandomItem::get().generate(gen)), x, y);
 					break;
 				case TileEnemy:
 					objectMap->addFloor(std::make_shared<Floor>(), x, y);

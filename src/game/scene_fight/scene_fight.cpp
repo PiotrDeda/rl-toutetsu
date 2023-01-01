@@ -1,7 +1,9 @@
 #include "scene_fight.h"
 
+#include <random>
 #include "../game_state/game_state.h"
 #include "../game_state/inventory_view.h"
+#include "../item/random_item.h"
 #include "../item/spell_weapon.h"
 
 SceneFight::SceneFight() : Scene()
@@ -111,6 +113,10 @@ void SceneFight::changeTurn()
 	}
 	if (enemyStats.maxHP <= 0)
 	{
+		std::mt19937 gen(std::random_device{}());
+		std::uniform_int_distribution<> percentageDistr(0, 99);
+		if (percentageDistr(gen) < 25)
+			GameState::get().inventory->addItem(RandomItem::get().generate(gen));
 		App::get().sceneManager.setNextScene(SceneId::GameMap);
 		return;
 	}
