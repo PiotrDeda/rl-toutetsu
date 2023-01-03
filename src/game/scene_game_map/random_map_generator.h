@@ -40,7 +40,7 @@ class RandomMapGenerator
 {
 public:
 	static void
-	generateMap(const std::shared_ptr<Map>& map, int currentLevel, RandomMapParameters parameters, unsigned int seed);
+	generateMap(const std::shared_ptr<Map>& map, RandomMapParameters parameters, unsigned int seed);
 
 private:
 	static void placeRoom(std::vector<std::vector<int>>& mapValues, int centerX, int centerY,
@@ -48,6 +48,6 @@ private:
 	static void placeCorridor(std::vector<std::vector<int>>& valueMap,
 							  int x1, int y1, int x2, int y2, std::mt19937& gen);
 	static void convertValueMapToObjectMap(const std::vector<std::vector<int>>& valueMap,
-										   const std::shared_ptr<Map>& objectMap, int currentLevel,
+										   const std::shared_ptr<Map>& objectMap,
 										   const RandomMapParameters& parameters, std::mt19937& gen);
 };

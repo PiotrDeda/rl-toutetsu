@@ -15,10 +15,11 @@ void GameState::nextLevel()
 	sceneGameMap->nextLevel();
 }
 
-void GameState::startFight(const std::shared_ptr<EnemyData>& enemyData)
+void GameState::startFight(const std::shared_ptr<EnemyData>& enemyData, bool bossFight)
 {
 	App::get().sceneManager.setNextScene(SceneId::Fight);
 	sceneFight->setupFight(enemyData, inventory);
+	sceneFight->bossFight = bossFight;
 }
 
 void GameState::doPlayerAttack(const std::shared_ptr<ItemData>& spell)
@@ -38,9 +39,4 @@ void GameState::healPlayer()
 {
 	playerStats->currentHp = playerStats->currentStats.maxHP;
 	playerStats->refreshText();
-}
-
-int GameState::getCurrentLevel()
-{
-	return sceneGameMap->currentLevel;
 }

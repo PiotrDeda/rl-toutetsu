@@ -11,8 +11,7 @@
 #include "map_objects/wall.h"
 #include "map_objects/wall_torch.h"
 
-void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& objectMap, int currentLevel,
-									 RandomMapParameters p, unsigned int seed)
+void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& objectMap, RandomMapParameters p, unsigned int seed)
 {
 	// seed random number generator
 	std::mt19937 gen(seed);
@@ -165,7 +164,7 @@ void RandomMapGenerator::generateMap(const std::shared_ptr<Map>& objectMap, int 
 				j = TileFloor;
 
 	// convert to real map
-	convertValueMapToObjectMap(valueMap, objectMap, currentLevel, p, gen);
+	convertValueMapToObjectMap(valueMap, objectMap, p, gen);
 }
 
 void RandomMapGenerator::placeRoom(std::vector<std::vector<int>>& mapValues, int centerX, int centerY,
@@ -235,7 +234,7 @@ void RandomMapGenerator::placeCorridor(std::vector<std::vector<int>>& valueMap, 
 }
 
 void RandomMapGenerator::convertValueMapToObjectMap(const std::vector<std::vector<int>>& valueMap,
-													const std::shared_ptr<Map>& objectMap, int currentLevel,
+													const std::shared_ptr<Map>& objectMap,
 													const RandomMapParameters& p, std::mt19937& gen)
 {
 	objectMap->clear();
@@ -279,7 +278,7 @@ void RandomMapGenerator::convertValueMapToObjectMap(const std::vector<std::vecto
 					break;
 				case TileEnemy:
 					objectMap->addFloor(std::make_shared<Floor>(), x, y);
-					objectMap->addInteract(std::make_shared<Unit>(RandomEnemy::generate(gen)), x, y);
+					objectMap->addInteract(std::make_shared<Unit>(RandomEnemy::get().generate(gen)), x, y);
 					break;
 			}
 		}

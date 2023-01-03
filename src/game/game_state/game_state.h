@@ -15,14 +15,14 @@ public:
 	void setSceneGameMap(const std::shared_ptr<SceneGameMap>& scene);
 	void setSceneFight(const std::shared_ptr<SceneFight>& scene);
 	void nextLevel();
-	void startFight(const std::shared_ptr<EnemyData>& enemyData);
+	void startFight(const std::shared_ptr<EnemyData>& enemyData, bool bossFight);
 	void doPlayerAttack(const std::shared_ptr<ItemData>& spell);
 	void doEnemyAttack();
 	void healPlayer();
-	[[nodiscard]] int getCurrentLevel();
 
 	std::shared_ptr<PlayerStats> playerStats = std::make_shared<PlayerStats>();
 	std::shared_ptr<Inventory> inventory = std::make_shared<Inventory>();
+	int currentLevel = 0;
 
 private:
 	GameState() = default;

@@ -1,8 +1,7 @@
 #pragma once
 
 #include <random>
-#include "../../engine/app/app.h"
-#include "item_data.h"
+#include "random_item_template.h"
 
 class EquippableItem : public ItemData
 {
@@ -42,10 +41,10 @@ public:
 	int agility = 0;
 };
 
-class EquippableItemTemplate
+class EquippableItemTemplate : public RandomItemTemplate
 {
 public:
-	std::shared_ptr<ItemData> generate()
+	std::shared_ptr<ItemData> generate() override
 	{
 		std::mt19937 gen(std::random_device{}());
 		std::normal_distribution<> maxHPDistr(getMaxHPMean(), getMaxHPDeviation());

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "equippable_items.h"
-#include "test_item.h"
+#include "spell_items.h"
 #include "../game_state/game_state.h"
 
 class RandomItem
@@ -12,7 +12,7 @@ public:
 	std::shared_ptr<ItemData> generate(std::mt19937& gen)
 	{
 		std::uniform_int_distribution<> percentageDistr(0, 99);
-		int tier = getTier(GameState::get().getCurrentLevel(), percentageDistr(gen));
+		int tier = getTier(GameState::get().currentLevel, percentageDistr(gen));
 		std::uniform_int_distribution<> itemDistr(0, static_cast<int>(items[tier].size() - 1));
 		std::shared_ptr<ItemData> item = items[tier][itemDistr(gen)]->generate();
 		return item;
@@ -23,9 +23,8 @@ public:
 		std::mt19937 gen(std::random_device{}());
 		std::uniform_int_distribution<> weaponDistr(0, static_cast<int>(startingWeapons.size() - 1));
 		std::shared_ptr<ItemData> weapon = startingWeapons[weaponDistr(gen)]->generate();
-		//std::uniform_int_distribution<> spellDistr(0, static_cast<int>(startingSpells.size() - 1));
-		//std::shared_ptr<ItemData> spell = startingSpells[spellDistr(gen)]->generate();
-		std::shared_ptr<ItemData> spell = std::make_shared<TestItem>();
+		std::uniform_int_distribution<> spellDistr(0, static_cast<int>(startingSpells.size() - 1));
+		std::shared_ptr<ItemData> spell = startingSpells[spellDistr(gen)]->generate();
 		return { weapon, spell };
 	}
 
@@ -73,7 +72,7 @@ public:
 private:
 	RandomItem() = default;
 
-	std::vector<std::vector<std::shared_ptr<EquippableItemTemplate>>> items = {
+	std::vector<std::vector<std::shared_ptr<RandomItemTemplate>>> items = {
 			{},
 			{
 					std::make_shared<WoodenWand>(),
@@ -83,6 +82,9 @@ private:
 					std::make_shared<CritPendant>(),
 					std::make_shared<WhiteShield>(),
 					std::make_shared<BlackShield>(),
+					std::make_shared<SpellZap>(),
+					std::make_shared<SpellBurn>(),
+					std::make_shared<SpellArrow>(),
 			},
 			{
 					std::make_shared<IronWand>(),
@@ -97,6 +99,9 @@ private:
 					std::make_shared<BlackShield>(),
 					std::make_shared<WhiteBookI>(),
 					std::make_shared<BlackBookI>(),
+					std::make_shared<SpellHolyStrike>(),
+					std::make_shared<SpellKeystone>(),
+					std::make_shared<SpellDarkOrb>(),
 			},
 			{
 					std::make_shared<GoldenWand>(),
@@ -109,6 +114,9 @@ private:
 					std::make_shared<GreaterHealthPendant>(),
 					std::make_shared<WhiteBookII>(),
 					std::make_shared<BlackBookII>(),
+					std::make_shared<SpellStarShower>(),
+					std::make_shared<SpellWaterGun>(),
+					std::make_shared<SpellPoison>(),
 			},
 			{
 					std::make_shared<EnchantedWand>(),
@@ -121,17 +129,22 @@ private:
 					std::make_shared<AgilityPendant>(),
 					std::make_shared<WhiteBookIII>(),
 					std::make_shared<BlackBookIII>(),
+					std::make_shared<SpellSunray>(),
+					std::make_shared<SpellElementalSeal>(),
+					std::make_shared<SpellDarkness>(),
 			}
 	};
 
-	std::vector<std::shared_ptr<EquippableItemTemplate>> startingWeapons = {
+	std::vector<std::shared_ptr<RandomItemTemplate>> startingWeapons = {
 				std::make_shared<WoodenWand>(),
 				std::make_shared<WoodenSword>(),
 				std::make_shared<WoodenAxe>(),
 				std::make_shared<WoodenStaff>(),
 	};
 
-	std::vector<std::shared_ptr<EquippableItemTemplate>> startingSpells = {
-			std::make_shared<WoodenWand>(),
+	std::vector<std::shared_ptr<RandomItemTemplate>> startingSpells = {
+			std::make_shared<SpellZap>(),
+			std::make_shared<SpellBurn>(),
+			std::make_shared<SpellArrow>(),
 	};
 };

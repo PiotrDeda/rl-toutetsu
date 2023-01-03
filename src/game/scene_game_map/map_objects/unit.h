@@ -12,10 +12,10 @@ public:
 
 	bool onInteract() override
 	{
-		GameState::get().startFight(enemyData);
+		GameState::get().startFight(enemyData, false);
 		return false;
 	}
 
-private:
+protected:
 	std::shared_ptr<EnemyData> enemyData;
 };

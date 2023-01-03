@@ -1,11 +1,10 @@
 #include "scene_game_map.h"
 
+#include "../enemy/enemies.h"
 #include "../game_state/inventory_view.h"
-#include "../loaders/scene_loader.h"
-#include "map_objects/pickup_item.h"
-#include "map_objects/unit_toutetsu.h"
-#include "random_map_generator.h"
 #include "../item/random_item.h"
+#include "map_objects/boss_unit.h"
+#include "random_map_generator.h"
 
 SceneGameMap::SceneGameMap() : Scene()
 {
@@ -47,7 +46,6 @@ SceneGameMap::SceneGameMap() : Scene()
 	App::get().inputManager.assignInputEventValue(SDLK_a, "MOVE_LEFT");
 	App::get().inputManager.assignInputEventValue(SDLK_d, "MOVE_RIGHT");
 	App::get().inputManager.assignInputEventValue(SDLK_r, "CENTER_CAMERA");
-	App::get().inputManager.assignInputEventValue(SDLK_g, "REGENERATE_MAP");
 }
 
 void SceneGameMap::handleEvent(Event event)
@@ -65,8 +63,6 @@ void SceneGameMap::handleEvent(Event event)
 				map->movePlayer(1, 0);
 			else if (event.keyInput.v == "CENTER_CAMERA")
 				camera->resetCamera();
-			else if (event.keyInput.v == "REGENERATE_MAP")
-				RandomMapGenerator::generateMap(map, currentLevel, RandomMapParameters(), std::random_device{}());
 			break;
 		case MouseWheelInput:
 			if (event.mouseWheelInput.y > 0)
@@ -85,9 +81,10 @@ void SceneGameMap::handleEvent(Event event)
 
 void SceneGameMap::nextLevel()
 {
-	currentLevel++;
-	GameState::get().healPlayer();
-	RandomMapGenerator::generateMap(map, currentLevel, RandomMapParameters(), std::random_device{}());
-	if (currentLevel == 4)
-		map->addInteract(std::make_shared<UnitToutetsu>(), map->exitX, map->exitY);
+	auto& gameState = GameState::get();
+	gameState.currentLevel++;
+	gameState.healPlayer();
+	RandomMapGenerator::generateMap(map, RandomMapParameters(), std::random_device{}());
+	if (gameState.currentLevel == 4)
+		map->addInteract(std::make_shared<BossUnit>(ToutetsuUnit().generate()), map->exitX, map->exitY);
 }

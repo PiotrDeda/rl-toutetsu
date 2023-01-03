@@ -14,7 +14,6 @@ public:
 
 	SceneFight();
 
-	void handleEvent(Event event) override;
 	void setupFight(const std::shared_ptr<EnemyData>& enemyData, const std::shared_ptr<Inventory>& inventory);
 	void changeTurn();
 	void doPlayerTurn();
@@ -35,4 +34,5 @@ public:
 	bool playerTurn = true;
 	int playerTurnCount = 0;
 	int enemyTurnCount = 0;
+	bool bossFight = false;
 };

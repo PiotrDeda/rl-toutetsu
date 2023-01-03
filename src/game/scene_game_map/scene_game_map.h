@@ -17,5 +17,4 @@ public:
 	std::shared_ptr<Camera> camera = std::make_shared<Camera>();
 	std::shared_ptr<UICamera> uiCamera = std::make_shared<UICamera>();
 	std::shared_ptr<Map> map;
-	int currentLevel = 0;
 };

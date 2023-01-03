@@ -28,11 +28,18 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	sprites.emplace("floor_exit", std::make_shared<Sprite>("tiles/floor_exit"));
 
 	// Enemies
-	sprites.emplace("test_unit_map", std::make_shared<Sprite>("enemies/green_slime"));
-	sprites.emplace("test_unit_fight", std::make_shared<Sprite>("enemies/green_slime"));
-	sprites.emplace("test_unit_2_map", std::make_shared<Sprite>("enemies/test_unit_2_map"));
-	sprites.emplace("test_unit_2_fight", std::make_shared<Sprite>("enemies/test_unit_2_fight"));
-	sprites.emplace("toutetsu_map", std::make_shared<Sprite>("enemies/unit_toutetsu"));
+	sprites.emplace("green_slime", std::make_shared<Sprite>("enemies/green_slime"));
+	sprites.emplace("blue_slime", std::make_shared<Sprite>("enemies/blue_slime"));
+	sprites.emplace("purple_slime", std::make_shared<Sprite>("enemies/purple_slime"));
+	sprites.emplace("fire_slime", std::make_shared<Sprite>("enemies/fire_slime"));
+
+	sprites.emplace("blue_beholder", std::make_shared<Sprite>("enemies/green_slime"));
+	sprites.emplace("orange_beholder", std::make_shared<Sprite>("enemies/blue_slime"));
+	sprites.emplace("pink_beholder", std::make_shared<Sprite>("enemies/purple_slime"));
+	sprites.emplace("lava_beholder", std::make_shared<Sprite>("enemies/fire_slime"));
+
+	sprites.emplace("toutetsu_map", std::make_shared<Sprite>("enemies/toutetsu_map"));
+	sprites.emplace("toutetsu_fight", std::make_shared<Sprite>("enemies/toutetsu_fight"));
 
 	// Items
 	sprites.emplace("blank_item", std::make_shared<Sprite>("items/blank_item"));
@@ -96,7 +103,7 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 
 	sprites.emplace("spell_star_shower", std::make_shared<Sprite>("items/spell_star_shower"));
 	sprites.emplace("spell_water_gun", std::make_shared<Sprite>("items/spell_water_gun"));
-	sprites.emplace("spell_dark_orb", std::make_shared<Sprite>("items/spell_poison"));
+	sprites.emplace("spell_poison", std::make_shared<Sprite>("items/spell_poison"));
 
 	sprites.emplace("spell_sunray", std::make_shared<Sprite>("items/spell_sunray"));
 	sprites.emplace("spell_elemental_seal", std::make_shared<Sprite>("items/spell_elemental_seal"));

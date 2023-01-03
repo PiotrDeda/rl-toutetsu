@@ -4,7 +4,6 @@
 #include "../game_state/game_state.h"
 #include "../game_state/inventory_view.h"
 #include "../item/random_item.h"
-#include "../item/spell_weapon.h"
 
 SceneFight::SceneFight() : Scene()
 {
@@ -62,22 +61,7 @@ SceneFight::SceneFight() : Scene()
 		clickables.push_back(spellButtons[i]);
 	}
 	spellButtons[0]->enabled = true;
-	spellButtons[0]->spell = std::make_shared<SpellWeapon>();
-
-	App::get().inputManager.assignInputEventValue(SDLK_m, "SCENE_GAME_MAP");
-}
-
-void SceneFight::handleEvent(Event event)
-{
-	switch (event.type)
-	{
-		case KeyInput:
-			if (event.keyInput.v == "SCENE_GAME_MAP")
-				App::get().sceneManager.setNextScene(SceneId::GameMap);
-			break;
-		default:
-			break;
-	}
+	spellButtons[0]->spell = std::make_shared<SpellWeapon>()->generate();
 }
 
 void SceneFight::setupFight(const std::shared_ptr<EnemyData>& enemyData, const std::shared_ptr<Inventory>& inventory)
@@ -118,6 +102,8 @@ void SceneFight::changeTurn()
 		if (percentageDistr(gen) < 25)
 			GameState::get().inventory->addItem(RandomItem::get().generate(gen));
 		App::get().sceneManager.setNextScene(SceneId::GameMap);
+		if (bossFight)
+			App::get().sceneManager.setNextScene(SceneId::Win);
 		return;
 	}
 
