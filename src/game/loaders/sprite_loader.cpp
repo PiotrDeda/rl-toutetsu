@@ -33,10 +33,10 @@ std::map<std::string, std::shared_ptr<Sprite>> SpriteLoader::getSprites()
 	sprites.emplace("purple_slime", std::make_shared<Sprite>("enemies/purple_slime"));
 	sprites.emplace("fire_slime", std::make_shared<Sprite>("enemies/fire_slime"));
 
-	sprites.emplace("blue_beholder", std::make_shared<Sprite>("enemies/green_slime"));
-	sprites.emplace("orange_beholder", std::make_shared<Sprite>("enemies/blue_slime"));
-	sprites.emplace("pink_beholder", std::make_shared<Sprite>("enemies/purple_slime"));
-	sprites.emplace("lava_beholder", std::make_shared<Sprite>("enemies/fire_slime"));
+	sprites.emplace("blue_beholder", std::make_shared<Sprite>("enemies/blue_beholder"));
+	sprites.emplace("orange_beholder", std::make_shared<Sprite>("enemies/orange_beholder"));
+	sprites.emplace("pink_beholder", std::make_shared<Sprite>("enemies/pink_beholder"));
+	sprites.emplace("lava_beholder", std::make_shared<Sprite>("enemies/lava_beholder"));
 
 	sprites.emplace("toutetsu_map", std::make_shared<Sprite>("enemies/toutetsu_map"));
 	sprites.emplace("toutetsu_fight", std::make_shared<Sprite>("enemies/toutetsu_fight"));
