@@ -7,6 +7,7 @@
 class EnemyData
 {
 public:
+	const char* displayName;
 	std::shared_ptr<Sprite> mapSprite;
 	std::shared_ptr<Sprite> fightSprite;
 	StatsSet stats{};

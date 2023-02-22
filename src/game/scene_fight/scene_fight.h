@@ -31,6 +31,7 @@ public:
 	StatsSet enemyStats{};
 	std::shared_ptr<GameObject> attackAnimationPlayer;
 	std::shared_ptr<GameObject> attackAnimationEnemy;
+	std::shared_ptr<TextObject> enemyDisplayName;
 	bool playerTurn = true;
 	int playerTurnCount = 0;
 	int enemyTurnCount = 0;

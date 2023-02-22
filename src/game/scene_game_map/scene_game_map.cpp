@@ -16,6 +16,9 @@ SceneGameMap::SceneGameMap() : Scene()
 			map->tileSize * map->getSize() + map->tileSize
 	);
 
+	// Level text (init)
+	levelText = std::make_shared<TextObject>("Level 1", uiCamera);
+
 	// Map
 	renderables.push_back(map);
 	nextLevel();
@@ -40,6 +43,10 @@ SceneGameMap::SceneGameMap() : Scene()
 	renderables.push_back(statsTextB);
 	statsTextB->setPosition(1082, 264);
 	GameState::get().playerStats->addViewSprites(statsTextA, statsTextB);
+
+	// Level text
+	renderables.push_back(levelText);
+	levelText->setPosition(800, 10);
 
 	App::get().inputManager.assignInputEventValue(SDLK_s, "MOVE_DOWN");
 	App::get().inputManager.assignInputEventValue(SDLK_w, "MOVE_UP");
@@ -87,4 +94,7 @@ void SceneGameMap::nextLevel()
 	RandomMapGenerator::generateMap(map, RandomMapParameters(), std::random_device{}());
 	if (gameState.currentLevel == 4)
 		map->addInteract(std::make_shared<BossUnit>(ToutetsuUnit().generate()), map->exitX, map->exitY);
+	const char* levelBuffer = new char[8];
+	sprintf((char*)levelBuffer, "Level %d", gameState.currentLevel);
+	levelText->setText(levelBuffer);
 }

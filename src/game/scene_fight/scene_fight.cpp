@@ -51,6 +51,11 @@ SceneFight::SceneFight() : Scene()
 	attackAnimationEnemy->setPosition(enemyPositionX - 32, enemyPositionY - 64);
 	renderables.push_back(attackAnimationEnemy);
 
+	// Enemy display name
+	enemyDisplayName = std::make_shared<TextObject>("Orange Beholder", uiCamera);
+	renderables.push_back(enemyDisplayName);
+	enemyDisplayName->setPosition(700, 10);
+
 	// Spell buttons
 	for (int i = 0; i < 5; i++)
 	{
@@ -66,6 +71,7 @@ SceneFight::SceneFight() : Scene()
 
 void SceneFight::setupFight(const std::shared_ptr<EnemyData>& enemyData, const std::shared_ptr<Inventory>& inventory)
 {
+	enemyDisplayName->setText(enemyData->displayName);
 	enemySprite->sprite = enemyData->fightSprite;
 	enemySprite->sprite->setState(2);
 	enemySprite->setPosition(enemyPositionX - enemySprite->sprite->getWidth() / 2,
