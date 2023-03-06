@@ -34,10 +34,10 @@ void Camera::move(int dx, int dy)
 
 void Camera::centerOn(int newX, int newY)
 {
-	LOG_INFO("Centering on %d, %d", newX, newY);
+	LOG_INFO("Centering on {}, {}", newX, newY);
 	this->x = (newX - App::defaultWidth * 0.5) / getScale();
 	this->y = (newY - App::defaultHeight * 0.5) / getScale();
-	LOG_INFO("Resulting center is %.0f, %.0f", x, y);
+	LOG_INFO("Resulting center is {}, {}", x, y);
 	if (x < curMinX)
 		x = curMinX;
 	if (x > curMaxX)
