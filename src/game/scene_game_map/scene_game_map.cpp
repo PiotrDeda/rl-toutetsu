@@ -32,8 +32,8 @@ SceneGameMap::SceneGameMap() : Scene()
 	renderables.push_back(inventoryView);
 	clickables.push_back(inventoryView);
 	auto [weapon, spell] = RandomItem::get().generateStartingItems();
-	GameState::get().inventory->addItem(weapon);
-	GameState::get().inventory->addItem(spell);
+	GameState::get().inventory->inventorySlots[Inventory::equipmentStartIndex]->item = weapon;
+	GameState::get().inventory->inventorySlots[Inventory::spellStartIndex]->item = spell;
 
 	// Stats
 	auto statsTextA = std::make_shared<TextObject>("StatsA", uiCamera);
