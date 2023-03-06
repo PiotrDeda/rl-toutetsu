@@ -36,10 +36,14 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         ${SDL2_TTF_LIBRARIES}
         fmt::fmt)
 
-file(GLOB_RECURSE ASSETS "${CMAKE_BINARY_DIR}/assets/*" "${CMAKE_BINARY_DIR}/*.dll")
+file(GLOB_RECURSE ASSETS "${CMAKE_BINARY_DIR}/assets/*" "${CMAKE_BINARY_DIR}/*.dll"
+        "${CMAKE_BINARY_DIR}/licenses/*" "${CMAKE_BINARY_DIR}/LICENSE")
 if(ASSETS)
     file(REMOVE ${ASSETS})
 endif()
+
 file(COPY src/assets DESTINATION ${CMAKE_BINARY_DIR})
 file(GLOB DLLS "src/bin/*.dll")
 file(COPY ${DLLS} DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY licenses DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY LICENSE DESTINATION ${CMAKE_BINARY_DIR})
