@@ -92,6 +92,7 @@ void SceneGameMap::nextLevel()
 	gameState.currentLevel++;
 	gameState.healPlayer();
 	RandomMapGenerator::generateMap(map, RandomMapParameters(), std::random_device{}());
+	camera->centerOn(map->player->getX(), map->player->getY());
 	if (gameState.currentLevel == 4)
 		map->addInteract(std::make_shared<BossUnit>(ToutetsuUnit().generate()), map->exitX, map->exitY);
 	const char* levelBuffer = new char[8];

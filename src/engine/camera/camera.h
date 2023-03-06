@@ -9,6 +9,7 @@ public:
 	[[nodiscard]] virtual int getScreenY(int gameY) const;
 	[[nodiscard]] virtual double getScale() const;
 	void move(int x, int y);
+	void centerOn(int newX, int newY);
 	void setBoundaries(int minX, int minY, int maxX, int maxY);
 	void zoomIn();
 	void zoomOut();
