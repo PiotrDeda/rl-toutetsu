@@ -1,5 +1,6 @@
 #include "inventory.h"
 
+#include <algorithm>
 #include "game_state.h"
 
 Inventory::Inventory()

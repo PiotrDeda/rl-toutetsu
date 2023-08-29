@@ -1,5 +1,6 @@
 #include "player_stats.h"
 
+#include <algorithm>
 #include <random>
 
 void PlayerStats::addViewSprites(const std::shared_ptr<TextObject>& spriteA, const std::shared_ptr<TextObject>& spriteB)

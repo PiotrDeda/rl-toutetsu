@@ -1,5 +1,6 @@
 #include "random_map_generator.h"
 
+#include <algorithm>
 #include <queue>
 #include "../../engine/misc/logger.h"
 #include "../enemy/random_enemy.h"
