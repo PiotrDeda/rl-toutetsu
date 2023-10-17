@@ -24,9 +24,9 @@ DEFINE_ENEMY(BlueSlime,		"Blue Slime",		blue_slime,		blue_slime,		50,	35,	0,	12,
 DEFINE_ENEMY(PurpleSlime,	"Purple Slime",		purple_slime,	purple_slime,	100,55,	0,	25,	0,	6,	1)
 DEFINE_ENEMY(FireSlime,		"Fire Slime",		fire_slime,		fire_slime,		150,70,	0,	35,	0,	8,	2)
 
-DEFINE_ENEMY(BlueBeholder,	"Blue Beholder",	blue_beholder,	blue_beholder,	40,	0,	8,	0,	10,	1,	0)
-DEFINE_ENEMY(OrangeBeholder,"Orange Beholder",	orange_beholder,orange_beholder,80,	0,	20,	0,	20,	2,	0)
-DEFINE_ENEMY(PinkBeholder,	"Pink Beholder",	pink_beholder,	pink_beholder,	130,0,	40,	0,	35,	3,	0)
+DEFINE_ENEMY(BlueBeholder,	"Blue Beholder",	blue_beholder,	blue_beholder,	40,	0,	8,	0,	10,	1,	1)
+DEFINE_ENEMY(OrangeBeholder,"Orange Beholder",	orange_beholder,orange_beholder,80,	0,	20,	0,	20,	2,	1)
+DEFINE_ENEMY(PinkBeholder,	"Pink Beholder",	pink_beholder,	pink_beholder,	130,0,	40,	0,	35,	3,	1)
 DEFINE_ENEMY(LavaBeholder,	"Lava Beholder",	lava_beholder,	lava_beholder,	180,0,	60,	0,	50,	4,	2)
 
 DEFINE_ENEMY(ToutetsuUnit,	"Toutetsu",			toutetsu_map,	toutetsu_fight,	400,50,	50,	75,	75,	5,	2)
