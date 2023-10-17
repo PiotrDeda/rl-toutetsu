@@ -53,8 +53,8 @@ SceneFight::SceneFight() : Scene()
 
 	// Enemy display name
 	enemyDisplayName = std::make_shared<TextObject>("Orange Beholder", uiCamera);
-	renderables.push_back(enemyDisplayName);
 	enemyDisplayName->setPosition(700, 10);
+	renderables.push_back(enemyDisplayName);
 
 	// Spell buttons
 	for (int i = 0; i < 5; i++)
