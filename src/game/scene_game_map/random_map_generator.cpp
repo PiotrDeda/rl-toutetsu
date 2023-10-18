@@ -248,8 +248,10 @@ void RandomMapGenerator::convertValueMapToObjectMap(const std::vector<std::vecto
 			{
 				case TileWall:
 					objectMap->addWall(std::make_shared<Wall>(), x, y);
+					break;
 				case TileWallTorch:
 					objectMap->addWall(std::make_shared<WallTorch>(), x, y);
+					break;
 				case TileWallRandom:
 					if (percentDistr(gen) < p.torchChance)
 						objectMap->addWall(std::make_shared<WallTorch>(), x, y);
