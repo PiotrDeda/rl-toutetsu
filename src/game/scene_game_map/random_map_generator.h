@@ -39,8 +39,7 @@ struct RoomConnection
 class RandomMapGenerator
 {
 public:
-	static void
-	generateMap(const std::shared_ptr<Map>& map, RandomMapParameters parameters, unsigned int seed);
+	static void generateMap(const std::shared_ptr<Map>& map, RandomMapParameters parameters, unsigned int seed);
 
 private:
 	static void placeRoom(std::vector<std::vector<int>>& mapValues, int centerX, int centerY,
